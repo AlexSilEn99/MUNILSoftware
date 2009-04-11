@@ -1,0 +1,5 @@
+Win32 build
+-----------
+
+./configure --prefix=/home/gbesjes/devel/wxMUN/build/win32 --disable-shared --build=i586-mingw32msvc --host=i586-mingw32msvc --with-wx-prefix=/home/gbesjes/devel/INSTALL_wxMSW-2.8.9/ --with-wx-config=/home/gbesjes/devel/INSTALL_wxMSW-2.8.9/bin/wx-config
+

@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE committee [
+   <!ELEMENT committee (name, countries, GSLtime?, topics) >
+   <!ELEMENT name (#PCDATA) >
+   <!ELEMENT countries (country+) >
+   <!ELEMENT country (countryname,code?,observer?) >
+   <!ELEMENT countryname (#PCDATA) >
+   <!ELEMENT code (#PCDATA) >
+   <!ELEMENT observer (#PCDATA) >
+   <!ELEMENT GSLtime (#PCDATA) >
+   <!ELEMENT topics (topic+) >
+   <!ELEMENT topic (topicname) >
+   <!ELEMENT topicname (#PCDATA) >
+ ]>
+<committee>
+	<name>Kabouterraad</name>
+	<countries>
+		<country>
+			<countryname>Afghanistan</countryname>
+			<code>AFGH</code>
+		</country>
+		<country>
+			<countryname>Albania</countryname>
+			<code>ALBA</code>
+		</country>
+		<country>
+			<countryname>Antigua and Barbuda</countryname>
+			<code>ANBA</code>
+		</country>
+		<country>
+			<countryname>Andorra</countryname>
+			<code>ANDR</code>
+		</country>
+		<country>
+			<countryname>Armenia</countryname>
+			<code>ARME</code>
+		</country>
+		<country>
+			<countryname>United States of America</countryname>
+			<code>UNST</code>
+			<observer>true</observer>
+		</country>
+		<country>
+			<countryname>Holy See</countryname>
+			<code>VACY</code>
+			<observer>true</observer>
+		</country>
+		<country>
+			<countryname>Venezuela</countryname>
+			<code>VENZ</code>
+			<observer>true</observer>
+		</country>
+		<country>
+			<countryname>Palestine</countryname>
+			<code>WEBA</code>
+			<observer>true</observer>
+		</country>
+	</countries>
+	<GSLtime>190</GSLtime>
+	<topics>
+		<topic>
+			<name>Smurfen</name>
+		</topic>
+		<topic>
+			<name>Kabouters</name>
+		</topic>
+	</topics>
+</committee>
