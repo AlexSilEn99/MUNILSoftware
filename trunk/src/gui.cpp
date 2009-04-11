@@ -2208,7 +2208,7 @@ GUI_wxMUNAboutDialog::GUI_wxMUNAboutDialog( wxWindow* parent, wxWindowID id, con
 	bSizer63 = new wxBoxSizer( wxVERTICAL );
 	
 	m_textCtrl121 = new wxTextCtrl( m_panel14, ABOUT_LICENSE, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_READONLY|wxNO_BORDER|wxVSCROLL );
-	m_textCtrl121->SetToolTip( _("wxMUN is licensed under the MIT License.") );
+	m_textCtrl121->SetToolTip( _("wxMUN is licensed under the GPLv3.") );
 	
 	bSizer63->Add( m_textCtrl121, 1, wxEXPAND, 5 );
 	
