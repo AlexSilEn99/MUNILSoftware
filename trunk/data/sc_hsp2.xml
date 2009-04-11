@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<committee name="Security Council" GSLtime="60" >
+	<countries>
+		<country name="Amnesty International" code="AMIN" />
+		<country name="Andorra" code="ANDR" />
+		<country name="Angola" code="ANGO" />
+		<country name="Antigua and Barbuda" code="ANTI" />
+		<country name="Armenia" code="ARME" />
+		<country name="Australia" code="ASTL" />
+		<country name="Burkina Faso" code="BUFA" />
+		<country name="Bulgaria" code="BULG" />
+		<country name="Burundi" code="BURU" />
+		<country name="Central African Republic" code="CAFR" />
+		<country name="Cameroon" code="CAME" />
+		<country name="Canada" code="CANA" />
+		<country name="Cote d'Ivoire" code="CDIV" />
+		<country name="Chad" code="CHAD" />
+		<country name="China" code="CHIN" />
+		<country name="Congo, Dem. Rep. of" code="CODR" />
+		<country name="Comoros" code="COMO" />
+		<country name="Costa Rica" code="CORC" />
+		<country name="German Dem. Rep. (East)" code="GERM" />
+		<country name="India" code="INDA" />
+		<country name="Japan" code="JAPA" />
+		<country name="Libyan Arab Jamahiriya" code="LBYA" />
+		<country name="Mexico" code="MEXC" />
+		<country name="Pakistan" code="PAKS" />
+		<country name="Russian Federation" code="RUSS" />
+		<country name="Korea, Rep. of (South)" code="SKOR" />
+		<country name="Turkey" code="TURK" />
+		<country name="Uganda" code="UGAN" />
+		<country name="United Kingdom" code="UNKG" />
+		<country name="United States of America" code="UNST" />
+		<country name="Vietnam" code="VIET" />
+	</countries>
+	<topics>
+		<topic name="The Weaponization of Outer Space" />
+	</topics>
+</committee>

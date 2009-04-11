@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<committee name="Security Council" GSLtime="90">
+	<countries>
+		<country name="Belgium" code="BELG" observer="false" />
+		<country name="Central African Republic" code="CAFR" observer="true" />
+		<country name="Chad" code="CHAD" observer="true" />
+		<country name="China" code="CHIN" observer="false" />
+		<country name="Congo" code="CONG" observer="false" />
+		<country name="France" code="FRAN" observer="false" />
+		<country name="Ghana" code="GHAN" observer="false" />
+		<country name="Israel" code="ISRA" observer="false" />
+		<country name="Italy" code="ITAL" observer="false" />
+		<country name="Panama" code="PANA" observer="false" />
+		<country name="Peru" code="PERU" observer="false" />
+		<country name="Qatar" code="QATA" observer="false" />
+		<country name="Russian Federation" code="RUSS" observer="false" />
+		<country name="Slovak Republic" code="SVKA" observer="false" />
+		<country name="South Africa" code="SOAF" observer="false" />
+		<country name="Sudan" code="SUDA" observer="true" />
+		<country name="United Kingdom" code="UNKG" observer="false" />
+		<country name="United States of America" code="UNST" observer="false" />
+	</countries>
+	<topics>
+		<topic name="Sudan and Chad" />
+		<topic name="The Weaponization of Outer Space" />
+	</topics>
+</committee>

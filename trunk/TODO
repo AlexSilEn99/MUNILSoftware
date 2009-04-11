@@ -1,0 +1,57 @@
+TODO
+-----
+
+* Ghost voting lists (for closure of debate) (+ auto clear ghosts if tab is left)
+* write help data
+
+* motions tab to deal with motions. (jump to specific tab if motion passes! + are you sure this passed dialog (& clear lists afterwards...))
+* roll call: 
+	- min in favour should be made member of class + add accessor/modifier
+	- calculating failed/passed should be a function of class
+
+* settings.xml with:
+	+ double quorum
+
+	+ bool commentsAllowed
+	+ double maxCommentsTime
+
+	+ bool yieldToQuestionsAllowed
+	+ double maxQuestionTime
+
+	+ types of motions
+		each motion properties:
+		- wxString name
+		- bool needsTime
+		- bool needsTopic
+		- bool needsSpeakerTime
+		- bool needsSpeakersInFavourAgainst
+		- wxString topic
+		- wxString majority ("simple" & "two-third")
+		- int maxTime
+		- int maxSpeakerTime
+		- int maxSpeakersInFavour
+		- int maxSpeakersAgainst
+		- int precedenceNumber
+		- bool allowedDuringDebate
+		- bool allowedDuringVotingProcedure
+
+Possible:
+----------
+
+* Support for more than 2 topics?? (topic array)
+* History of debate flow
+* Support to edit countries.xml
+* Resolutions (seperate sub-notebook)
+   - create new
+   - table old (don't delete)
+   - edit (via amendments)
+   - support for div. of question?
+* Amendments (per resolution, sub-sub-notebook)
+   - how to store wtf these do? manual copy to resolution?
+   - create new
+   - delete (if voted down)
+* Storage formats of these? HTML with uls? XML?
+   - something suitable for div. of question?
+* How to show a proper diff for an amendment?
+* Link those to voting tab
+

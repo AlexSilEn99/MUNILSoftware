@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE committee [
+  <!ELEMENT name (#PCDATA) >
+  <!ELEMENT countries (country+) > 
+  <!ELEMENT country (name,code?,observer?) >
+  <!ELEMENT name (#PCDATA) >
+  <!ELEMENT code (#PCDATA) >
+  <!ELEMENT observer (#PCDATA) >
+  <!ELEMENT GSLtime? (#PCDATA) >
+  <!ELEMENT topics (topic+) >
+  <!ELEMENT topic (name) >
+  <!ELEMENT name (#PCDATA) >
+]>
+<committee>
+	<name>Security Council</name>
+	<countries>
+		<country>
+			<name>Belgium</name>
+			<code>BELG</code>
+			<observer>false</observer>
+		</country>
+		<country>
+			<name>Central African Republic</name>
+			<code>CAFR</code>
+			<observer>false</observer>
+		</country>
+		<country>
+			<name>Chad</name>
+			<code>CHAD</code>
+			<observer>false</observer>
+		</country>
+		<country>
+			<name>China</name>
+			<code>CHIN</code>
+			<observer>false</observer>
+		</country>
+		<country>
+			<name>Congo</name>
+			<code>CONG</code>
+			<observer>false</observer>
+		</country>
+		<country>
+			<name>France</name>
+			<code>FRAN</code>
+			<observer>false</observer>
+		</country>
+		<country>
+			<name>Ghana</name>
+			<code>GHAN</code>
+			<observer>false</observer>
+		</country>
+		<country>
+			<name>Israel</name>
+			<code>ISRA</code>
+			<observer>false</observer>
+		</country>
+		<country>
+			<name>Italy</name>
+			<code>ITAL</code>
+			<observer>false</observer>
+		</country>
+		<country>
+			<name>Panama</name>
+			<code>PANA</code>
+			<observer>false</observer>
+		</country>
+		<country>
+			<name>Peru</name>
+			<code>PERU</code>
+			<observer>false</observer>
+		</country>
+		<country>
+			<name>Qatar</name>
+			<code>QATA</code>
+			<observer>false</observer>
+		</country>
+		<country>
+			<name>Russian Federation</name>
+			<code>RUSS</code>
+			<observer>false</observer>
+		</country>
+		<country>
+			<name>Slovak Republic</name>
+			<code>SVKA</code>
+			<observer>false</observer>
+		</country>
+		<country>
+			<name>South Africa</name>
+			<code>SOAF</code>
+			<observer>false</observer>
+		</country>
+		<country>
+			<name>Sudan</name>
+			<code>SUDA</code>
+			<observer>false</observer>
+		</country>
+		<country>
+			<name>United Kingdom</name>
+			<code>UNKG</code>
+			<observer>false</observer>
+		</country>
+		<country>
+			<name>United States of America</name>
+			<code>UNST</code>
+			<observer>false</observer>
+		</country>
+	</countries>
+	<GSLtime>90</GSLtime>
+	<topics>
+		<topic>
+			<name>Sudan and Chad</name>
+		</topic>
+		<topic>
+			<name>The Weaponization of Outer Space</name>
+		</topic>
+	<topics>
+</committee>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<committee name="Testbeertjes" GSLtime="90" >
+	<countries>
+		<country name="Albania" code="ALBA" observer="true" />
+		<country name="Amnesty International" code="AMIN" />
+		<country name="Angola" code="ANGO" />
+		<country name="Argentina" code="ARGE" />
+		<country name="Bolivia" code="BLVA" />
+		<country name="Belize" code="BLZE" />
+		<country name="Bosnia and Herzegovina" code="BOHE" />
+	</countries>
+	<topics>
+		<topic name="Woei" />
+		<topic name="Blub" />
+	</topics>
+</committee>
