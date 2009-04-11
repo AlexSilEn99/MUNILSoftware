@@ -1,7 +1,21 @@
 /*
  * Copyright (c) 2008-2009 Geert-Jan Besjes 
  *
- * See COPYING for the status of this software. 
+ * This file is part of wxMUN.
+ *
+ * wxMUN is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * wxMUN is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with wxMUN.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 #ifndef DEFS_H
@@ -17,6 +31,19 @@
 
 #define DARK_RED (wxColour(187, 14, 14))
 #define DARK_GREEN (wxColour(00, 79 , 00))
+
+#define LICENSE_GPL wxT("Copyright (c) 2008-2009 Geert-Jan Besjes\n\nThis program is free software: you can redistribute it and/or modify "\
+	"it under the terms of the GNU General Public License as published by "\
+	"the Free Software Foundation, either version 3 of the License, or "\
+	"(at your option) any later version.\n\n"\
+	""\
+	"This program is distributed in the hope that it will be useful, "\
+	"but WITHOUT ANY WARRANTY; without even the implied warranty of "\
+	"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "\
+	"GNU General Public License for more details.\n\n"\
+	""\
+	"You should have received a copy of the GNU General Public License "\
+	"along with this program.  If not, see <http://www.gnu.org/licenses/>. ")
 
 #define LICENSE_MIT wxT("Copyright (c) 2008-2009 Geert-Jan Besjes\n\nPermission is hereby granted, free of charge, to any person " \
 "obtaining a copy of this software and associated documentation " \

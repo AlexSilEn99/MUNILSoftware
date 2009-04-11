@@ -1,7 +1,21 @@
 /*
  * Copyright (c) 2008-2009 Geert-Jan Besjes 
  *
- * See COPYING for the status of this software. 
+ * This file is part of wxMUN.
+ *
+ * wxMUN is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * wxMUN is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with wxMUN.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 #include "wxmunaboutdialog.h"
@@ -40,6 +54,6 @@ GUI_wxMUNAboutDialog( parent )
 	email->SetLabel(_T("g.besjes@student.science.ru.nl"));
 	
 	wxTextCtrl *license = (wxTextCtrl*) wxWindow::FindWindowById(ABOUT_LICENSE);
-	license->SetValue(LICENSE_MIT);
+	license->SetValue(LICENSE_GPL);
 
 }
