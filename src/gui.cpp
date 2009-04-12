@@ -2197,6 +2197,13 @@ GUI_wxMUNAboutDialog::GUI_wxMUNAboutDialog( wxWindow* parent, wxWindowID id, con
 	m_staticText66->Wrap( -1 );
 	fgSizer19->Add( m_staticText66, 0, wxALL|wxEXPAND, 5 );
 	
+	m_staticText88 = new wxStaticText( m_panel13, wxID_ANY, _("Homepage:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText88->Wrap( -1 );
+	fgSizer19->Add( m_staticText88, 0, wxALL, 5 );
+	
+	m_hyperlink1 = new wxHyperlinkCtrl( m_panel13, wxID_ANY, _("http://wxmun.sourceforge.net"), wxT("http://wxmun.sourceforge.net"), wxDefaultPosition, wxDefaultSize, wxHL_DEFAULT_STYLE );
+	fgSizer19->Add( m_hyperlink1, 0, wxALL, 5 );
+	
 	bSizer62->Add( fgSizer19, 1, wxEXPAND, 5 );
 	
 	m_panel13->SetSizer( bSizer62 );
@@ -2208,6 +2215,7 @@ GUI_wxMUNAboutDialog::GUI_wxMUNAboutDialog( wxWindow* parent, wxWindowID id, con
 	bSizer63 = new wxBoxSizer( wxVERTICAL );
 	
 	m_textCtrl121 = new wxTextCtrl( m_panel14, ABOUT_LICENSE, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_READONLY|wxNO_BORDER|wxVSCROLL );
+	m_textCtrl121->SetFont( wxFont( 10, 76, 90, 90, false, wxT("Courier New") ) );
 	m_textCtrl121->SetToolTip( _("wxMUN is licensed under the GPLv3.") );
 	
 	bSizer63->Add( m_textCtrl121, 1, wxEXPAND, 5 );
