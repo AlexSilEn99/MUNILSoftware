@@ -22,7 +22,7 @@
 #define DEFS_H
 
 #ifndef VERSION
- #define VERSION "0.27"
+ #define VERSION "0.38"
 #endif
 
 #ifndef PACKAGE_NAME
