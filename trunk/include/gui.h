@@ -41,6 +41,7 @@
 #include <wx/frame.h>
 #include <wx/checklst.h>
 #include <wx/dialog.h>
+#include <wx/hyperlink.h>
 #include <wx/notebook.h>
 
 ///////////////////////////////////////////////////////////////////////////
@@ -634,6 +635,8 @@ class GUI_wxMUNAboutDialog : public wxDialog
 		wxStaticText* m_staticText64;
 		wxStaticText* m_staticText65;
 		wxStaticText* m_staticText66;
+		wxStaticText* m_staticText88;
+		wxHyperlinkCtrl* m_hyperlink1;
 		wxPanel* m_panel14;
 		wxTextCtrl* m_textCtrl121;
 		wxButton* m_closeAbout;

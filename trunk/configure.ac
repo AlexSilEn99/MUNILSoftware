@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.61)
-AC_INIT(wxMUN, 0.27, g.besjes@student.science.ru.nl)
+AC_INIT(wxMUN, 0.38, g.besjes@student.science.ru.nl)
 
 if test `pwd | wc -w` -ne 1; then
         AC_MSG_ERROR([

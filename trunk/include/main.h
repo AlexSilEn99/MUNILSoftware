@@ -55,7 +55,7 @@ extern wxMUNFrame *parentFrame;
 
 class MyApp : public wxApp {
 public:
-	MyApp() : m_committeeLoaded(false) {}
+	MyApp() : m_committeeLoaded(false), m_latest_version(wxT("")) {}
         bool OnInit();
         int OnExit();
         int OnRun();
@@ -66,6 +66,7 @@ public:
 	bool isCommitteeLoaded();
 	void committeeLoaded();
 
+	bool checkForUpdates();
 	void setSession(Session);
 	Session *session();
 
@@ -88,6 +89,7 @@ private:
 //	void ParseCountry(const xmlpp::Node*);
         bool ReadCountries(const char *);
 
+	wxString m_latest_version;
 };
 
 DECLARE_APP( MyApp );

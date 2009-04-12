@@ -2149,7 +2149,7 @@ void wxMUNFrame::StopVotingSpeaker()
 
 	favourLabel->Enable(false); againstLabel->Enable(false);
 
-	wxStaticText *time  = ((wxStaticText*) wxWindow::FindWindowById(VOTING_TOTAL_TIME) );
+	wxStaticText *time  = ((wxStaticText*) wxWindow::FindWindowById(VOTING_TIME_LEFT) );
 	time->SetLabel(wxString::Format(wxT("00:00") ));
 	
 	clearCountryFlag(VOTING_SPEAKER_FLAG);	
