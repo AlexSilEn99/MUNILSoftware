@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Apr 21 2008)
+// C++ code generated with wxFormBuilder (version Dec 29 2008)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -36,12 +36,12 @@
 #include <wx/radiobut.h>
 #include <wx/scrolwin.h>
 #include <wx/aui/auibook.h>
+#include <wx/hyperlink.h>
 #include <wx/statusbr.h>
 #include <wx/menu.h>
 #include <wx/frame.h>
 #include <wx/checklst.h>
 #include <wx/dialog.h>
-#include <wx/hyperlink.h>
 #include <wx/notebook.h>
 
 ///////////////////////////////////////////////////////////////////////////
@@ -345,6 +345,9 @@ class GUI_MainFrame : public wxFrame
 		wxStaticText* m_rollCallVotingWithRightsLabel;
 		wxListBox* m_rollCallVotingWithRights;
 		wxButton* m_rollCallClearButton;
+		wxPanel* m_bannerSizer;
+		wxStaticText* m_bannerText;
+		wxHyperlinkCtrl* m_bannerHyperlink;
 		wxStatusBar* m_statusBar;
 		wxMenuBar* m_menubar;
 		wxMenu* m_fileMenu;

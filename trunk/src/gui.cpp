@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Apr 21 2008)
+// C++ code generated with wxFormBuilder (version Dec 29 2008)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -304,7 +304,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_GSLpanel->SetSizer( GSLcontainerSizer );
 	m_GSLpanel->Layout();
 	GSLcontainerSizer->Fit( m_GSLpanel );
-	m_mainauinotebook->AddPage( m_GSLpanel, _("General Speakers List"), false, wxNullBitmap );
+	m_mainauinotebook->AddPage( m_GSLpanel, _("General Speakers List"), true, wxNullBitmap );
 	m_singleSpeakerPanel = new wxPanel( m_mainauinotebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	m_singleSpeakerPanel->Hide();
 	m_singleSpeakerPanel->SetToolTip( _("The single speaker tab can be used in conjuction with the GSL, to deal with a yield to questions or handle comments.") );
@@ -1484,7 +1484,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_rollCallVotePanel->SetSizer( rollCallVoteSizer );
 	m_rollCallVotePanel->Layout();
 	rollCallVoteSizer->Fit( m_rollCallVotePanel );
-	m_mainauinotebook->AddPage( m_rollCallVotePanel, _("Roll call vote"), true, wxNullBitmap );
+	m_mainauinotebook->AddPage( m_rollCallVotePanel, _("Roll call vote"), false, wxNullBitmap );
 	
 	bSizer42->Add( m_mainauinotebook, 1, wxEXPAND | wxALL, 5 );
 	
@@ -1494,6 +1494,27 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_mainPanel->Layout();
 	panelContainerSizer->Fit( m_mainPanel );
 	containerSizer->Add( m_mainPanel, 1, wxEXPAND, 5 );
+	
+	m_bannerSizer = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* bBannerMainSizer;
+	bBannerMainSizer = new wxBoxSizer( wxVERTICAL );
+	
+	wxBoxSizer* bSizer105;
+	bSizer105 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_bannerText = new wxStaticText( m_bannerSizer, wxID_ANY, _("The wxMUN homepage is hosted by "), wxDefaultPosition, wxDefaultSize, 0 );
+	m_bannerText->Wrap( -1 );
+	bSizer105->Add( m_bannerText, 0, wxTOP|wxBOTTOM|wxLEFT|wxALIGN_CENTER_HORIZONTAL, 5 );
+	
+	m_bannerHyperlink = new wxHyperlinkCtrl( m_bannerSizer, wxID_ANY, _("United Netherlands"), wxT("http://www.unitednetherlands.org"), wxDefaultPosition, wxDefaultSize, wxHL_DEFAULT_STYLE );
+	bSizer105->Add( m_bannerHyperlink, 0, wxTOP|wxBOTTOM|wxRIGHT|wxALIGN_CENTER_HORIZONTAL, 5 );
+	
+	bBannerMainSizer->Add( bSizer105, 1, wxALIGN_CENTER_HORIZONTAL, 5 );
+	
+	m_bannerSizer->SetSizer( bBannerMainSizer );
+	m_bannerSizer->Layout();
+	bBannerMainSizer->Fit( m_bannerSizer );
+	containerSizer->Add( m_bannerSizer, 0, wxEXPAND, 5 );
 	
 	this->SetSizer( containerSizer );
 	this->Layout();
