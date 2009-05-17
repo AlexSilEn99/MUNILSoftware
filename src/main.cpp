@@ -390,7 +390,7 @@ bool MyApp::OnInit(){
 	wxYield();
 
 	if(splash){ 
-		//explicitely delete the splash our the parent frame will start minimized
+		//explicitely delete the splash or the parent frame will start minimized
 		wxMilliSleep(3500);
 		delete splash; 
 	}	
@@ -440,7 +440,7 @@ bool MyApp::OnInit(){
 	if( checkForUpdates() ){
 		wxString message = wxT("An updated version to wxMUN is available. You are currently running version ");
 		message << wxT(VERSION);
-		message << wxT(", the latest downloadable one is wxMUN ") << m_latest_version << wxT(".\n\nVisit http://wxmun.sourceforge.net to get the update.");
+		message << wxT(", the latest downloadable one is wxMUN ") << m_latest_version << wxT(".\n\nVisit http://wxmun.unitednetherlands.org to get the update.");
 
 		wxMessageBox(message,
 			wxT("New version available!"),

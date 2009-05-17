@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Dec 29 2008)
+// C++ code generated with wxFormBuilder (version Apr 21 2008)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -133,7 +133,8 @@
 #define ABOUT_AUTHOR 1084
 #define ABOUT_EMAIL 1085
 #define ABOUT_LICENSE 1086
-#define YIELD_TO_DELEGATE_CHOICES 1087
+#define UNL_LOGO_BITMAP 1087
+#define YIELD_TO_DELEGATE_CHOICES 1088
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class GUI_MainFrame
@@ -642,9 +643,12 @@ class GUI_wxMUNAboutDialog : public wxDialog
 		wxHyperlinkCtrl* m_hyperlink1;
 		wxPanel* m_panel14;
 		wxTextCtrl* m_textCtrl121;
+		wxStaticLine* m_staticline19;
+		wxStaticLine* m_staticline20;
 		wxButton* m_closeAbout;
 	
 	public:
+		wxStaticBitmap* m_aboutUNLlogobitmap;
 		GUI_wxMUNAboutDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("About wxMUN"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE );
 		~GUI_wxMUNAboutDialog();
 	
