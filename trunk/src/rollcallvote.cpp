@@ -47,12 +47,14 @@ void RollCallVote::Print(){
 
 bool RollCallVote::Passed()
 {
-	if( ( m_consensusBased && numAgainst() > 0 ) || 		//consensus fails
+	// special options
+	if( ( m_consensusBased && numAgainst() > 0 ) || 		// consensus fails
  	    ( m_P5veto && IsVetoed() )  ||				// vetoed
 	    ( m_hasMinInFavour && numInFavour() < GetMinInFavour() ) 	// doesn't meet minimum amount
 	    ) {
 
 		return false;
+	// simple majority
 	} else if ( numAgainst() < numInFavour() ) {
 		return true;
 	} else {

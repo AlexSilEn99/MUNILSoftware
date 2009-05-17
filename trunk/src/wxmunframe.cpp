@@ -40,6 +40,7 @@
 #include "countriespresentdialog.h"
 #include "yielddialog.h"
 #include "clear_png.h"
+#include "unl_logo.h"
 #include "rollcallvote.h"
 
 //helper functions
@@ -149,7 +150,8 @@ void setCountryFlag(int id, wxString name){
 	
 	clearCountryFlag(id);
 	
-	if( !wxFile::Exists(ConfigManager::FindDataFile(wxGetApp().findCountryFlagByName(name))) || !flag.LoadFile(ConfigManager::FindDataFile(wxGetApp().findCountryFlagByName(name)))){
+	if( !wxFile::Exists(ConfigManager::FindDataFile(wxGetApp().findCountryFlagByName(name))) || 
+	    !flag.LoadFile(ConfigManager::FindDataFile(wxGetApp().findCountryFlagByName(name)))){
 		clearCountryFlag(id); 
 		return;
 	}
@@ -1635,6 +1637,8 @@ void wxMUNFrame::OnHelp( wxCommandEvent& event )
 void wxMUNFrame::OnAbout( wxCommandEvent& event )
 {
 	wxMUNAboutDialog* dlg = new wxMUNAboutDialog(this);
+	dlg->m_aboutUNLlogobitmap->SetBitmap(wxGetBitmapFromMemory(unl_logo));
+
 	dlg->ShowModal();
 	dlg->Destroy();
 }
@@ -2523,7 +2527,7 @@ void wxMUNFrame::EnableAndResetRollCallCtrls()
 	m_rollCallFirstRoundChoices->Clear();
 	m_rollCallSecondRoundChoices->Clear();
 	for(; it != countries->end(); it++){
-		if( it->second.isObserver())
+		if( it->second.isObserver() || !it->second.isPresent())
 			continue;
 			
 		m_rollCallFirstRoundChoices->Append(it->second.name());

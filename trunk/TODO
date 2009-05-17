@@ -5,9 +5,6 @@ TODO
 * write help data
 
 * motions tab to deal with motions. (jump to specific tab if motion passes! + are you sure this passed dialog (& clear lists afterwards...))
-* roll call: 
-	- min in favour should be made member of class + add accessor/modifier
-	- calculating failed/passed should be a function of class
 
 * settings.xml with:
 	+ double quorum

@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Dec 29 2008)
+// C++ code generated with wxFormBuilder (version Apr 21 2008)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -2222,7 +2222,7 @@ GUI_wxMUNAboutDialog::GUI_wxMUNAboutDialog( wxWindow* parent, wxWindowID id, con
 	m_staticText88->Wrap( -1 );
 	fgSizer19->Add( m_staticText88, 0, wxALL, 5 );
 	
-	m_hyperlink1 = new wxHyperlinkCtrl( m_panel13, wxID_ANY, _("http://wxmun.sourceforge.net"), wxT("http://wxmun.sourceforge.net"), wxDefaultPosition, wxDefaultSize, wxHL_DEFAULT_STYLE );
+	m_hyperlink1 = new wxHyperlinkCtrl( m_panel13, wxID_ANY, _("http://wxmun.unitednetherlands.org"), wxT("http://wxmun.unitednetherlands.org"), wxDefaultPosition, wxDefaultSize, wxHL_DEFAULT_STYLE );
 	fgSizer19->Add( m_hyperlink1, 0, wxALL, 5 );
 	
 	bSizer62->Add( fgSizer19, 1, wxEXPAND, 5 );
@@ -2247,6 +2247,15 @@ GUI_wxMUNAboutDialog::GUI_wxMUNAboutDialog( wxWindow* parent, wxWindowID id, con
 	m_aboutNotebook->AddPage( m_panel14, _("License"), true );
 	
 	bSizer60->Add( m_aboutNotebook, 1, wxEXPAND|wxTOP|wxBOTTOM, 5 );
+	
+	m_staticline19 = new wxStaticLine( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
+	bSizer60->Add( m_staticline19, 0, wxEXPAND | wxALL, 5 );
+	
+	m_aboutUNLlogobitmap = new wxStaticBitmap( this, UNL_LOGO_BITMAP, wxNullBitmap, wxDefaultPosition, wxSize( 165,47 ), 0 );
+	bSizer60->Add( m_aboutUNLlogobitmap, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	
+	m_staticline20 = new wxStaticLine( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
+	bSizer60->Add( m_staticline20, 0, wxEXPAND | wxALL, 5 );
 	
 	m_closeAbout = new wxButton( this, wxID_CANCEL, _("&Close"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer60->Add( m_closeAbout, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );

@@ -17,6 +17,7 @@ wxMUN_include_DATA = clear_png.h \
 			prep.h \
 			rollcallvote.h\
 			session.h \
+			unl_logo.h \
 			votingpanel.h \
 			wxmunframe.h\
 			wxmunaboutdialog.h \
