@@ -258,11 +258,15 @@ You can deviate from this default setting in multiple ways:
 \begin{description}
 \item[Consensus-based voting.] If you check this box, any vote against will cause the document you are voting on to fail;
 \item[P5-veto.] If any of the permanent members of the Security Council voted against, the vote fails. Note that \wxMUN\ uses the composition of the \textsc{sc} since 1991 to determine if a country is a permanent member, it is currently impossible\footnote{Note to self: this is downright stupid.} to use this option with either the Soviet Union, the Republic of China or both;
-\item[Mininum affirmative.] If the vote requires a different majority than a simple majority you can specify the required number of votes in favour. If this threshold is then exceeded, the document voted upon passes. Note that this is for example required for a Security Council simulation, where 9 votes in favour (instead of a simple majority of countries voting) are always needed.
+\item[Minimum affirmative.] If the vote requires a different majority than a simple majority you can specify the required number of votes in favour. If this threshold is then exceeded, the document voted upon passes. Note that this is for example required for a Security Council simulation, where 9 votes in favour (instead of a simple majority of countries voting) are always needed.
 \end{description}
 The last two options can of course be combined. Also, it is worthwile to remember that these options can all be changed at any time, including \emph{before} displaying the outcome.
 
 Finally, please note again that \wxMUN\ has \emph{no notion} of the concept `present and voting'. You must remember yourself whether countries are allowed to abstain or not.
+
+\section{Changing settings}
+\subsection{Logo}
+The logo in the top right corner can be changed to your own conference's logo. Simply replace the file \texttt{images/logo.png} by any image\footnote{Note to self: should be in \textsc{gui} and be put in userdir.}. This image will not scaled, so be mindful of the dimensions of the file you create. \wxMUN 's original logo is 289$\times$67 px.
 
 \section{Bugs and questions}
 In case you find a bug in \wxMUN\, we urge you to please send us an email. This helps to improve the experience for other users. Also, if you feel a certain feature could be added to the program, do not hesitate to ask. 
