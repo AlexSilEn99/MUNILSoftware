@@ -1,5 +1,8 @@
 \documentclass[11pt, a4paper]{article}
 
+
+\usepackage[T1]{fontenc}
+
 \usepackage[british]{babel}
 \usepackage{a4wide}
 %\usepackage{palatino}
@@ -9,6 +12,12 @@
 \usepackage[hang,bf,footnotesize]{caption}
 \usepackage{wrapfig}
 \usepackage{subfigure}
+
+
+\usepackage{MnSymbol}
+%\usepackage{MinionPro}
+\usepackage[mathlf,textlf,minionint]{MinionPro}
+\usepackage{textcomp}
 
 \newcommand\wxMUN{wx\textsc{mun}}
 
@@ -114,15 +123,15 @@ If somehow the program still does not run, please send an email (see p. \pageref
 \section{Running wxMUN}
 Running \wxMUN\ should work fine now -- on Windows, double-click the executable or shortcut, on Linux/Unix type \texttt{wxmun} (or, in case you have not used \texttt{make install} or installed into a directory not included in your \texttt{PATH}, the full path of the executable) to start the program.
 
+On startup, \wxMUN\ will check if there is a new version of the program available.
+
+\subsection{Creating and loading a committee}
+\subsubsection{Creating a new committee}
 \begin{wrapfigure}[17]{r}{0.45\textwidth}
 \includegraphics[width=0.45\textwidth]{screenshots/new_committee.png}
 \caption{Creating a new committee, in this case a Security Council.}
 \end{wrapfigure}
 
-On startup, \wxMUN\ will check if there is a new version of the program available.
-
-\subsection{Creating and loading a committee}
-\subsubsection{Creating a new committee}
 Your first order of business to be able to manage debate is to actually have something to manage: you must create a committee. This can be done through \emph{Committee $\rightarrow$ New}. 
 
 What you see is a screen that allows you to create a new committee definition. Required for the creation are a \emph{name}, a \emph{topic} \textsc{a}, and \emph{at least one member}. Select all countries that are members and observers and simply press \textsc{ok}. The invert button can be used to invert the selection on either of the lists. \wxMUN\ will always make sure a country is only selected in one of the lists, so when inverting one list changes in the other can occur.
@@ -157,17 +166,16 @@ Keep in mind the following when adding or changing a country:
 \item its code \emph{must} be unique. In case of duplicate code entries, later entries will simply overwrite earlier ones;
 \item names \emph{must} be unique;
 \item the code is also used to display flags. \wxMUN\ expects flags to be in \textsc{png}-format and as such simply adds \texttt{.png} to the code 
-entered. If this file does not exist, no flag is displayed at all\footnote{Note to self: figure out what happens with data that is in fact not in the right format\ldots}. Put the file in XXX\footnote{Note to self: this should not be the global data directory, but where is the user data directory exactly on Windows?} to be displayed.
+entered. If this file does not exist, no flag is displayed at all\footnote{Note to self: figure out what happens with data that is in fact not in the right format\ldots}. Put the file in \textbf{XXX}\footnote{Note to self: this should not be the global data directory, but where is the user data directory exactly on Windows?} to be displayed.
 \end{enumerate}
 
 \subsection{Managing debate}
+Once you have loaded a committee, you are ready to start managing debate. The first things to do should be to find out which countries are present and tell \wxMUN\ this.
+\subsubsection{Countries present}
 \begin{wrapfigure}[18]{l}{0.34\textwidth}
 \includegraphics[width=0.34\textwidth]{screenshots/countries_present.png}
 \caption{Editing the countries present.}
 \end{wrapfigure}
-
-Once you have loaded a committee, you are ready to start managing debate. The first order of business should be to find out which countries are present and tell \wxMUN\ this.
-\subsubsection{Countries present}
 
 Which countries are present in the committee at the current time can be specified through \emph{Manage debate $\rightarrow$ Countries Present}. Simply check all countries that are present and uncheck any that are (perhaps no longer) present. Indicating that countries are `present and voting' is impossible in \wxMUN , you will have to keep track of this yourself when using the Roll Call Vote tab.
 
@@ -194,19 +202,19 @@ The time given allotted to each speaker can be set at any time, except during sp
 Any change to the \textsc{gsl} itself or the time is automatically saved. If you restart \wxMUN\ you will return to the state the program previously was in. This state is, for Linux/Unix, saved under \texttt{\~{}/.wxmun} and for Windows in \textbf{XXX}.
 
 \subsubsection{(Un)moderated caucus}
-\begin{wrapfigure}[15]{l}{0.40\textwidth}
+Starting a caucus should be extremely easy: simply use the input fields and hit \textsc{ok}. For an unmoderated caucus, the topic is optional. Caucuses end when the total time elapses or when you manually use `Stop'. 
+
+\begin{wrapfigure}[12]{l}{0.40\textwidth}
 \includegraphics[width=0.40\textwidth]{screenshots/mod_caucus.png}
 \caption{An example of a moderated caucus.}
 \end{wrapfigure}
-
-Starting a caucus should be extremely easy: simply use the input fields and hit OK. For an unmoderated caucus, the topic is optional. Caucuses end when the total time elapses or when you manually use `Stop'. 
 
 When in moderated caucus, simply double-click any country name to give the floor to its delegate.
 
 Note that for a moderated caucus, it still is allowed to call upon a speaker when the speaker time is longer than the time remaining in the caucus (e.g. 30 seconds, but there are only 8 seconds left in the caucus). This is to allow the dais to use their own personal preference in this matter, simply end the caucus manually if you do not want to allow such kind of final speakers.
 
 \subsubsection{Procedural voting}
-\begin{wrapfigure}[16]{r}{0.4\textwidth}
+\begin{wrapfigure}[13]{r}{0.4\textwidth}
 \includegraphics[width=0.4\textwidth]{screenshots/proc_voting.png}
 \caption{Voting on whether or not to divide the question.}
 \end{wrapfigure}
@@ -218,6 +226,20 @@ Again you can simply double-click the first country on either of the lists to gi
 Note that \wxMUN\ does not force you to use the same amount of speakers in favour of a particular motion as there are against nor does it require you to alternate between the lists.
 
 \subsubsection{Roll Call Vote}
+The `Roll Call Vote' tab is unavailable until you enter voting procedure via \emph{Manage Debate $\rightarrow$ Start Voting Procedure}. Please note that it is impossible to edit the countries present once you have done this. Once you start voting procedure, any other tab can no longer be used. This is \emph{not} saved in the state of debate, so you can at any time close the program and restart it to return to the state debate was in prior to clicking on `Start Voting Procedure'.
+
+The Roll Call Vote tab is based on the Rules of Procedure used at Harvard National Model United Nations and WorldMUN. As such, you will only find countries that are both a member of the committee or council you are simulating and are present. Any observer nation will not be shown in the lists. Again, please keep in mind that you must indicate which members are in fact present before starting a roll call vote!
+
+In case the Rules of Procedure you are using do not contain the notion of multiple rounds, it suffices to not use the `Pass' button in the first round. This naturally equates to each country being called only once. 
+
+The `with rights' buttons only differ from the normal ones in that they add countries to the list in the right-hand corner which you can, after the vote has concluded, double-click to allow explanations of votes against country policy if your Rules of Procedure allow this. \wxMUN\ will automatically switch to the Single Speaker tab to display the time.
+
+To actually proceed in taking a vote, simply use the first round list starting from the member you randomly chose and use the buttons below the list. \wxMUN\ will always cycle to the next country on the list for convenience. Once the first list is exhausted, the list for the second round becomes available if there are any countries that passed during the first round. If this is the case, proceed with the second round until that list is empty as well.
+
+Once you are done taking the vote, select `Display outcome' to show the outcome. By default, \wxMUN\ calculates whether the vote has passed by requiring a simple majority: if there are more countries voting `yes' than `no', the outcome is a pass.
+
+You can deviate from this default setting in multiple ways:
+
 \begin{figure}[tbp]
 \centering
 \subfigure[First round] % caption for subfigure a
@@ -240,20 +262,6 @@ Note that \wxMUN\ does not force you to use the same amount of speakers in favou
 \caption{A roll call vote requiring the affirmative votes of the P5 and 9 votes in favour to pass. Congo has voted `no with rights'.}
 \label{fig:sub} % caption for the whole figure
 \end{figure}
-
-The `Roll Call Vote' tab is unavailable until you enter voting procedure via \emph{Manage Debate $\rightarrow$ Start Voting Procedure}. Please note that it is impossible to edit the countries present once you have done this. Once you start voting procedure, any other tab can no longer be used. This is \emph{not} saved in the state of debate, so you can at any time close the program and restart it to return to the state debate was in prior to clicking on `Start Voting Procedure'.
-
-The Roll Call Vote tab is based on the Rules of Procedure used at Harvard National Model United Nations and WorldMUN. As such, you will only find countries that are both a member of the committee or council you are simulating and are present. Any observer nation will not be shown in the lists. Again, please keep in mind that you must indicate which members are in fact present before starting a roll call vote!
-
-In case the Rules of Procedure you are using do not contain the notion of multiple rounds, it suffices to not use the `Pass' button in the first round. This naturally equates to each country being called only once. 
-
-The `with rights' buttons only differ from the normal ones in that they add countries to the list in the right-hand corner which you can, after the vote has concluded, double-click to allow explanations of votes against country policy if your Rules of Procedure allow this. \wxMUN\ will automatically switch to the Single Speaker tab to display the time.
-
-To actually proceed in taking a vote, simply use the first round list starting from the member you randomly chose and use the buttons below the list. \wxMUN\ will always cycle to the next country on the list for convenience. Once the first list is exhausted, the list for the second round becomes available if there are any countries that passed during the first round. If this is the case, proceed with the second round until that list is empty as well.
-
-Once you are done taking the vote, select `Display outcome' to show the outcome. By default, \wxMUN\ calculates whether the vote has passed by requiring a simple majority: if there are more countries voting `yes' than `no', the outcome is a pass.
-
-You can deviate from this default setting in multiple ways:
 
 \begin{description}
 \item[Consensus-based voting.] If you check this box, any vote against will cause the document you are voting on to fail;
