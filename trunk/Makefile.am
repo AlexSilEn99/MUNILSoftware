@@ -1,7 +1,8 @@
 AUTOMAKE_OPTIONS = foreign 1.7 dist-bzip2
 
-SUBDIRS = src include data images m4
-DIST_SUBDIRS = MSVC src include data images
+SUBDIRS = src include
+EXTRA_SUBDIRS = MSVC data images m4
+DIST_SUBDIRS = $(SUBDIRS) $(EXTRA_SUBDIRS)
 EXTRA_DIST = autogen.sh mkinstalldirs
 
 # Copy all the spec files. Of course, only one is actually used.
