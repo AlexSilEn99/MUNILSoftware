@@ -24,14 +24,14 @@
 #include <wx/choice.h>
 
 #include <map>
-#include "main.h"
+
+#include "app.h"
 #include "country.h"
 #include "countriespresentdialog.h"
 
 CountriesPresentDialog::CountriesPresentDialog( wxWindow* parent, std::map<wxString, Country> *countries )
 :
-GUI_CountriesPresentDialog( parent ), m_numPresent(0)
-{
+GUI_CountriesPresentDialog( parent ), m_numPresent(0) {
 	std::map<wxString, Country>::iterator it = countries->begin();
 	for(int i=0; it != countries->end(); it++, i++){
 		m_countriesPresentCheckList->Append(it->second.name());

@@ -22,16 +22,19 @@
 #include <map>
 #include <wx/defs.h>
 #include <wx/string.h>
-#include "defs.h"
-#include "main.h"
-#include "country.h"
-#include "committee.h"
 
 #include <sstream>
 #include <sys/types.h>
 #include <sys/stat.h>
 //#include <unistd.h>
 #include <errno.h>
+
+#include "app.h"
+#include "defs.h"
+#include "country.h"
+#include "committee.h"
+
+XERCES_CPP_NAMESPACE_USE
 
 Committee::Committee(const char *filename) : m_numTopics(0), m_votingTime(30), m_numPresent(0), m_numMembersPresent(0) {
 	if(initFromXML(filename)){

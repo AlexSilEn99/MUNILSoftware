@@ -1,8 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-wxMUN_includedir = $(pkgincludedir)
-
-wxMUN_include_DATA = clear_png.h \
+noinst_HEADERS = clear_png.h \
 			committee.h \
 			configmanager.h \
 			confirmtopicswapdialog.h \
@@ -11,7 +9,7 @@ wxMUN_include_DATA = clear_png.h \
 			defs.h \
 			editcommitteedialog.h \
 			gui.h \
-			main.h \
+			app.h \
 			newcommitteedialog.h \
 			noname.h \
 			prep.h \

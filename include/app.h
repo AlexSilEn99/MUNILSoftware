@@ -18,8 +18,8 @@
  *
  */
 
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef APP_H
+#define APP_H
 
 #ifdef __BORLANDC__
     #pragma hdrstop
@@ -37,15 +37,12 @@
  #include <iostream.h>
 #endif
 
-XERCES_CPP_NAMESPACE_USE
-
 #include <wx/wx.h>
 #include <wx/splash.h>
 #include <wx/defs.h>
 #include <wx/string.h>
 #include <wx/filename.h>
 
-// #include <libxml++/libxml++.h>
 #include <map>
 #include "wxmunframe.h"
 #include "country.h"
@@ -53,9 +50,9 @@ XERCES_CPP_NAMESPACE_USE
 
 extern wxMUNFrame *parentFrame;
 
-class MyApp : public wxApp {
+class wxMUN : public wxApp {
 public:
-	MyApp() : m_committeeLoaded(false), m_latest_version(wxT("")) {}
+	wxMUN() : m_committeeLoaded(false), m_latest_version(wxT("")) {}
         bool OnInit();
         int OnExit();
         int OnRun();
@@ -92,7 +89,7 @@ private:
 	wxString m_latest_version;
 };
 
-DECLARE_APP( MyApp );
+DECLARE_APP( wxMUN );
 
-#endif /* MAIN_H */
+#endif /* APP_H */
 
