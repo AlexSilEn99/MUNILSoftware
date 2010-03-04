@@ -29,7 +29,7 @@
 #include <map>
 
 #include "country.h"
-#include "main.h"
+#include "app.h"
 #include "wxmunframe.h"
 #include "defs.h"
 #include "confirmtopicswapdialog.h"

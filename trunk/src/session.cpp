@@ -26,12 +26,14 @@
 #include <wx/file.h>
 #include <wx/filefn.h>
 
-#include "main.h"
+#include "app.h"
 #include "session.h"
 #include "committee.h"
 #include "country.h"
 #include "configmanager.h"
 #include "rollcallvote.h"
+
+XERCES_CPP_NAMESPACE_USE
 
 Session::Session(const Committee &c, wxString t) : m_topic(t), m_committee(c) {
 	m_topicChosen=false;

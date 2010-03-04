@@ -62,5 +62,89 @@ AC_C_CONST
 
 # Checks for library functions.
 
-AC_CONFIG_FILES([Makefile src/Makefile include/Makefile data/Makefile data/flags/Makefile images/Makefile MSVC/Makefile m4/Makefile])
+# Create application bundle on OS X
+# ----------------------------
+
+if echo $WX_CPPFLAGS | grep __WXMAC__; then
+    macappbundle="yes"
+else
+    macappbundle="no"
+fi
+
+# Everything translation related
+# ------------------------------
+
+WXMUN_LINGUAS=
+WXMUN_LINGUAS_PO=
+WXMUN_LINGUAS_MO=
+WXMUN_LINGUAS_PO_NEW=
+
+if test "$locales" = "yes"; then
+  AC_PATH_PROG(xgettext, xgettext)
+  if test -z "$xgettext"; then
+    AC_MSG_ERROR([xgettext not found, please install the GNU gettext package and make sure xgettext is in the path.])
+  fi
+
+  AC_PATH_PROG(msgfmt, msgfmt)
+  if test -z "$msgfmt"; then
+    AC_MSG_ERROR([ msgfmt not found, please install the GNU gettext package and make sure  msgfmt is in the path.])
+  fi
+
+  FZ_PATH_PROG_VER(msgmerge, msgmerge, 0.11.0)
+  if test -z "$msgmerge"; then
+    AC_MSG_ERROR([msgmerge not found or too old, please install a current version of the GNU gettext package and make sure msgmerge is in the path.])
+  fi
+
+  AC_MSG_CHECKING([available message catalogs])
+
+  WXMUN_LINGUAS_PO=
+  WXMUN_LINGUAS=
+
+  if /bin/ls > /dev/null; then
+    LSPROG='/bin/ls'
+  else
+    LSPROG='ls'
+  fi
+
+  if test x$srcdir = x; then
+    path="po"
+  else
+    path="$srcdir/po"
+  fi
+  for i in `$LSPROG $path/*.po`; do
+    i=${i%.*}
+    i=${i##*/}
+    WXMUN_LINGUAS_PO=$WXMUN_LINGUAS_PO${WXMUN_LINGUAS_PO:+ }\$\(srcdir\)/$i.po
+    WXMUN_LINGUAS_PO_NEW=$WXMUN_LINGUAS_PO_NEW${WXMUN_LINGUAS_PO_NEW:+ }$i.po.new
+    WXMUN_LINGUAS=$WXMUN_LINGUAS${WXMUN_LINGUAS:+ }$i
+    WXMUN_LINGUAS_MO=$WXMUN_LINGUAS_MO${WXMUN_LINGUAS_MO:+ }$i.mo
+  done
+
+  AC_MSG_RESULT([$WXMUN_LINGUAS])
+
+fi
+
+AC_SUBST(WXMUN_LINGUAS)
+AC_SUBST(WXMUN_LINGUAS_PO)
+AC_SUBST(WXMUN_LINGUAS_PO_NEW)
+AC_SUBST(WXMUN_LINGUAS_MO)
+
+# Output automake conditionals
+# ----------------------------
+
+AM_CONDITIONAL([LOCALES_ONLY], [test "$localesonly" = "yes"])
+AM_CONDITIONAL([LOCALES], [test "$locales" = "yes"])
+AM_CONDITIONAL(MACAPPBUNDLE, [test "$macappbundle" = "yes"])
+
+AC_CONFIG_FILES([Makefile 
+		src/Makefile 
+		include/Makefile 
+		doc/Makefile
+		data/Makefile 
+		data/flags/Makefile 
+		images/Makefile 
+		MSVC/Makefile 
+		m4/Makefile
+		po/Makefile
+		MacInfo.plist ])
 AC_OUTPUT

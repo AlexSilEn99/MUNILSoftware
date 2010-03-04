@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+
+	<key>CFBundleExecutable</key>
+	<string>wxmun</string>
+
+	<key>CFBundleGetInfoString</key>
+	<string>wxMUN @PACKAGE_VERSION@, Copyright (C) 2008-2010  Geert-Jan Besjes; website: http://wxmun.unitednetherlands.org</string>
+
+	<key>CFBundleIconFile</key>
+	<string>wxmun.icns</string>
+
+	<key>CFBundleIdentifier</key>
+	<string>org.unitednetherlands.wxmun</string>
+
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+
+	<key>CFBundleLongVersionString</key>
+	<string>wxMUN @PACKAGE_VERSION@</string>
+
+	<key>CFBundleName</key>
+	<string>wxMUN</string>
+
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+
+	<key>CFBundleShortVersionString</key>
+	<string>@PACKAGE_VERSION@</string>
+
+	<key>CFBundleSignature</key>
+	<string>wxmun</string>
+
+	<key>CFBundleVersion</key>
+	<string>@PACKAGE_VERSION@</string>
+
+	<key>CSResourcesFileMapped</key>
+	<true/>
+
+	<key>LSRequiresCarbon</key>
+	<true/>
+
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright (C) 2008-2010  Geert-Jan Besjes</string>
+</dict>
+</plist>

@@ -28,7 +28,8 @@
 #include <wx/file.h>
 #include <iostream>
 #include <fstream>
-#include "main.h"
+
+#include "app.h"
 #include "defs.h"
 #include "country.h"
 #include "gui.h"
@@ -36,8 +37,7 @@
 
 NewCommitteeDialog::NewCommitteeDialog( wxWindow* parent,  std::map<wxString, Country> *countries)
 : 
-GUI_NewCommitteeDialog( parent )
-{
+GUI_NewCommitteeDialog( parent ) {
 	std::map<wxString, Country>::iterator it;
 	int i=0; int j=0;
 	for(it = countries->begin(); it != countries->end(); it++, i++, j++){

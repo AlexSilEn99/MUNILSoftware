@@ -18,11 +18,6 @@
  *
  */
 
-#include "main.h"
-#include "configmanager.h"
-#include "defs.h"
-
-#include "wx/aui/aui.h"
 #include <sstream>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -33,18 +28,22 @@
 #include <wx/taskbar.h>
 #include <wx/sstream.h>
 #include <wx/url.h>
+#include "wx/aui/aui.h"
 
+#include "app.h"
+#include "configmanager.h"
+#include "defs.h"
 
 #if defined(__WXGTK__) || defined(__WXMOTIF__) || defined(__WXMAC__) || defined(__WXMGL__) || defined(__WXX11__)
     #include "resources/icons/wxMUN.xpm"
 #endif
 
-using namespace xercesc_2_8;
+//using namespace xercesc_2_8;
+XERCES_CPP_NAMESPACE_USE
 
 wxMUNFrame *parentFrame;
 
-wxULongLong ConvertToVersionNumber(const wxChar* version)
-{
+wxULongLong ConvertToVersionNumber(const wxChar* version) {
 	// This function is (c) the FileZilla project.
 
 	// Crude conversion from version string into number for easy comparison
@@ -105,7 +104,7 @@ wxULongLong ConvertToVersionNumber(const wxChar* version)
 	return v;
 }
 
-bool MyApp::checkForUpdates(){
+bool wxMUN::checkForUpdates(){
 	wxString current = wxT(VERSION), latest;
 
 	wxURL url(wxT(CHECK_FOR_UPDATE_URL));
@@ -126,24 +125,24 @@ bool MyApp::checkForUpdates(){
 	return false;
 }
 
-void MyApp::setSession(Session s){
+void wxMUN::setSession(Session s){
 	m_session = s;
 	m_session.saveState();
 }
 
-Session *MyApp::session(){
+Session *wxMUN::session(){
 	return &m_session;
 }
 
-bool MyApp::isCommitteeLoaded(){
+bool wxMUN::isCommitteeLoaded(){
 	return m_committeeLoaded;
 }
 
-void MyApp::committeeLoaded(){
+void wxMUN::committeeLoaded(){
 	m_committeeLoaded = true;
 }
 
-Country* MyApp::findCountryPtr(wxString code){
+Country* wxMUN::findCountryPtr(wxString code){
 	std::map<wxString, Country>::iterator it = m_allAvailableCountries.find(code);
 	if(it == m_allAvailableCountries.end())
 		return NULL;
@@ -151,7 +150,7 @@ Country* MyApp::findCountryPtr(wxString code){
 	return &(m_allAvailableCountries[code]);
 }
 
-Country MyApp::findCountry(wxString code){
+Country wxMUN::findCountry(wxString code){
 	std::map<wxString, Country>::iterator it = m_allAvailableCountries.find(code);
 	if(it == m_allAvailableCountries.end())
 		throw -1;
@@ -159,7 +158,7 @@ Country MyApp::findCountry(wxString code){
 	return m_allAvailableCountries[code];
 }
 
-wxString MyApp::findCountryCode(wxString name){
+wxString wxMUN::findCountryCode(wxString name){
 	std::map<wxString, Country>::iterator it = m_allAvailableCountries.begin();
 	for(; it != m_allAvailableCountries.end(); it++){
 		if(it->second.name() == name)
@@ -169,7 +168,7 @@ wxString MyApp::findCountryCode(wxString name){
 	return wxT("");
 }
 
-wxString MyApp::findCountryFlagByName(wxString name){
+wxString wxMUN::findCountryFlagByName(wxString name){
 	std::map<wxString, Country>::iterator it = m_allAvailableCountries.begin();
 	for(; it != m_allAvailableCountries.end(); it++){
 		if(it->second.name() == name)
@@ -179,15 +178,15 @@ wxString MyApp::findCountryFlagByName(wxString name){
 	return wxT("");
 }
 
-std::map<wxString, Country>* MyApp::availableCountries() {
+std::map<wxString, Country>* wxMUN::availableCountries() {
 	return &m_allAvailableCountries;
 }
 
-std::map<wxString, Country*>* MyApp::committeeCountries() {
+std::map<wxString, Country*>* wxMUN::committeeCountries() {
 	return &m_committeeCountries;
 }
 
-bool MyApp::ReadCountries(const char *filename){
+bool wxMUN::ReadCountries(const char *filename){
 
 	xercesc::XercesDOMParser *m_CountriesFileParser = new XercesDOMParser;
 	char* m_name;
@@ -296,7 +295,7 @@ bool MyApp::ReadCountries(const char *filename){
 	return true;
 }
 
-void MyApp::LoadCommitteeFromFile(wxString filename, bool overwriteState){
+void wxMUN::LoadCommitteeFromFile(wxString filename, bool overwriteState){
 	if(filename == wxEmptyString)
 		return;
 
@@ -305,7 +304,7 @@ void MyApp::LoadCommitteeFromFile(wxString filename, bool overwriteState){
 		// create session instance
 		Session s(c);
 
-		// write session back to MyApp instance and save	
+		// write session back to wxMUN instance and save	
 		wxGetApp().committeeLoaded();
 		wxGetApp().setSession(s);
 
@@ -340,7 +339,7 @@ void MyApp::LoadCommitteeFromFile(wxString filename, bool overwriteState){
 		wxICON_INFORMATION | wxOK, NULL);
 }
 
-void MyApp::readState(wxString filename){
+void wxMUN::readState(wxString filename){
 	std::cout << filename.mb_str() << std::endl;
 
 	wxString file = (filename != wxEmptyString) ? filename : ConfigManager::GetFolder(sdConfig) + wxFILE_SEP_PATH + _T("state.xml");
@@ -353,7 +352,7 @@ void MyApp::readState(wxString filename){
 	}
 }
 
-bool MyApp::OnInit(){
+bool wxMUN::OnInit(){
 
 	ConfigManager* mgr = 0;
 
@@ -450,14 +449,14 @@ bool MyApp::OnInit(){
 	return true;
 }
 
-int MyApp::OnExit(){
+int wxMUN::OnExit(){
 	//TODO: save state to xml
 
 	xercesc::XMLPlatformUtils::Terminate();
 	return 0;
 }
 
-int MyApp::OnRun(){
+int wxMUN::OnRun(){
 
 	int exitcode = wxApp::OnRun();
 	//wxTheClipboard->Flush();
@@ -465,4 +464,4 @@ int MyApp::OnRun(){
 		return exitcode;
 }
 
-IMPLEMENT_APP( MyApp );
+IMPLEMENT_APP( wxMUN );
