@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2009 Geert-Jan Besjes 
+ * Copyright (c) 2008-2010 Geert-Jan Besjes 
  *
  * This file is part of wxMUN.
  *
@@ -26,6 +26,20 @@
 #include "configmanager.h"
 #include "prep.h"
 
+#if defined(__APPLE__) && defined(__MACH__)
+ #include <sys/param.h>
+ #include <mach-o/dyld.h>
+#endif
+
+#ifdef __WXMAC__
+ #include "wx/mac/corefoundation/cfstring.h"
+ #include "wx/intl.h"
+
+ #include <CoreFoundation/CFBundle.h>
+ #include <CoreFoundation/CFURL.h>
+#endif
+
+
 #define cbC2U wxString::FromAscii
 
 wxString ConfigManager::config_folder;
@@ -36,10 +50,9 @@ wxString ConfigManager::app_path;
 wxString ConfigManager::temp_folder;
 bool ConfigManager::relo = 0;
 
-namespace
-{
-	wxString DetermineExecutablePath()
-	{
+namespace {
+
+	wxString DetermineExecutablePath() {
 		#if (__WXMSW__)
 			wxChar name[MAX_PATH];
 			GetModuleFileName(0L, name, MAX_PATH);
@@ -68,8 +81,8 @@ namespace
 		#endif
 		#endif
 	};
-	wxString DetermineResourcesPath()
-	{
+
+	wxString DetermineResourcesPath() {
 		#if defined(__WXMAC__)
 			CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(CFBundleGetMainBundle());
 			CFURLRef absoluteURL = CFURLCopyAbsoluteURL(resourcesURL); // relative -> absolute
@@ -90,7 +103,7 @@ wxString ConfigManager::FindDataFile(const wxString& filename){
 	wxPathList searchPaths;
 
 	wxString u(wxStandardPathsBase::Get().GetUserDataDir() + wxFILE_SEP_PATH + filename);
-	wxString e(ConfigManager::GetFolder(sdDataGlobal) + wxFILE_SEP_PATH +filename);
+	wxString e(ConfigManager::GetFolder(sdDataGlobal) + wxFILE_SEP_PATH + filename);
 
 	//std::cout << u.mb_str() << std::endl;
 	//std::cout << e.mb_str() << std::endl;
@@ -157,7 +170,7 @@ void ConfigManager::InitPaths() {
 			ConfigManager::data_path_global = wxStandardPathsBase::Get().GetDataDir();
 	}
 
-	ConfigManager::data_path_user = ConfigManager::relo ? data_path_global : config_folder + _T("/share/wxmun");
+	ConfigManager::data_path_user = ConfigManager::relo ? data_path_global : config_folder + wxFILE_SEP_PATH + _T("share") + wxFILE_SEP_PATH +_T("wxmun");
 
    // CreateDirRecursively(ConfigManager::config_folder);
    // CreateDirRecursively(ConfigManager::data_path_user   + _T("/plugins/"));
