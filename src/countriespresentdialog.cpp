@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2009 Geert-Jan Besjes 
+ * Copyright (c) 2008-2010 Geert-Jan Besjes 
  *
  * This file is part of wxMUN.
  *
@@ -44,8 +44,7 @@ GUI_CountriesPresentDialog( parent ), m_numPresent(0)
 	CheckNumPresent();
 }
 
-void CountriesPresentDialog::CheckNumPresent()
-{
+void CountriesPresentDialog::CheckNumPresent(){
 	m_numPresentText->SetLabel(wxString::Format(wxT("%i"), m_numPresent));
 
 	if(m_numPresent == 0){
@@ -60,31 +59,32 @@ void CountriesPresentDialog::CheckNumPresent()
 	}
 }
 
-void CountriesPresentDialog::OnSelectAll(wxCommandEvent& event)
-{
+void CountriesPresentDialog::OnSelectAll(wxCommandEvent& event){
 	m_numPresent = m_countriesPresentCheckList->GetCount();
 	for(int i = 0; i < m_countriesPresentCheckList->GetCount(); i++)
 		 m_countriesPresentCheckList->Check(i);
 	CheckNumPresent();
 }
-void CountriesPresentDialog::OnSelectNone(wxCommandEvent& event)
-{
+
+void CountriesPresentDialog::OnSelectNone(wxCommandEvent& event){
 	m_numPresent = 0;
+
 	for(int i = 0; i < m_countriesPresentCheckList->GetCount(); i++)
 		 m_countriesPresentCheckList->Check(i, false);
+
 	CheckNumPresent();
 }
 
-void CountriesPresentDialog::OnInvert(wxCommandEvent& event)
-{
+void CountriesPresentDialog::OnInvert(wxCommandEvent& event){
 	m_numPresent =  m_countriesPresentCheckList->GetCount() - m_numPresent;
+
 	for(int i = 0; i < m_countriesPresentCheckList->GetCount(); i++)
 		 m_countriesPresentCheckList->Check(i, !m_countriesPresentCheckList->IsChecked(i) );
+
 	CheckNumPresent();	
 }
 
-void CountriesPresentDialog::OnCountriesPresentToggle( wxCommandEvent& event )
-{
+void CountriesPresentDialog::OnCountriesPresentToggle( wxCommandEvent& event ){
 	int i = event.GetInt();
 
 	if(m_countriesPresentCheckList->IsChecked(i))

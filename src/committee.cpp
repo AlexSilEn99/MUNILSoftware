@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2009 Geert-Jan Besjes 
+ * Copyright (c) 2008-2010 Geert-Jan Besjes 
  *
  * This file is part of wxMUN.
  *
@@ -50,6 +50,7 @@ void Committee::setGSLtime(int t ){
 int Committee::numTopics(){
 	return m_numTopics;
 }
+
 int Committee::numMembers(){
 	return m_members.size();
 }
@@ -57,6 +58,7 @@ int Committee::numMembers(){
 int Committee::numObservers(){
 	return m_observers.size();
 }
+
 int Committee::numCountries(){
 	return m_countries.size();
 }
@@ -68,6 +70,7 @@ std::map<wxString, Country> *Committee::countries(){
 std::map<wxString, Country*> *Committee::members(){
 	return &m_members;
 }
+
 std::map<wxString, Country*> *Committee::observers(){
 	return &m_observers;
 }
@@ -79,6 +82,7 @@ int Committee::numPresent(){
 int Committee::numMembersPresent(){
 	return m_numMembersPresent;
 }
+
 void Committee::setPresent(int n){
 	m_numPresent = n;
 }
