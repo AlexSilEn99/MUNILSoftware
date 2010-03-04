@@ -59,7 +59,7 @@ XGETTEXT_ARGS=-C -k_ -kwxGetTranslation -kwxTRANSLATE -kwxPLURAL:1,2 -s -j
 # touch file so that timestamp is newer than that of wxmun.pot
 	@touch $@;
 
-wxmun.pot: $(srcdir)/src/*.cpp $(srcdir)/include/*.h  
+wxmun.pot: $(srcdir)/../src/*.cpp $(srcdir)/../include/*.h  
 	@rm -f $@.new
 	@touch $@.new
 

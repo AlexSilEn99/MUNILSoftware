@@ -276,8 +276,8 @@ EXTRA_DIST = $(flags_DATA)
 
 if MACAPPBUNDLE
 mac-copy-resources: $(flags_DATA)
-        mkdir -p $(top_builddir)/wxMUN.app/Contents/Resources/share/wxmun/data/flags
-        for i in $(flags_DATA); \
-                do cp -f $(srcdir)/$$i $(top_builddir)/wxMUN.app/Contents/Resources/share/wxmun/data/flags; \
-        done
+	mkdir -p $(top_builddir)/wxMUN.app/Contents/Resources/share/wxmun/data/flags
+	for i in $(flags_DATA); \
+		do cp -f $(srcdir)/$$i $(top_builddir)/wxMUN.app/Contents/Resources/share/wxmun/data/flags; \
+	done
 endif

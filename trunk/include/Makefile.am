@@ -21,4 +21,4 @@ noinst_HEADERS = clear_png.h \
 			wxmunaboutdialog.h \
 			yielddialog.h
 
-EXTRA_DIST = $(wxMUN_include_DATA) 
+EXTRA_DIST = $(noinst_HEADERS) 
