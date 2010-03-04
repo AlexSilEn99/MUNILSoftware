@@ -25,50 +25,89 @@ AC_PROG_CXX
 AC_PROG_CC
 AM_PROG_LIBTOOL
 
-# Checks for libraries.
-AM_OPTIONS_WXCONFIG
-reqwx=2.8.0
-AM_PATH_WXCONFIG($reqwx, wxWin=1)
-if test "$wxWin" != 1; then
-	AC_MSG_ERROR([
-		wxWidgets must be installed on your system.
- 
-		Please check that wx-config is in path, the directory
-		where wxWidgets libraries are installed (returned by
-		'wx-config --libs' or 'wx-config --static --libs' command)
-		is in LD_LIBRARY_PATH or equivalent variable and
-		wxWidgets version is $reqwx or above.
-		])
-fi
-
-AX_LIB_XERCES
-if test $HAVE_XERCES != "yes"; then
-	AC_MSG_ERROR([
-		Xerces-C++ must be installed on your system.
-	])
-fi
-
-CPPFLAGS="$CPPFLAGS $WX_CPPFLAGS $XERCES_CPPFLAGS"
-CXXFLAGS="$CXXFLAGS $WX_CXXFLAGS_ONLY"
-CFLAGS="$CFLAGS $WX_CFLAGS_ONLY"
-LIBS="$LIBS $WX_LIBS $XERCES_LIBS"
-LDFLAGS="$LDFLAGS $XERCES_LDFLAGS"
-
-# Checks for header files.
-
 # Checks for typedefs, structures, and compiler characteristics.
 AC_HEADER_STDBOOL
 AC_C_CONST
 
-# Checks for library functions.
+AC_CACHE_SAVE
 
-# Create application bundle on OS X
-# ----------------------------
+AC_ARG_ENABLE(locales, AC_HELP_STRING([--enable-locales], [Build message catalogs]), \
+                [locales="$enableval"], [locales="yes"])
 
-if echo $WX_CPPFLAGS | grep __WXMAC__; then
-    macappbundle="yes"
+AC_ARG_ENABLE(localesonly, AC_HELP_STRING([--enable-localesonly], [Just build locales]), \
+                [localesonly="$enableval"], [localesonly="no"])
+
+if test "$locales" != "yes" -a "$localesonly" = "yes"; then
+  AC_MSG_ERROR([invalid flags: --disable-locales cannot be used together with --enable-localesonly])
+fi
+
+if test "$localesonly" = "yes"; then
+  buildmain="no"
 else
-    macappbundle="no"
+  buildmain="yes"
+fi
+
+if ! test "$localesonly" = "yes"; then
+
+  if test "X$GCC" = Xyes; then
+    CFLAGS="$CFLAGS -Wall -g -fexceptions"
+    CXXFLAGS="$CXXFLAGS -Wall -g -fexceptions"
+  fi
+
+  # Add build information to config.h
+  # ---------------------------------
+
+  # Add host to config.h
+  AC_DEFINE_UNQUOTED(USED_HOST, ["$host"], [Host system under which the program will run.])
+  AC_DEFINE_UNQUOTED(USED_BUILD, ["$build"], [Build system under which the program was compiled on.])
+
+  # Add used CXXFLAGS to config.h
+  AC_DEFINE_UNQUOTED(USED_CXXFLAGS, ["$CXXFLAGS"], [Define to the used CXXFLAGS to compile this package.])
+
+  # Get compiler (version)
+  AH_TEMPLATE(USED_COMPILER, [Define to name and version of used compiler])
+  if COMPILER=`$CC --version | head -n 1`; then
+    AC_DEFINE_UNQUOTED(USED_COMPILER, ["$COMPILER"])
+  fi
+fi
+
+
+if test "$buildmain" = "yes"; then
+
+	# Checks for libraries.
+	AM_OPTIONS_WXCONFIG
+	reqwx=2.8.0
+	AM_PATH_WXCONFIG($reqwx, wxWin=1)
+	if test "$wxWin" != 1; then
+		AC_MSG_ERROR([
+			wxWidgets must be installed on your system.
+ 
+			Please check that wx-config is in path, the directory
+			where wxWidgets libraries are installed (returned by
+			'wx-config --libs' or 'wx-config --static --libs' command)
+			is in LD_LIBRARY_PATH or equivalent variable and
+			wxWidgets version is $reqwx or above.
+			])
+	fi
+
+	AX_LIB_XERCES
+	if test $HAVE_XERCES != "yes"; then
+		AC_MSG_ERROR([
+			Xerces-C++ must be installed on your system.
+		])
+	fi
+
+	AC_CACHE_SAVE
+
+	# Create application bundle on OS X
+	# ----------------------------
+
+	if echo $WX_CPPFLAGS | grep __WXMAC__; then
+	    macappbundle="yes"
+	else
+	    macappbundle="no"
+	fi
+
 fi
 
 # Everything translation related
