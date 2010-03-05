@@ -7,7 +7,7 @@ images_DATA = logo.png\
 		wxMUNlogo_medium.png\
 		wxMUNlogo_small.png
 
-EXTRA_DIST = $(images_DATA) wxMUNsplash.svg wxMUNlogo.svg wxMUNlogo_horizontal.svg
+EXTRA_DIST = $(images_DATA) wxMUNicon.icns wxMUNsplash.svg wxMUNlogo.svg wxMUNlogo_horizontal.svg
 
 if MACAPPBUNDLE
 mac-copy-resources: $(images_DATA)

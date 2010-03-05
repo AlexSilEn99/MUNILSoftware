@@ -1,1 +1,3 @@
-DIST_SUBDIRS = icons
+dist_noinst_DATA = 
+
+SUBDIRS = icons
