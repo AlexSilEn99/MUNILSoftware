@@ -438,6 +438,9 @@ void wxMUNFrame::EnableGSLCtrls()
 	GSLChoices->Enable(true);
 	GSLList->Enable(true);
 	EnableGSLTimerCtrls();
+
+	EnableGSLNextButton();
+	EnableGSLStopButton();
 }
 
 void wxMUNFrame::DisableGSLTimerCtrls()
@@ -451,12 +454,15 @@ void wxMUNFrame::DisableGSLTimerCtrls()
 
 void wxMUNFrame::DisableGSLCtrls()
 {
-	wxChoice *GSLChoices = (wxChoice*) wxWindow::FindWindowById(GSL_CHOICES);
+	//wxChoice *GSLChoices = (wxChoice*) wxWindow::FindWindowById(GSL_CHOICES);
 	wxListBox *GSLList = (wxListBox*) wxWindow::FindWindowById(GSL_LIST);
 	
-	GSLChoices->Enable(false);
+	//GSLChoices->Enable(false);
 	GSLList->Enable(false);
 	DisableGSLTimerCtrls();
+
+	DisableGSLNextButton();
+	DisableGSLStopButton();
 }
 
 void wxMUNFrame::OnGSLMinutesChange ( wxSpinEvent &event ){
@@ -604,7 +610,8 @@ void wxMUNFrame::StartSingleSpeaker(wxString name)
 	DisableCaucusCtrls();
 	DisableVotingCtrls();
 	
-	m_GSLpanel->Enable(false); m_procVotingPanel->Enable(false);
+	// m_GSLpanel->Enable(false); 
+	m_procVotingPanel->Enable(false);
 	m_modCaucusPanel->Enable(false); m_unModCaucusPanel->Enable(false);
 
 	_speakerLength  = duration;
@@ -879,8 +886,10 @@ void wxMUNFrame::OnGSLChoice( wxCommandEvent& event )
 	if(GSLList->FindString(s) == wxNOT_FOUND)
 		GSLList->Append(s);
 	
-	EnableGSLNextButton();
 	updateGSLdata(GSLList);
+
+	if(!_speakerRunning)
+		EnableGSLNextButton();
 } 
 
 void wxMUNFrame::OnGSLStop( wxCommandEvent& event )
@@ -979,6 +988,22 @@ void wxMUNFrame::DisableGSLResumeButton()
 {
 	wxButton *r = (wxButton*) wxWindow::FindWindowById(RESUME_GSL);
 	r->Enable(false);
+}
+
+void wxMUNFrame::DisableGSLStopButton()
+{
+	//wxButton *p = (wxButton*) wxWindow::FindWindowById(GSL_STOP);
+	//p->Enable(false);
+
+	m_GSLStopButton->Enable(false);
+}
+
+void wxMUNFrame::EnableGSLStopButton()
+{
+	//wxButton *r = (wxButton*) wxWindow::FindWindowById(GSL_STOP);
+	//r->Enable(true);
+
+	m_GSLStopButton->Enable(true);
 }
 
 void wxMUNFrame::DisableGSLNextButton()
@@ -1945,7 +1970,10 @@ void wxMUNFrame::OnSpeakingInFavourListSelect( wxCommandEvent& event )
 
 	wxStaticText *favourLabel = (wxStaticText*) wxWindow::FindWindowById(VOTING_IN_FAVOUR);
 	wxStaticText *againstLabel = (wxStaticText*) wxWindow::FindWindowById(VOTING_AGAINST);
+	
 	favourLabel->Enable(true); againstLabel->Enable(false);
+	favourLabel->SetForegroundColour( wxColour( 0,79,0) );
+	againstLabel->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_GRAYTEXT ) );
 
 	wxGauge* progressBar = (wxGauge*) wxWindow::FindWindowById(VOTING_GAUGE);
 	progressBar->SetValue(0);
@@ -2050,7 +2078,10 @@ void wxMUNFrame::OnSpeakingAgainstListSelect( wxCommandEvent& event )
 
 	wxStaticText *favourLabel = (wxStaticText*) wxWindow::FindWindowById(VOTING_IN_FAVOUR);
 	wxStaticText *againstLabel = (wxStaticText*) wxWindow::FindWindowById(VOTING_AGAINST);
+	
 	favourLabel->Enable(false); againstLabel->Enable(true);
+	againstLabel->SetForegroundColour( wxColour( 187,14,14) );
+	favourLabel->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_GRAYTEXT ) );
 
 	wxGauge* progressBar = (wxGauge*) wxWindow::FindWindowById(VOTING_GAUGE);
 	progressBar->SetValue(0);
@@ -2148,10 +2179,13 @@ void wxMUNFrame::StopVotingSpeaker()
 
 	clearTimerLabels(VOTING_GAUGE, VOTING_TIME_LEFT, VOTING_SPEAKER, 0);
 
-	wxStaticText *favourLabel = (wxStaticText*) wxWindow::FindWindowById(VOTING_IN_FAVOUR);
-	wxStaticText *againstLabel = (wxStaticText*) wxWindow::FindWindowById(VOTING_AGAINST);
-
-	favourLabel->Enable(false); againstLabel->Enable(false);
+// don't disable texts here, allows user to keep track of what the last speaker did
+//	wxStaticText *favourLabel = (wxStaticText*) wxWindow::FindWindowById(VOTING_IN_FAVOUR);
+//	wxStaticText *againstLabel = (wxStaticText*) wxWindow::FindWindowById(VOTING_AGAINST);
+//
+//	favourLabel->Enable(false); againstLabel->Enable(false);
+//	favourLabel->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_GRAYTEXT ) );
+//	againstLabel->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_GRAYTEXT ) );
 
 	wxStaticText *time  = ((wxStaticText*) wxWindow::FindWindowById(VOTING_TIME_LEFT) );
 	time->SetLabel(wxString::Format(wxT("00:00") ));
@@ -2216,8 +2250,14 @@ void wxMUNFrame::OnRollCallDisplayOutcomeCheck(wxCommandEvent& event)
 		m_againstCount->Enable(true);
 		m_abstentionsCount->Enable(true);
 
-		if(m_vetoRadioBtn->GetValue() && !m_rollCallConsensusCheckbox->GetValue())
+		m_inFavourCount->SetForegroundColour( wxColour( wxSYS_COLOUR_WINDOWTEXT) );
+		m_againstCount->SetForegroundColour( wxColour( wxSYS_COLOUR_WINDOWTEXT) );
+		m_abstentionsCount->SetForegroundColour( wxColour( wxSYS_COLOUR_WINDOWTEXT) );
+
+		if(m_vetoRadioBtn->GetValue() && !m_rollCallConsensusCheckbox->GetValue()){
 			m_vetoText->Enable(true);
+			m_vetoText->SetForegroundColour( wxColour( wxSYS_COLOUR_WINDOWTEXT) );
+		}
 
 		DisplayRollCallOutcome();
 	} else {
@@ -2226,6 +2266,11 @@ void wxMUNFrame::OnRollCallDisplayOutcomeCheck(wxCommandEvent& event)
 		m_abstentionsCount->Enable(false);
 		m_vetoText->Enable(false);
 		
+		m_inFavourCount->SetForegroundColour( wxColour( wxSYS_COLOUR_GRAYTEXT) );
+		m_againstCount->SetForegroundColour( wxColour( wxSYS_COLOUR_GRAYTEXT) );
+		m_abstentionsCount->SetForegroundColour( wxColour( wxSYS_COLOUR_GRAYTEXT) );
+		m_vetoText->SetForegroundColour( wxColour( wxSYS_COLOUR_GRAYTEXT) );
+
 		m_inFavourCount->SetLabel( wxString::Format(wxT("%i"), 0 ) );
 		m_againstCount->SetLabel( wxString::Format(wxT("%i"), 0 ) );
 		m_abstentionsCount->SetLabel( wxString::Format(wxT("%i"), 0 ) );

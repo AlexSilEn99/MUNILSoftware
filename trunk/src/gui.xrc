@@ -1,0 +1,1212 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<resource xmlns="http://www.wxwindows.org/wxxrc" version="2.3.0.1">
+	<object class="wxFrame" name="GUI_MainFrame">
+		<style>wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL</style>
+		<exstyle>wxFRAME_EX_METAL</exstyle>
+		<size>1000,780</size>
+		<title></title>
+		<object class="wxBoxSizer">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_mainPanel">
+					<style>wxTAB_TRAVERSAL</style>
+					<bg>#e0dfde</bg>
+					<object class="wxBoxSizer">
+						<orient>wxVERTICAL</orient>
+						<object class="sizeritem">
+							<option>0</option>
+							<flag>wxEXPAND|wxTOP</flag>
+							<border>5</border>
+							<object class="wxFlexGridSizer">
+								<rows>1</rows>
+								<cols>2</cols>
+								<vgap>0</vgap>
+								<hgap>0</hgap>
+								<growablecols>0</growablecols>
+								<growablerows></growablerows>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxEXPAND|wxALIGN_CENTER_VERTICAL</flag>
+									<border>5</border>
+									<object class="wxFlexGridSizer">
+										<rows>2</rows>
+										<cols>2</cols>
+										<vgap>0</vgap>
+										<hgap>0</hgap>
+										<growablecols>1</growablecols>
+										<growablerows></growablerows>
+										<object class="sizeritem">
+											<option>0</option>
+											<flag>wxALL</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="m_currentCommitteeLabel">
+												<font>
+													<size>12</size>
+													<family>swiss</family>
+													<style>normal</style>
+													<weight>bold</weight>
+													<underlined>0</underlined>
+													<face>Sans</face>
+												</font>
+												<label>Committee:</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<option>0</option>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="m_currentCommitteeText">
+												<font>
+													<size>12</size>
+													<family>swiss</family>
+													<style>italic</style>
+													<weight>normal</weight>
+													<underlined>0</underlined>
+													<face>Sans</face>
+												</font>
+												<label>awaiting user input</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<option>0</option>
+											<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="m_currentTopicLabel">
+												<font>
+													<size>12</size>
+													<family>swiss</family>
+													<style>normal</style>
+													<weight>bold</weight>
+													<underlined>0</underlined>
+													<face>Sans</face>
+												</font>
+												<label>Current topic:</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<option>0</option>
+											<flag>wxEXPAND|wxTOP|wxRIGHT|wxLEFT</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="m_currentTopicText">
+												<font>
+													<size>12</size>
+													<family>swiss</family>
+													<style>italic</style>
+													<weight>normal</weight>
+													<underlined>0</underlined>
+													<face>Sans</face>
+												</font>
+												<label>awaiting user input</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<option>0</option>
+											<flag>wxTOP|wxRIGHT|wxLEFT</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="m_staticText67">
+												<font>
+													<size>12</size>
+													<family>swiss</family>
+													<style>normal</style>
+													<weight>bold</weight>
+													<underlined>0</underlined>
+													<face>Sans</face>
+												</font>
+												<label>Present:</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<option>1</option>
+											<flag>wxEXPAND</flag>
+											<border>5</border>
+											<object class="wxBoxSizer">
+												<orient>wxVERTICAL</orient>
+												<object class="sizeritem">
+													<option>0</option>
+													<flag>wxALL|wxEXPAND</flag>
+													<border>5</border>
+													<object class="wxStaticText" name="m_presentText">
+														<font>
+															<size>12</size>
+															<family>swiss</family>
+															<style>normal</style>
+															<weight>normal</weight>
+															<underlined>0</underlined>
+															<face>Sans</face>
+														</font>
+														<label>0 / 0  (1/2 = 0; 2/3 = 0)</label>
+													</object>
+												</object>
+												<object class="sizeritem">
+													<option>0</option>
+													<flag>wxALL</flag>
+													<border>5</border>
+													<object class="wxStaticText" name="m_noMembersPresentStaticText">
+														<fg>#bb0e0e</fg>
+														<hidden>1</hidden>
+														<font>
+															<size>12</size>
+															<family>swiss</family>
+															<style>normal</style>
+															<weight>bold</weight>
+															<underlined>0</underlined>
+															<face>Sans</face>
+														</font>
+														<label>There are currently no members present!</label>
+													</object>
+												</object>
+											</object>
+										</object>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT|wxRIGHT|wxLEFT</flag>
+									<border>5</border>
+									<object class="wxStaticBitmap" name="m_logoBitmap">
+										<bitmap />
+									</object>
+								</object>
+							</object>
+						</object>
+						<object class="sizeritem">
+							<option>0</option>
+							<flag>wxEXPAND|wxALL</flag>
+							<border>5</border>
+							<object class="wxStaticLine" name="m_staticline1">
+								<style>wxLI_HORIZONTAL</style>
+							</object>
+						</object>
+						<object class="sizeritem">
+							<option>1</option>
+							<flag>wxEXPAND</flag>
+							<border>5</border>
+							<object class="wxBoxSizer">
+								<orient>wxHORIZONTAL</orient>
+								<object class="sizeritem">
+									<option>1</option>
+									<flag>wxEXPAND | wxALL</flag>
+									<border>5</border>
+									<object class="unknown" name="m_mainauinotebook" />
+								</object>
+							</object>
+						</object>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxPanel" name="m_bannerSizer">
+					<style>wxTAB_TRAVERSAL</style>
+					<bg>#e0dfde</bg>
+					<object class="wxBoxSizer">
+						<orient>wxVERTICAL</orient>
+						<object class="sizeritem">
+							<option>1</option>
+							<flag>wxALIGN_CENTER_HORIZONTAL</flag>
+							<border>5</border>
+							<object class="wxBoxSizer">
+								<orient>wxHORIZONTAL</orient>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxTOP|wxBOTTOM|wxLEFT|wxALIGN_CENTER_HORIZONTAL</flag>
+									<border>5</border>
+									<object class="wxStaticText" name="m_bannerText">
+										<label>The wxMUN homepage is hosted by </label>
+									</object>
+								</object>
+								<object class="sizeritem">
+									<option>0</option>
+									<flag>wxTOP|wxBOTTOM|wxRIGHT|wxALIGN_CENTER_HORIZONTAL</flag>
+									<border>5</border>
+									<object class="wxHyperlinkCtrl" name="m_bannerHyperlink">
+										<label>United Netherlands</label>
+										<url>http://www.unitednetherlands.org</url>
+										<style>wxHL_DEFAULT_STYLE</style>
+									</object>
+								</object>
+							</object>
+						</object>
+					</object>
+				</object>
+			</object>
+		</object>
+		<object class="wxStatusBar" name="m_statusBar">
+			<style>wxST_SIZEGRIP</style>
+			<bg>#e0dfde</bg>
+			<fields>1</fields>
+		</object>
+		<object class="wxMenuBar" name="m_menubar">
+			<label>MyMenuBar</label>
+			<object class="wxMenu" name="m_fileMenu">
+				<label>_File</label>
+				<object class="wxMenuItem" name="m_openMenuItem">
+					<label>&amp;Open State File\tCtrl+O</label>
+					<help>Open an existing state state of debate</help>
+				</object>
+				<object class="separator" />
+				<object class="wxMenuItem" name="m_saveAsMenuItem">
+					<label>&amp;Save State As\tCtrl+S</label>
+					<help>Save the current state of debate under a new name</help>
+				</object>
+				<object class="separator" />
+				<object class="wxMenuItem" name="m_quitMenuItem">
+					<label>&amp;Quit\tCtrl+Q</label>
+					<help>Exit the program</help>
+				</object>
+			</object>
+			<object class="wxMenu" name="m_viewMenu">
+				<label>_View</label>
+				<object class="wxMenuItem" name="m_fullscreenMenu">
+					<label>&amp;Fullscreen\tF11</label>
+					<help></help>
+				</object>
+			</object>
+			<object class="wxMenu" name="m_manageMenu">
+				<label>_Manage debate</label>
+				<object class="wxMenu" name="m_topicSelectorMenu">
+					<label>_Select topic</label>
+					<object class="wxMenuItem" name="m_topicAMenuItem">
+						<label>Topic A</label>
+						<help></help>
+						<enabled>0</enabled>
+						<checkable>1</checkable>
+					</object>
+					<object class="wxMenuItem" name="m_topicBMenuItem">
+						<label>Topic B</label>
+						<help></help>
+						<enabled>0</enabled>
+						<checkable>1</checkable>
+					</object>
+				</object>
+				<object class="wxMenuItem" name="m_countriesPresentMenuItem">
+					<label>&amp;Countries present\tCtrl+Shift+C</label>
+					<help></help>
+					<enabled>0</enabled>
+				</object>
+				<object class="wxMenuItem" name="m_votingProcedureMenuItem">
+					<label>Start &amp;voting procedure\tCtrl+Shift+V</label>
+					<help></help>
+					<enabled>0</enabled>
+				</object>
+			</object>
+			<object class="wxMenu" name="m_committeeMenu">
+				<label>_Committee</label>
+				<object class="wxMenuItem" name="m_newCommitteeMenuItem">
+					<label>&amp;New\tCtrl+N</label>
+					<help>Create a new committee</help>
+				</object>
+				<object class="wxMenuItem" name="m_loadCommitteeMenuItem">
+					<label>&amp;Load\tCtrl+L</label>
+					<help>Load an existing committee to start a new session. Load a state file if you want to resume debate!</help>
+				</object>
+				<object class="wxMenuItem" name="m_editCommitteeMenuItem">
+					<label>&amp;Edit\tCtrl+E</label>
+					<help>Edit a committee file</help>
+				</object>
+			</object>
+			<object class="wxMenu" name="m_helpMenu">
+				<label>_Help</label>
+				<object class="wxMenuItem" name="m_helpMenuItem">
+					<label>&amp;Help\tF1</label>
+					<help>View the on-line help</help>
+				</object>
+				<object class="wxMenuItem" name="m_aboutMenuItem">
+					<label>&amp;About\tF2</label>
+					<help>About the program</help>
+				</object>
+			</object>
+		</object>
+	</object>
+	<object class="wxDialog" name="GUI_NewCommitteeDialog">
+		<style>wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE</style>
+		<title>New committee</title>
+		<object class="wxBoxSizer">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxStaticBoxSizer">
+					<orient>wxVERTICAL</orient>
+					<label>Instructions</label>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+						<object class="wxStaticText" name="ncInstructions">
+							<style>wxST_NO_AUTORESIZE</style>
+							<size>350,80</size>
+							<label>1. Check the countries you would like to be a part of this committee or council.\n2. Optionally check any observers present. wxMUN always checks observers aren&apos;t already members.\n3. You can edit individual committee/council details by clicking on their names in the list.\n4. Click &apos;OK&apos;.</label>
+						</object>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxBoxSizer">
+					<orient>wxHORIZONTAL</orient>
+					<object class="sizeritem">
+						<option>1</option>
+						<flag>wxEXPAND|wxTOP</flag>
+						<border>5</border>
+						<object class="wxBoxSizer">
+							<orient>wxVERTICAL</orient>
+							<object class="sizeritem">
+								<option>1</option>
+								<flag>wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxBoxSizer">
+									<orient>wxVERTICAL</orient>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALIGN_CENTER_HORIZONTAL</flag>
+										<border>5</border>
+										<object class="wxBoxSizer">
+											<orient>wxHORIZONTAL</orient>
+											<object class="sizeritem">
+												<option>0</option>
+												<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+												<border>5</border>
+												<object class="wxStaticText" name="m_membersButtonText">
+													<label>Members:</label>
+												</object>
+											</object>
+											<object class="sizeritem">
+												<option>0</option>
+												<flag>wxALL</flag>
+												<border>5</border>
+												<object class="wxButton" name="m_selectAllMembers">
+													<label>Select All</label>
+													<default>0</default>
+												</object>
+											</object>
+											<object class="sizeritem">
+												<option>0</option>
+												<flag>wxALL</flag>
+												<border>5</border>
+												<object class="wxButton" name="m_selectNoneMembers">
+													<enabled>0</enabled>
+													<label>Select None</label>
+													<default>0</default>
+												</object>
+											</object>
+											<object class="sizeritem">
+												<option>0</option>
+												<flag>wxALL</flag>
+												<border>5</border>
+												<object class="wxButton" name="m_invertMembers">
+													<label>Invert</label>
+													<default>0</default>
+												</object>
+											</object>
+										</object>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL|wxEXPAND</flag>
+										<border>5</border>
+										<object class="wxCheckListBox" name="m_membersCheckList">
+											<style>wxLB_MULTIPLE|wxLB_NEEDED_SB</style>
+											<size>350,200</size>
+											<tooltip>Members of the committee/council</tooltip>
+											<content />
+										</object>
+									</object>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxEXPAND | wxALL</flag>
+								<border>5</border>
+								<object class="wxStaticLine" name="m_staticline15">
+									<style>wxLI_HORIZONTAL</style>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>1</option>
+								<flag>wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxBoxSizer">
+									<orient>wxVERTICAL</orient>
+									<object class="sizeritem">
+										<option>1</option>
+										<flag>wxEXPAND</flag>
+										<border>5</border>
+										<object class="wxBoxSizer">
+											<orient>wxHORIZONTAL</orient>
+											<object class="sizeritem">
+												<option>0</option>
+												<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+												<border>5</border>
+												<object class="wxStaticText" name="m_observersButtonText">
+													<label>Observers:</label>
+												</object>
+											</object>
+											<object class="sizeritem">
+												<option>0</option>
+												<flag>wxALL</flag>
+												<border>5</border>
+												<object class="wxButton" name="m_selectAllObservers">
+													<label>Select All</label>
+													<default>0</default>
+												</object>
+											</object>
+											<object class="sizeritem">
+												<option>0</option>
+												<flag>wxALL</flag>
+												<border>5</border>
+												<object class="wxButton" name="m_selectNoneObservers">
+													<enabled>0</enabled>
+													<label>Select None</label>
+													<default>0</default>
+												</object>
+											</object>
+											<object class="sizeritem">
+												<option>0</option>
+												<flag>wxALL</flag>
+												<border>5</border>
+												<object class="wxButton" name="m_invertObservers">
+													<label>Invert</label>
+													<default>0</default>
+												</object>
+											</object>
+										</object>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALL|wxEXPAND</flag>
+										<border>5</border>
+										<object class="wxCheckListBox" name="m_observersCheckList">
+											<style>wxLB_MULTIPLE|wxLB_NEEDED_SB</style>
+											<size>350,200</size>
+											<tooltip>Observers for this committee/council</tooltip>
+											<content />
+										</object>
+									</object>
+								</object>
+							</object>
+						</object>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<object class="wxStaticBoxSizer">
+							<orient>wxVERTICAL</orient>
+							<label>Settings:</label>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxTOP|wxRIGHT|wxLEFT</flag>
+								<border>5</border>
+								<object class="wxStaticText" name="m_committeeNameStaticText">
+									<label>Committee/council name:</label>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxEXPAND|wxBOTTOM|wxRIGHT|wxLEFT</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="m_committeeNameTextCtrl">
+									<value></value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxTOP|wxRIGHT|wxLEFT</flag>
+								<border>5</border>
+								<object class="wxStaticText" name="m_staticTopicA">
+									<label>Topic A:</label>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxBOTTOM|wxRIGHT|wxLEFT|wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="m_topicATextCtrl">
+									<value></value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxTOP|wxRIGHT|wxLEFT</flag>
+								<border>5</border>
+								<object class="wxStaticText" name="m_staticTopicB">
+									<label>Topic B:</label>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxBOTTOM|wxRIGHT|wxLEFT|wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="m_topicBTextCtrl">
+									<value></value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxBoxSizer">
+									<orient>wxHORIZONTAL</orient>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALIGN_CENTER_VERTICAL|wxLEFT</flag>
+										<border>5</border>
+										<object class="wxStaticText" name="m_staticDefaultGSLtime">
+											<label>Default GSL speaker time (sec):</label>
+										</object>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALIGN_RIGHT|wxALIGN_BOTTOM|wxEXPAND|wxRIGHT|wxLEFT</flag>
+										<border>5</border>
+										<object class="wxSpinCtrl" name="m_GSLspin">
+											<style>wxSP_ARROW_KEYS</style>
+											<value>90</value>
+											<min>0</min>
+											<max>10000</max>
+										</object>
+									</object>
+								</object>
+							</object>
+						</object>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxStdDialogButtonSizer">
+					<object class="button">
+						<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+						<border>5</border>
+						<object class="wxButton" name="wxID_OK">
+							<label>&amp;OK</label>
+						</object>
+					</object>
+					<object class="button">
+						<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+						<border>5</border>
+						<object class="wxButton" name="wxID_CANCEL">
+							<label>&amp;Cancel</label>
+						</object>
+					</object>
+				</object>
+			</object>
+		</object>
+	</object>
+	<object class="wxDialog" name="GUI_CountriesPresentDialog">
+		<style>wxDEFAULT_DIALOG_STYLE</style>
+		<title>Countries present</title>
+		<object class="wxBoxSizer">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALIGN_CENTER_HORIZONTAL</flag>
+				<border>5</border>
+				<object class="wxBoxSizer">
+					<orient>wxHORIZONTAL</orient>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL</flag>
+						<border>5</border>
+						<object class="wxButton" name="m_selectAllButton">
+							<label>Select All</label>
+							<default>0</default>
+						</object>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL</flag>
+						<border>5</border>
+						<object class="wxButton" name="m_selectNoneButton">
+							<enabled>0</enabled>
+							<label>Select None</label>
+							<default>0</default>
+						</object>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL</flag>
+						<border>5</border>
+						<object class="wxButton" name="m_invertButton">
+							<label>Invert</label>
+							<default>0</default>
+						</object>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALIGN_CENTER_HORIZONTAL</flag>
+				<border>5</border>
+				<object class="wxBoxSizer">
+					<orient>wxHORIZONTAL</orient>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL</flag>
+						<border>5</border>
+						<object class="wxStaticText" name="m_numPresentLabelText">
+							<font>
+								<size>10</size>
+								<family>swiss</family>
+								<style>normal</style>
+								<weight>bold</weight>
+								<underlined>0</underlined>
+								<face>Sans</face>
+							</font>
+							<label>Currently present:</label>
+						</object>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL</flag>
+						<border>5</border>
+						<object class="wxStaticText" name="m_numPresentText">
+							<font>
+								<size>10</size>
+								<family>swiss</family>
+								<style>normal</style>
+								<weight>bold</weight>
+								<underlined>0</underlined>
+								<face>Sans</face>
+							</font>
+							<label>0</label>
+						</object>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND|wxALL</flag>
+				<border>5</border>
+				<object class="wxCheckListBox" name="m_countriesPresentCheckList">
+					<style>wxLB_MULTIPLE|wxLB_NEEDED_SB|wxLB_SORT</style>
+					<size>350,350</size>
+					<content />
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALIGN_CENTER_HORIZONTAL|wxBOTTOM</flag>
+				<border>5</border>
+				<object class="wxStdDialogButtonSizer">
+					<object class="button">
+						<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+						<border>5</border>
+						<object class="wxButton" name="wxID_OK">
+							<label>&amp;OK</label>
+						</object>
+					</object>
+					<object class="button">
+						<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+						<border>5</border>
+						<object class="wxButton" name="wxID_CANCEL">
+							<label>&amp;Cancel</label>
+						</object>
+					</object>
+				</object>
+			</object>
+		</object>
+	</object>
+	<object class="wxDialog" name="GUI_EditCommitteeDialog">
+		<style>wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxSTAY_ON_TOP</style>
+		<title>Edit committee</title>
+		<object class="wxBoxSizer">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxStaticBoxSizer">
+					<orient>wxVERTICAL</orient>
+					<label>Instructions</label>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+						<object class="wxStaticText" name="editInstructions">
+							<style>wxST_NO_AUTORESIZE</style>
+							<size>350,70</size>
+							<label>1. Check the countries you would like to be a part of this committee or council.\n2. Optionally check any observers present. wxMUN always checks observers aren&apos;t already members.\n3. You can edit individual committee/council details by clicking on their names in the list.\n4. Click &apos;OK&apos;.</label>
+						</object>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxBoxSizer">
+					<orient>wxHORIZONTAL</orient>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<object class="wxStaticBoxSizer">
+							<orient>wxVERTICAL</orient>
+							<label>Members and observers:</label>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALL|wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxCheckListBox" name="m_membersCheckList">
+									<style>wxLB_MULTIPLE|wxLB_NEEDED_SB</style>
+									<size>350,200</size>
+									<tooltip>Members of the committee/council</tooltip>
+									<content />
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxEXPAND | wxALL</flag>
+								<border>5</border>
+								<object class="wxStaticLine" name="m_staticline5">
+									<style>wxLI_HORIZONTAL</style>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxALL</flag>
+								<border>5</border>
+								<object class="wxCheckListBox" name="m_observersCheckList">
+									<style>wxLB_MULTIPLE|wxLB_NEEDED_SB</style>
+									<size>350,200</size>
+									<tooltip>Members of the committee/council</tooltip>
+									<content />
+								</object>
+							</object>
+						</object>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<object class="wxStaticBoxSizer">
+							<orient>wxVERTICAL</orient>
+							<label>Settings:</label>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxTOP|wxRIGHT|wxLEFT</flag>
+								<border>5</border>
+								<object class="wxStaticText" name="m_committeeNameStaticText">
+									<label>Committee/council name:</label>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxEXPAND|wxBOTTOM|wxRIGHT|wxLEFT</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="m_committeeNameTextCtrl">
+									<value></value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxTOP|wxRIGHT|wxLEFT</flag>
+								<border>5</border>
+								<object class="wxStaticText" name="m_staticTopicA">
+									<label>Topic A:</label>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxBOTTOM|wxRIGHT|wxLEFT|wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="m_topicATextCtrl">
+									<value></value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxTOP|wxRIGHT|wxLEFT</flag>
+								<border>5</border>
+								<object class="wxStaticText" name="m_staticTopicB">
+									<label>Topic B:</label>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxBOTTOM|wxRIGHT|wxLEFT|wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxTextCtrl" name="m_topicBTextCtrl">
+									<value></value>
+									<maxlength>0</maxlength>
+								</object>
+							</object>
+							<object class="sizeritem">
+								<option>0</option>
+								<flag>wxEXPAND</flag>
+								<border>5</border>
+								<object class="wxBoxSizer">
+									<orient>wxHORIZONTAL</orient>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALIGN_CENTER_VERTICAL|wxLEFT</flag>
+										<border>5</border>
+										<object class="wxStaticText" name="m_staticDefaultGSLtime">
+											<label>Default GSL speaker time (sec):</label>
+										</object>
+									</object>
+									<object class="sizeritem">
+										<option>0</option>
+										<flag>wxALIGN_RIGHT|wxALIGN_BOTTOM|wxEXPAND|wxRIGHT|wxLEFT</flag>
+										<border>5</border>
+										<object class="wxSpinCtrl" name="m_GSLspin">
+											<style>wxSP_ARROW_KEYS</style>
+											<value>90</value>
+											<min>0</min>
+											<max>10000</max>
+										</object>
+									</object>
+								</object>
+							</object>
+						</object>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxStdDialogButtonSizer">
+					<object class="button">
+						<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+						<border>5</border>
+						<object class="wxButton" name="wxID_OK">
+							<label>&amp;OK</label>
+						</object>
+					</object>
+					<object class="button">
+						<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+						<border>5</border>
+						<object class="wxButton" name="wxID_CANCEL">
+							<label>&amp;Cancel</label>
+						</object>
+					</object>
+				</object>
+			</object>
+		</object>
+	</object>
+	<object class="wxDialog" name="GUI_ConfirmTopicSwapDialog">
+		<style>wxDEFAULT_DIALOG_STYLE</style>
+		<title>Confirm topic change</title>
+		<object class="wxBoxSizer">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxBoxSizer">
+					<orient>wxVERTICAL</orient>
+					<object class="sizeritem">
+						<option>1</option>
+						<flag>wxEXPAND|wxRIGHT</flag>
+						<border>5</border>
+						<object class="wxStaticText" name="m_confirmTopicSwapText">
+							<size>350,205</size>
+							<label>You currenty already have a topic selected. Changing the topic is possible and allowed, but please bear in mind the side effects:\n\n1. The state of the debate on the current topic will be reset to a clean General Speakers List.\n2. Roll call votes are never stored and will be reset upon entering a new topic.\n3. Any old (current) settings in the current topic can not be retrieved! The state file is forever lost, if you want to keep the current GSL, save it under a different file name (File &gt; Save State As).</label>
+						</object>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL|wxALIGN_RIGHT</flag>
+						<border>5</border>
+						<object class="wxStdDialogButtonSizer">
+							<object class="button">
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxButton" name="wxID_OK">
+									<label>&amp;OK</label>
+								</object>
+							</object>
+							<object class="button">
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxButton" name="wxID_CANCEL">
+									<label>&amp;Cancel</label>
+								</object>
+							</object>
+						</object>
+					</object>
+				</object>
+			</object>
+		</object>
+	</object>
+	<object class="wxDialog" name="GUI_wxMUNAboutDialog">
+		<style>wxDEFAULT_DIALOG_STYLE</style>
+		<title>About wxMUN</title>
+		<object class="wxBoxSizer">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL</flag>
+				<border>5</border>
+				<object class="wxStaticBitmap" name="m_aboutLogo">
+					<size>350,166</size>
+					<bitmap />
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxStaticLine" name="m_staticline18">
+					<style>wxLI_HORIZONTAL</style>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND|wxTOP|wxBOTTOM</flag>
+				<border>5</border>
+				<object class="wxNotebook" name="m_aboutNotebook">
+					<object class="notebookpage">
+						<label>Description</label>
+						<selected>0</selected>
+						<object class="wxPanel" name="m_panel12">
+							<style>wxTAB_TRAVERSAL</style>
+							<object class="wxBoxSizer">
+								<orient>wxVERTICAL</orient>
+								<object class="sizeritem">
+									<option>1</option>
+									<flag>wxEXPAND</flag>
+									<border>0</border>
+									<object class="wxTextCtrl" name="m_textCtrl12">
+										<style>wxTE_MULTILINE|wxTE_READONLY|wxNO_BORDER|wxVSCROLL</style>
+										<value></value>
+										<maxlength>0</maxlength>
+									</object>
+								</object>
+							</object>
+						</object>
+					</object>
+					<object class="notebookpage">
+						<label>Version</label>
+						<selected>0</selected>
+						<object class="wxPanel" name="m_panel13">
+							<style>wxTAB_TRAVERSAL</style>
+							<object class="wxBoxSizer">
+								<orient>wxVERTICAL</orient>
+								<object class="sizeritem">
+									<option>1</option>
+									<flag>wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxFlexGridSizer">
+										<rows>5</rows>
+										<cols>2</cols>
+										<vgap>0</vgap>
+										<hgap>0</hgap>
+										<growablecols>1</growablecols>
+										<growablerows></growablerows>
+										<object class="sizeritem">
+											<option>0</option>
+											<flag>wxALL</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="m_staticText59">
+												<label>Name:</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<option>0</option>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="m_staticText60">
+												<label>nnn</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<option>0</option>
+											<flag>wxALL</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="m_staticText61">
+												<label>Version:</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<option>0</option>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="m_staticText62">
+												<label>vvv</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<option>0</option>
+											<flag>wxALL</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="m_staticText63">
+												<label>Author:</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<option>0</option>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="m_staticText64">
+												<label>aaa</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<option>0</option>
+											<flag>wxALL</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="m_staticText65">
+												<label>E-mail:</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<option>0</option>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="m_staticText66">
+												<label>eee</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<option>0</option>
+											<flag>wxALL</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="m_staticText88">
+												<label>Homepage:</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<option>0</option>
+											<flag>wxALL</flag>
+											<border>5</border>
+											<object class="wxHyperlinkCtrl" name="m_hyperlink1">
+												<label>http://wxmun.unitednetherlands.org</label>
+												<url>http://wxmun.unitednetherlands.org</url>
+												<style>wxHL_DEFAULT_STYLE</style>
+											</object>
+										</object>
+									</object>
+								</object>
+							</object>
+						</object>
+					</object>
+					<object class="notebookpage">
+						<label>License</label>
+						<selected>1</selected>
+						<object class="wxPanel" name="m_panel14">
+							<style>wxTAB_TRAVERSAL</style>
+							<object class="wxBoxSizer">
+								<orient>wxVERTICAL</orient>
+								<object class="sizeritem">
+									<option>1</option>
+									<flag>wxEXPAND</flag>
+									<border>5</border>
+									<object class="wxTextCtrl" name="m_textCtrl121">
+										<style>wxTE_MULTILINE|wxTE_READONLY|wxNO_BORDER|wxVSCROLL</style>
+										<font>
+											<size>10</size>
+											<family>teletype</family>
+											<style>normal</style>
+											<weight>normal</weight>
+											<underlined>0</underlined>
+											<face>Courier New</face>
+										</font>
+										<tooltip>wxMUN is licensed under the GPLv3.</tooltip>
+										<value></value>
+										<maxlength>0</maxlength>
+									</object>
+								</object>
+							</object>
+						</object>
+					</object>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxStaticLine" name="m_staticline19">
+					<style>wxLI_HORIZONTAL</style>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_CENTER_HORIZONTAL</flag>
+				<border>5</border>
+				<object class="wxStaticBitmap" name="m_aboutUNLlogobitmap">
+					<size>165,47</size>
+					<bitmap />
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxEXPAND | wxALL</flag>
+				<border>5</border>
+				<object class="wxStaticLine" name="m_staticline20">
+					<style>wxLI_HORIZONTAL</style>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL</flag>
+				<border>5</border>
+				<object class="wxButton" name="m_closeAbout">
+					<label>_Close</label>
+					<default>0</default>
+				</object>
+			</object>
+		</object>
+	</object>
+	<object class="wxDialog" name="GUI_YieldDialog">
+		<style>wxDEFAULT_DIALOG_STYLE</style>
+		<title>Yield to other delegate</title>
+		<object class="wxBoxSizer">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxTOP|wxRIGHT|wxLEFT</flag>
+				<border>5</border>
+				<object class="wxStaticText" name="m_yieldToLabel">
+					<font>
+						<size>10</size>
+						<family>swiss</family>
+						<style>normal</style>
+						<weight>bold</weight>
+						<underlined>0</underlined>
+						<face>Sans</face>
+					</font>
+					<label>Yield to:</label>
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxListBox" name="m_yieldToDelegateChoices">
+					<style>wxLB_SINGLE|wxLB_SORT</style>
+					<size>300,350</size>
+					<content />
+				</object>
+			</object>
+			<object class="sizeritem">
+				<option>0</option>
+				<flag>wxALIGN_CENTER_HORIZONTAL|wxBOTTOM|wxRIGHT|wxLEFT</flag>
+				<border>5</border>
+				<object class="wxButton" name="m_yieldOKButton">
+					<enabled>0</enabled>
+					<label></label>
+					<default>0</default>
+				</object>
+			</object>
+		</object>
+	</object>
+</resource>

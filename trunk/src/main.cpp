@@ -375,12 +375,13 @@ bool wxMUN::OnInit(){
 		return false;
 	}
 
-	::wxInitAllImageHandlers(); //we don't know what crazy formats people might make flags in!
+	::wxInitAllImageHandlers(); //we don't know what crazy formats people might make flags in, init all possible handlers!
 
 #ifndef DEBUG
 	wxBitmap bitmap;
 	wxSplashScreen *splash=NULL;
 	if (bitmap.LoadFile(ConfigManager::FindDataFile(_T("images/splash.png")), wxBITMAP_TYPE_PNG)){
+		std::cout << ConfigManager::FindDataFile(_T("images/splash.png")).mb_str() << std::endl;			
 		splash = new wxSplashScreen(bitmap,
 				wxSPLASH_CENTRE_ON_SCREEN|wxSPLASH_TIMEOUT,
 				3500, NULL, -1, wxDefaultPosition, wxDefaultSize,
