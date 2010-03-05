@@ -24,6 +24,8 @@ wxmun_CPPFLAGS = $(WX_CPPFLAGS) $(XERCES_CPPFLAGS)
 wxmun_LDFLAGS = $(XERCES_LDFLAGS)
 wxmun_LDADD = $(WX_LIBS) $(XERCES_LIBS)
 
+DIST_SUBDIRS = resources
+
 if MACAPPBUNDLE
 noinst_DATA = $(top_builddir)/wxMUN.app/Contents/MacOS/wxmun$(EXEEXT)
 endif
