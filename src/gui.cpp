@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Apr 21 2008)
+// C++ code generated with wxFormBuilder (version Dec 29 2008)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -29,6 +29,8 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	containerSizer = new wxBoxSizer( wxVERTICAL );
 	
 	m_mainPanel = new wxPanel( this, MAIN_PANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	m_mainPanel->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_BACKGROUND ) );
+	
 	wxBoxSizer* panelContainerSizer;
 	panelContainerSizer = new wxBoxSizer( wxVERTICAL );
 	
@@ -142,6 +144,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_GSLSpeaker = new wxStaticText( m_GSLCountryPanel, GSL_SPEAKER, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE|wxST_NO_AUTORESIZE|wxFULL_REPAINT_ON_RESIZE );
 	m_GSLSpeaker->Wrap( -1 );
 	m_GSLSpeaker->SetFont( wxFont( 17, 74, 90, 92, false, wxT("Sans") ) );
+	m_GSLSpeaker->SetMinSize( wxSize( -1,30 ) );
 	
 	bSizer41111->Add( m_GSLSpeaker, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5 );
 	
@@ -243,12 +246,12 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	wxBoxSizer* bSizer73;
 	bSizer73 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_GSLminutesSpinCtrl = new wxSpinCtrl( m_GSLrightpanel, GSL_SPEAKER_TIME_MINUTES, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 59, 0 );
+	m_GSLminutesSpinCtrl = new wxSpinCtrl( m_GSLrightpanel, GSL_SPEAKER_TIME_MINUTES, wxT("0"), wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 59, 0 );
 	m_GSLminutesSpinCtrl->SetMaxSize( wxSize( 80,-1 ) );
 	
 	bSizer73->Add( m_GSLminutesSpinCtrl, 0, wxALL, 5 );
 	
-	m_GSLsecondsSpinCtrl = new wxSpinCtrl( m_GSLrightpanel, GSL_SPEAKER_TIME_SECONDS, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, -1, 60, 0 );
+	m_GSLsecondsSpinCtrl = new wxSpinCtrl( m_GSLrightpanel, GSL_SPEAKER_TIME_SECONDS, wxT("0"), wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, -1, 60, 0 );
 	m_GSLsecondsSpinCtrl->SetMaxSize( wxSize( 80,-1 ) );
 	
 	bSizer73->Add( m_GSLsecondsSpinCtrl, 0, wxALL, 5 );
@@ -259,6 +262,14 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	m_staticline152 = new wxStaticLine( m_GSLrightpanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	GSLlistSizer->Add( m_staticline152, 0, wxALL|wxEXPAND, 5 );
+	
+	wxArrayString m_GSLChoiceChoices;
+	m_GSLChoice = new wxChoice( m_GSLrightpanel, GSL_CHOICES, wxDefaultPosition, wxSize( 370,-1 ), m_GSLChoiceChoices, 0 );
+	m_GSLChoice->SetSelection( 0 );
+	m_GSLChoice->SetToolTip( _("Add country") );
+	m_GSLChoice->SetMaxSize( wxSize( 370,-1 ) );
+	
+	GSLlistSizer->Add( m_GSLChoice, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
 	m_GSLList = new wxListBox( m_GSLrightpanel, GSL_LIST, wxDefaultPosition, wxDefaultSize, 0, NULL, 0 ); 
 	m_GSLList->SetToolTip( _("Current list of countries on the General Speakers List") );
@@ -287,13 +298,6 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	GSLButtonSizer->Add( m_GSLClearButton, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
 	GSLlistSizer->Add( GSLButtonSizer, 0, wxALIGN_CENTER_HORIZONTAL, 5 );
-	
-	wxArrayString m_GSLChoiceChoices;
-	m_GSLChoice = new wxChoice( m_GSLrightpanel, GSL_CHOICES, wxDefaultPosition, wxSize( 370,-1 ), m_GSLChoiceChoices, 0 );
-	m_GSLChoice->SetSelection( 0 );
-	m_GSLChoice->SetMaxSize( wxSize( 370,-1 ) );
-	
-	GSLlistSizer->Add( m_GSLChoice, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
 	m_GSLrightpanel->SetSizer( GSLlistSizer );
 	m_GSLrightpanel->Layout();
@@ -346,6 +350,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_singleSpeakerName = new wxStaticText( m_panel611, SINGLE_SPEAKER_NAME, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE|wxST_NO_AUTORESIZE|wxFULL_REPAINT_ON_RESIZE );
 	m_singleSpeakerName->Wrap( -1 );
 	m_singleSpeakerName->SetFont( wxFont( 17, 74, 90, 92, false, wxT("Sans") ) );
+	m_singleSpeakerName->SetMinSize( wxSize( -1,30 ) );
 	
 	bSizer4112->Add( m_singleSpeakerName, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5 );
 	
@@ -430,13 +435,13 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	wxBoxSizer* speakerTimeSizer11;
 	speakerTimeSizer11 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_singleSpeakerMinutes = new wxSpinCtrl( m_singleSpeakerRightPanel, SINGLE_SPEAKER_MINUTES, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 59, 0 );
+	m_singleSpeakerMinutes = new wxSpinCtrl( m_singleSpeakerRightPanel, SINGLE_SPEAKER_MINUTES, wxT("0"), wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 59, 0 );
 	m_singleSpeakerMinutes->SetToolTip( _("Minutes") );
 	m_singleSpeakerMinutes->SetMaxSize( wxSize( 80,-1 ) );
 	
 	speakerTimeSizer11->Add( m_singleSpeakerMinutes, 0, wxALL, 5 );
 	
-	m_singleSpeakerSeconds = new wxSpinCtrl( m_singleSpeakerRightPanel, SINGLE_SPEAKER_SECONDS, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, -1, 60, 30 );
+	m_singleSpeakerSeconds = new wxSpinCtrl( m_singleSpeakerRightPanel, SINGLE_SPEAKER_SECONDS, wxT("30"), wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, -1, 60, 30 );
 	m_singleSpeakerSeconds->SetToolTip( _("Seconds") );
 	m_singleSpeakerSeconds->SetMaxSize( wxSize( 80,-1 ) );
 	
@@ -504,6 +509,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_modCaucusSpeaker = new wxStaticText( m_panel61, MOD_CAUCUS_SPEAKER, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE|wxST_NO_AUTORESIZE|wxFULL_REPAINT_ON_RESIZE );
 	m_modCaucusSpeaker->Wrap( -1 );
 	m_modCaucusSpeaker->SetFont( wxFont( 17, 74, 90, 92, false, wxT("Sans") ) );
+	m_modCaucusSpeaker->SetMinSize( wxSize( -1,30 ) );
 	
 	bSizer411->Add( m_modCaucusSpeaker, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5 );
 	
@@ -563,6 +569,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_modCaucusTopic = new wxStaticText( m_panel62, MOD_CAUCUS_TOPIC, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE|wxST_NO_AUTORESIZE );
 	m_modCaucusTopic->Wrap( -1 );
 	m_modCaucusTopic->SetFont( wxFont( 16, 74, 93, 90, false, wxT("Sans") ) );
+	m_modCaucusTopic->SetMinSize( wxSize( -1,30 ) );
 	
 	bSizer412->Add( m_modCaucusTopic, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
@@ -654,19 +661,19 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	wxBoxSizer* durationSizer1;
 	durationSizer1 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_mod_caucus_durationHours = new wxSpinCtrl( m_modCaucusRightPanel, NEW_MOD_CAUCUS_HOURS, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 99, 0 );
+	m_mod_caucus_durationHours = new wxSpinCtrl( m_modCaucusRightPanel, NEW_MOD_CAUCUS_HOURS, wxT("0"), wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 99, 0 );
 	m_mod_caucus_durationHours->SetToolTip( _("Hours") );
 	m_mod_caucus_durationHours->SetMaxSize( wxSize( 80,-1 ) );
 	
 	durationSizer1->Add( m_mod_caucus_durationHours, 0, wxALL, 5 );
 	
-	m_mod_caucus_durationMinutes = new wxSpinCtrl( m_modCaucusRightPanel, NEW_MOD_CAUCUS_MINUTES, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, -1, 60, 5 );
+	m_mod_caucus_durationMinutes = new wxSpinCtrl( m_modCaucusRightPanel, NEW_MOD_CAUCUS_MINUTES, wxT("5"), wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, -1, 60, 5 );
 	m_mod_caucus_durationMinutes->SetToolTip( _("Minutes") );
 	m_mod_caucus_durationMinutes->SetMaxSize( wxSize( 80,-1 ) );
 	
 	durationSizer1->Add( m_mod_caucus_durationMinutes, 0, wxALL, 5 );
 	
-	m_mod_caucus_durationSeconds = new wxSpinCtrl( m_modCaucusRightPanel, NEW_MOD_CAUCUS_SECONDS, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, -1, 60, 0 );
+	m_mod_caucus_durationSeconds = new wxSpinCtrl( m_modCaucusRightPanel, NEW_MOD_CAUCUS_SECONDS, wxT("0"), wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, -1, 60, 0 );
 	m_mod_caucus_durationSeconds->SetToolTip( _("Seconds") );
 	m_mod_caucus_durationSeconds->SetMaxSize( wxSize( 80,-1 ) );
 	
@@ -681,13 +688,13 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	wxBoxSizer* speakerTimeSizer1;
 	speakerTimeSizer1 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_mod_caucus_STminutes = new wxSpinCtrl( m_modCaucusRightPanel, NEW_MOD_CAUCUS_ST_MINUTES, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 59, 0 );
+	m_mod_caucus_STminutes = new wxSpinCtrl( m_modCaucusRightPanel, NEW_MOD_CAUCUS_ST_MINUTES, wxT("0"), wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 59, 0 );
 	m_mod_caucus_STminutes->SetToolTip( _("Minutes") );
 	m_mod_caucus_STminutes->SetMaxSize( wxSize( 80,-1 ) );
 	
 	speakerTimeSizer1->Add( m_mod_caucus_STminutes, 0, wxALL, 5 );
 	
-	m_mod_caucus_STseconds = new wxSpinCtrl( m_modCaucusRightPanel, NEW_MOD_CAUCUS_ST_SECONDS, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, -1, 60, 30 );
+	m_mod_caucus_STseconds = new wxSpinCtrl( m_modCaucusRightPanel, NEW_MOD_CAUCUS_ST_SECONDS, wxT("30"), wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, -1, 60, 30 );
 	m_mod_caucus_STseconds->SetToolTip( _("Seconds") );
 	m_mod_caucus_STseconds->SetMaxSize( wxSize( 80,-1 ) );
 	
@@ -760,6 +767,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_unModCaucusTopic = new wxStaticText( m_panel6, UNMOD_CAUCUS_TOPIC, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE|wxST_NO_AUTORESIZE|wxFULL_REPAINT_ON_RESIZE );
 	m_unModCaucusTopic->Wrap( -1 );
 	m_unModCaucusTopic->SetFont( wxFont( 15, 74, 93, 90, false, wxT("Sans") ) );
+	m_unModCaucusTopic->SetMinSize( wxSize( -1,30 ) );
 	
 	bSizer41->Add( m_unModCaucusTopic, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
@@ -843,19 +851,19 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	wxBoxSizer* durationSizer;
 	durationSizer = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_durationHours = new wxSpinCtrl( m_unModCaucusRightPanel, NEW_UNMOD_CAUCUS_HOURS, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 100, 0 );
+	m_durationHours = new wxSpinCtrl( m_unModCaucusRightPanel, NEW_UNMOD_CAUCUS_HOURS, wxT("0"), wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 100, 0 );
 	m_durationHours->SetToolTip( _("Hours") );
 	m_durationHours->SetMaxSize( wxSize( 80,-1 ) );
 	
 	durationSizer->Add( m_durationHours, 0, wxALL, 5 );
 	
-	m_durationMinutes = new wxSpinCtrl( m_unModCaucusRightPanel, NEW_UNMOD_CAUCUS_MINUTES, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, -1, 60, 5 );
+	m_durationMinutes = new wxSpinCtrl( m_unModCaucusRightPanel, NEW_UNMOD_CAUCUS_MINUTES, wxT("5"), wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, -1, 60, 5 );
 	m_durationMinutes->SetToolTip( _("Minutes") );
 	m_durationMinutes->SetMaxSize( wxSize( 80,-1 ) );
 	
 	durationSizer->Add( m_durationMinutes, 0, wxALL, 5 );
 	
-	m_durationSeconds = new wxSpinCtrl( m_unModCaucusRightPanel, NEW_UNMOD_CAUCUS_SECONDS, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, -1, 60, 0 );
+	m_durationSeconds = new wxSpinCtrl( m_unModCaucusRightPanel, NEW_UNMOD_CAUCUS_SECONDS, wxT("0"), wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, -1, 60, 0 );
 	m_durationSeconds->SetToolTip( _("Seconds") );
 	m_durationSeconds->SetMaxSize( wxSize( 80,-1 ) );
 	
@@ -936,7 +944,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_votingInFavourLabel = new wxStaticText( m_procVotingLeftPanel, VOTING_IN_FAVOUR, _("IN FAVOUR"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE|wxST_NO_AUTORESIZE|wxFULL_REPAINT_ON_RESIZE );
 	m_votingInFavourLabel->Wrap( -1 );
 	m_votingInFavourLabel->SetFont( wxFont( 16, 74, 90, 90, false, wxT("Sans") ) );
-	m_votingInFavourLabel->SetForegroundColour( wxColour( 0, 79, 0 ) );
+	m_votingInFavourLabel->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_GRAYTEXT ) );
 	m_votingInFavourLabel->Enable( false );
 	
 	bSizer84->Add( m_votingInFavourLabel, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5 );
@@ -944,6 +952,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_staticText78 = new wxStaticText( m_procVotingLeftPanel, wxID_ANY, _("/"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText78->Wrap( -1 );
 	m_staticText78->SetFont( wxFont( 16, 74, 90, 90, false, wxT("Sans") ) );
+	m_staticText78->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_GRAYTEXT ) );
 	m_staticText78->Enable( false );
 	
 	bSizer84->Add( m_staticText78, 0, wxALL, 5 );
@@ -951,7 +960,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_votingAgainstLabel = new wxStaticText( m_procVotingLeftPanel, VOTING_AGAINST, _("AGAINST"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_votingAgainstLabel->Wrap( -1 );
 	m_votingAgainstLabel->SetFont( wxFont( 16, 74, 90, 90, false, wxT("Sans") ) );
-	m_votingAgainstLabel->SetForegroundColour( wxColour( 187, 14, 14 ) );
+	m_votingAgainstLabel->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_GRAYTEXT ) );
 	m_votingAgainstLabel->Enable( false );
 	
 	bSizer84->Add( m_votingAgainstLabel, 1, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
@@ -974,6 +983,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_votingSpeaker = new wxStaticText( m_votingCountryPanel, VOTING_SPEAKER, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE|wxST_NO_AUTORESIZE|wxFULL_REPAINT_ON_RESIZE );
 	m_votingSpeaker->Wrap( -1 );
 	m_votingSpeaker->SetFont( wxFont( 17, 74, 90, 92, false, wxT("Sans") ) );
+	m_votingSpeaker->SetMinSize( wxSize( -1,30 ) );
 	
 	bSizer4111->Add( m_votingSpeaker, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5 );
 	
@@ -1062,10 +1072,16 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	wxBoxSizer* bSizer48;
 	bSizer48 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_votingMinutesSpinCtrl = new wxSpinCtrl( m_procVotingRightPanel, VOTING_TIME_MINUTES, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 59, 0 );
+	m_votingMinutesSpinCtrl = new wxSpinCtrl( m_procVotingRightPanel, VOTING_TIME_MINUTES, wxT("0"), wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 59, 0 );
+	m_votingMinutesSpinCtrl->SetMinSize( wxSize( 80,-1 ) );
+	m_votingMinutesSpinCtrl->SetMaxSize( wxSize( 80,-1 ) );
+	
 	bSizer48->Add( m_votingMinutesSpinCtrl, 0, wxALL, 5 );
 	
-	m_votingSecondsSpinCtrl = new wxSpinCtrl( m_procVotingRightPanel, VOTING_TIME_SECONDS, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -1, 60, 30 );
+	m_votingSecondsSpinCtrl = new wxSpinCtrl( m_procVotingRightPanel, VOTING_TIME_SECONDS, wxT("30"), wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, -1, 60, 30 );
+	m_votingSecondsSpinCtrl->SetMinSize( wxSize( 80,-1 ) );
+	m_votingSecondsSpinCtrl->SetMaxSize( wxSize( 80,-1 ) );
+	
 	bSizer48->Add( m_votingSecondsSpinCtrl, 0, wxALL, 5 );
 	
 	fgSizer26->Add( bSizer48, 1, wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
@@ -1074,6 +1090,14 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	wxStaticBoxSizer* speakingInFavorSizer;
 	speakingInFavorSizer = new wxStaticBoxSizer( new wxStaticBox( m_procVotingRightPanel, wxID_ANY, _("In favour") ), wxVERTICAL );
+	
+	wxArrayString m_inFavourChoiceChoices;
+	m_inFavourChoice = new wxChoice( m_procVotingRightPanel, SPEAKING_IN_FAVOUR_CHOICES, wxDefaultPosition, wxSize( 370,-1 ), m_inFavourChoiceChoices, 0 );
+	m_inFavourChoice->SetSelection( 0 );
+	m_inFavourChoice->SetToolTip( _("Add country") );
+	m_inFavourChoice->SetMaxSize( wxSize( 370,-1 ) );
+	
+	speakingInFavorSizer->Add( m_inFavourChoice, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
 	m_speakingInFavourList = new wxListBox( m_procVotingRightPanel, SPEAKING_IN_FAVOUR, wxDefaultPosition, wxDefaultSize, 0, NULL, 0 ); 
 	m_speakingInFavourList->SetToolTip( _("Current list of countries speaking in favour") );
@@ -1103,17 +1127,18 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	speakingInFavorSizer->Add( inFavourButtonSizer, 0, wxALIGN_CENTER_HORIZONTAL, 5 );
 	
-	wxArrayString m_inFavourChoiceChoices;
-	m_inFavourChoice = new wxChoice( m_procVotingRightPanel, SPEAKING_IN_FAVOUR_CHOICES, wxDefaultPosition, wxSize( 370,-1 ), m_inFavourChoiceChoices, 0 );
-	m_inFavourChoice->SetSelection( 0 );
-	m_inFavourChoice->SetMaxSize( wxSize( 370,-1 ) );
-	
-	speakingInFavorSizer->Add( m_inFavourChoice, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
-	
 	votingRightBoxSizer->Add( speakingInFavorSizer, 1, wxEXPAND|wxALIGN_CENTER_VERTICAL|wxBOTTOM|wxRIGHT|wxLEFT, 5 );
 	
 	wxStaticBoxSizer* speakingAgainstSizer;
 	speakingAgainstSizer = new wxStaticBoxSizer( new wxStaticBox( m_procVotingRightPanel, wxID_ANY, _("Against") ), wxVERTICAL );
+	
+	wxArrayString m_againstChoiceChoices;
+	m_againstChoice = new wxChoice( m_procVotingRightPanel, SPEAKING_AGAINST_CHOICES, wxDefaultPosition, wxSize( 370,-1 ), m_againstChoiceChoices, 0 );
+	m_againstChoice->SetSelection( 0 );
+	m_againstChoice->SetToolTip( _("Add country") );
+	m_againstChoice->SetMaxSize( wxSize( 370,-1 ) );
+	
+	speakingAgainstSizer->Add( m_againstChoice, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
 	m_speakingAgainstList = new wxListBox( m_procVotingRightPanel, SPEAKING_AGAINST, wxDefaultPosition, wxDefaultSize, 0, NULL, 0 ); 
 	m_speakingAgainstList->SetToolTip( _("Current list of countries speaking against") );
@@ -1142,13 +1167,6 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	againstButtonSizer->Add( m_againstClearButton, 0, wxALL, 5 );
 	
 	speakingAgainstSizer->Add( againstButtonSizer, 0, wxALIGN_CENTER_HORIZONTAL, 5 );
-	
-	wxArrayString m_againstChoiceChoices;
-	m_againstChoice = new wxChoice( m_procVotingRightPanel, SPEAKING_AGAINST_CHOICES, wxDefaultPosition, wxSize( 370,-1 ), m_againstChoiceChoices, 0 );
-	m_againstChoice->SetSelection( 0 );
-	m_againstChoice->SetMaxSize( wxSize( 370,-1 ) );
-	
-	speakingAgainstSizer->Add( m_againstChoice, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
 	votingRightBoxSizer->Add( speakingAgainstSizer, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
 	
@@ -1352,12 +1370,14 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	m_vetoTextLabel = new wxStaticText( m_scrolledWindow1, wxID_ANY, _("Veto:"), wxDefaultPosition, wxDefaultSize, 0|wxFULL_REPAINT_ON_RESIZE );
 	m_vetoTextLabel->Wrap( -1 );
+	m_vetoTextLabel->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_GRAYTEXT ) );
 	m_vetoTextLabel->Enable( false );
 	
 	rollCallOutcomeDetailsDataSizer->Add( m_vetoTextLabel, 0, wxALL, 5 );
 	
 	m_vetoText = new wxStaticText( m_scrolledWindow1, wxID_ANY, _("no"), wxDefaultPosition, wxDefaultSize, 0|wxFULL_REPAINT_ON_RESIZE );
 	m_vetoText->Wrap( -1 );
+	m_vetoText->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_GRAYTEXT ) );
 	m_vetoText->Enable( false );
 	
 	rollCallOutcomeDetailsDataSizer->Add( m_vetoText, 0, wxALL, 5 );
@@ -1374,13 +1394,14 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_outcomeTextPassed = new wxStaticText( m_scrolledWindow1, wxID_ANY, _("PASSED"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_outcomeTextPassed->Wrap( -1 );
 	m_outcomeTextPassed->SetFont( wxFont( 10, 74, 90, 92, false, wxT("Sans") ) );
-	m_outcomeTextPassed->SetForegroundColour( wxColour( 0, 79, 0 ) );
+	m_outcomeTextPassed->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_GRAYTEXT ) );
 	m_outcomeTextPassed->Enable( false );
 	
 	rollCallPassedFailedSizer->Add( m_outcomeTextPassed, 0, wxALL, 5 );
 	
 	m_outcomeTextSep = new wxStaticText( m_scrolledWindow1, wxID_ANY, _("/"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_outcomeTextSep->Wrap( -1 );
+	m_outcomeTextSep->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_GRAYTEXT ) );
 	m_outcomeTextSep->Enable( false );
 	
 	rollCallPassedFailedSizer->Add( m_outcomeTextSep, 0, wxTOP|wxBOTTOM, 5 );
@@ -1388,7 +1409,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_outcomeTextFailed = new wxStaticText( m_scrolledWindow1, wxID_ANY, _("FAILED"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_outcomeTextFailed->Wrap( -1 );
 	m_outcomeTextFailed->SetFont( wxFont( 10, 74, 90, 92, false, wxT("Sans") ) );
-	m_outcomeTextFailed->SetForegroundColour( wxColour( 187, 14, 14 ) );
+	m_outcomeTextFailed->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_GRAYTEXT ) );
 	m_outcomeTextFailed->Enable( false );
 	
 	rollCallPassedFailedSizer->Add( m_outcomeTextFailed, 0, wxALL, 5 );
@@ -1496,6 +1517,8 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	containerSizer->Add( m_mainPanel, 1, wxEXPAND, 5 );
 	
 	m_bannerSizer = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	m_bannerSizer->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_BACKGROUND ) );
+	
 	wxBoxSizer* bBannerMainSizer;
 	bBannerMainSizer = new wxBoxSizer( wxVERTICAL );
 	
@@ -1519,6 +1542,8 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	this->SetSizer( containerSizer );
 	this->Layout();
 	m_statusBar = this->CreateStatusBar( 1, wxST_SIZEGRIP, wxID_ANY );
+	m_statusBar->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_BACKGROUND ) );
+	
 	m_menubar = new wxMenuBar( 0 );
 	m_fileMenu = new wxMenu();
 	wxMenuItem* m_openMenuItem;
@@ -1606,12 +1631,12 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_GSLStopButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLStop ), NULL, this );
 	m_GSLminutesSpinCtrl->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUI_MainFrame::OnGSLMinutesChange ), NULL, this );
 	m_GSLsecondsSpinCtrl->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUI_MainFrame::OnGSLSecondsChange ), NULL, this );
+	m_GSLChoice->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUI_MainFrame::OnGSLChoice ), NULL, this );
 	m_GSLList->Connect( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLListSelect ), NULL, this );
 	m_GSLUpButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLUpClick ), NULL, this );
 	m_GSLDownButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLDownClick ), NULL, this );
 	m_GSLDeleteButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLDeleteClick ), NULL, this );
 	m_GSLClearButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLClearClick ), NULL, this );
-	m_GSLChoice->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUI_MainFrame::OnGSLChoice ), NULL, this );
 	m_stopSingleSpeakerButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnSingleSpeakerStop ), NULL, this );
 	m_singleSpeakerMinutes->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUI_MainFrame::OnSingleSpeakerMinutesChange ), NULL, this );
 	m_singleSpeakerSeconds->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUI_MainFrame::OnSingleSpeakerSecondsChange ), NULL, this );
@@ -1636,18 +1661,18 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_votingOnChoice->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUI_MainFrame::OnVotingOnChoice ), NULL, this );
 	m_votingMinutesSpinCtrl->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUI_MainFrame::OnVotingMinutesChange ), NULL, this );
 	m_votingSecondsSpinCtrl->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUI_MainFrame::OnVotingSecondsChange ), NULL, this );
+	m_inFavourChoice->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUI_MainFrame::OnSpeakingInFavourChoice ), NULL, this );
 	m_speakingInFavourList->Connect( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler( GUI_MainFrame::OnSpeakingInFavourListSelect ), NULL, this );
 	m_inFavourUpButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnInFavourUpClick ), NULL, this );
 	m_inFavourDownButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnInFavourDownClick ), NULL, this );
 	m_inFavourDeleteButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnInFavourDeleteClick ), NULL, this );
 	m_inFavourClearButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnInFavourClearClick ), NULL, this );
-	m_inFavourChoice->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUI_MainFrame::OnSpeakingInFavourChoice ), NULL, this );
+	m_againstChoice->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUI_MainFrame::OnSpeakingAgainstChoice ), NULL, this );
 	m_speakingAgainstList->Connect( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler( GUI_MainFrame::OnSpeakingAgainstListSelect ), NULL, this );
 	m_againstUpButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnAgainstUpClick ), NULL, this );
 	m_againstDownButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnAgainstDownClick ), NULL, this );
 	m_againstDeleteButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnAgainstDeleteClick ), NULL, this );
 	m_againstClearButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnAgainstClearClick ), NULL, this );
-	m_againstChoice->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUI_MainFrame::OnSpeakingAgainstChoice ), NULL, this );
 	m_rollCallFirstRoundYesButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnRollCallFirstRoundYes ), NULL, this );
 	m_rollCallFirstRoundNoButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnRollCallFirstRoundNo ), NULL, this );
 	m_rollCallFirstRoundYesWithRightsButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnRollCallFirstRoundYesWithRights ), NULL, this );
@@ -1689,12 +1714,12 @@ GUI_MainFrame::~GUI_MainFrame()
 	m_GSLStopButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLStop ), NULL, this );
 	m_GSLminutesSpinCtrl->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUI_MainFrame::OnGSLMinutesChange ), NULL, this );
 	m_GSLsecondsSpinCtrl->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUI_MainFrame::OnGSLSecondsChange ), NULL, this );
+	m_GSLChoice->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUI_MainFrame::OnGSLChoice ), NULL, this );
 	m_GSLList->Disconnect( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLListSelect ), NULL, this );
 	m_GSLUpButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLUpClick ), NULL, this );
 	m_GSLDownButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLDownClick ), NULL, this );
 	m_GSLDeleteButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLDeleteClick ), NULL, this );
 	m_GSLClearButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLClearClick ), NULL, this );
-	m_GSLChoice->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUI_MainFrame::OnGSLChoice ), NULL, this );
 	m_stopSingleSpeakerButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnSingleSpeakerStop ), NULL, this );
 	m_singleSpeakerMinutes->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUI_MainFrame::OnSingleSpeakerMinutesChange ), NULL, this );
 	m_singleSpeakerSeconds->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUI_MainFrame::OnSingleSpeakerSecondsChange ), NULL, this );
@@ -1719,18 +1744,18 @@ GUI_MainFrame::~GUI_MainFrame()
 	m_votingOnChoice->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUI_MainFrame::OnVotingOnChoice ), NULL, this );
 	m_votingMinutesSpinCtrl->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUI_MainFrame::OnVotingMinutesChange ), NULL, this );
 	m_votingSecondsSpinCtrl->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUI_MainFrame::OnVotingSecondsChange ), NULL, this );
+	m_inFavourChoice->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUI_MainFrame::OnSpeakingInFavourChoice ), NULL, this );
 	m_speakingInFavourList->Disconnect( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler( GUI_MainFrame::OnSpeakingInFavourListSelect ), NULL, this );
 	m_inFavourUpButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnInFavourUpClick ), NULL, this );
 	m_inFavourDownButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnInFavourDownClick ), NULL, this );
 	m_inFavourDeleteButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnInFavourDeleteClick ), NULL, this );
 	m_inFavourClearButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnInFavourClearClick ), NULL, this );
-	m_inFavourChoice->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUI_MainFrame::OnSpeakingInFavourChoice ), NULL, this );
+	m_againstChoice->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUI_MainFrame::OnSpeakingAgainstChoice ), NULL, this );
 	m_speakingAgainstList->Disconnect( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler( GUI_MainFrame::OnSpeakingAgainstListSelect ), NULL, this );
 	m_againstUpButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnAgainstUpClick ), NULL, this );
 	m_againstDownButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnAgainstDownClick ), NULL, this );
 	m_againstDeleteButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnAgainstDeleteClick ), NULL, this );
 	m_againstClearButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnAgainstClearClick ), NULL, this );
-	m_againstChoice->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUI_MainFrame::OnSpeakingAgainstChoice ), NULL, this );
 	m_rollCallFirstRoundYesButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnRollCallFirstRoundYes ), NULL, this );
 	m_rollCallFirstRoundNoButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnRollCallFirstRoundNo ), NULL, this );
 	m_rollCallFirstRoundYesWithRightsButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnRollCallFirstRoundYesWithRights ), NULL, this );
@@ -1772,7 +1797,7 @@ GUI_NewCommitteeDialog::GUI_NewCommitteeDialog( wxWindow* parent, wxWindowID id,
 	wxStaticBoxSizer* ncInstructionSizer;
 	ncInstructionSizer = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Instructions") ), wxVERTICAL );
 	
-	ncInstructions = new wxStaticText( this, wxID_ANY, _("1. Check the countries you would like to be a part of this committee or council.\n2. Optionally check any observers present. wxMUN always checks observers aren't already members.\n3. You can edit individual committee/council details by clicking on their names in the list.\n4. Click 'OK'."), wxDefaultPosition, wxSize( 350,70 ), wxST_NO_AUTORESIZE );
+	ncInstructions = new wxStaticText( this, wxID_ANY, _("1. Check the countries you would like to be a part of this committee or council.\n2. Optionally check any observers present. wxMUN always checks observers aren't already members.\n3. You can edit individual committee/council details by clicking on their names in the list.\n4. Click 'OK'."), wxDefaultPosition, wxSize( 350,80 ), wxST_NO_AUTORESIZE );
 	ncInstructions->Wrap( -1 );
 	ncInstructionSizer->Add( ncInstructions, 0, wxALL|wxEXPAND, 5 );
 	

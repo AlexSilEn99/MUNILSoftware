@@ -8,7 +8,6 @@ noinst_HEADERS = clear_png.h \
 			country.h \
 			defs.h \
 			editcommitteedialog.h \
-			gui.h \
 			app.h \
 			newcommitteedialog.h \
 			noname.h \

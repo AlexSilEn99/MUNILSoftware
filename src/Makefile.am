@@ -1,5 +1,8 @@
 INCLUDES = -I.. -I../include
 
+EXTRA_DIST = resources.rc
+DIST_SUBDIRS = resources
+
 bin_PROGRAMS = wxmun
 wxmun_SOURCES = committee.cpp \
 		configmanager.cpp \
@@ -23,8 +26,6 @@ wxmun_CXXFLAGS = $(WX_CXXFLAGS_ONLY)
 wxmun_CPPFLAGS = $(WX_CPPFLAGS) $(XERCES_CPPFLAGS)
 wxmun_LDFLAGS = $(XERCES_LDFLAGS)
 wxmun_LDADD = $(WX_LIBS) $(XERCES_LIBS)
-
-DIST_SUBDIRS = resources
 
 if MACAPPBUNDLE
 noinst_DATA = $(top_builddir)/wxMUN.app/Contents/MacOS/wxmun$(EXEEXT)

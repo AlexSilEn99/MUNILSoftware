@@ -3,7 +3,7 @@
     <FileVersion major="1" minor="9" />
     <object class="Project" expanded="1">
         <property name="class_decoration"></property>
-        <property name="code_generation">C++</property>
+        <property name="code_generation">C++|XRC</property>
         <property name="disconnect_events">1</property>
         <property name="encoding">UTF-8</property>
         <property name="event_generation">connect</property>
@@ -18,7 +18,7 @@
         <property name="relative_path">1</property>
         <property name="use_enum">0</property>
         <property name="use_microsoft_bom">0</property>
-        <object class="Frame" expanded="1">
+        <object class="Frame" expanded="0">
             <property name="bg"></property>
             <property name="center"></property>
             <property name="context_help"></property>
@@ -79,8 +79,8 @@
                     <property name="border">5</property>
                     <property name="flag">wxEXPAND</property>
                     <property name="proportion">1</property>
-                    <object class="wxPanel" expanded="0">
-                        <property name="bg"></property>
+                    <object class="wxPanel" expanded="1">
+                        <property name="bg">wxSYS_COLOUR_BACKGROUND</property>
                         <property name="context_help"></property>
                         <property name="enabled">1</property>
                         <property name="fg"></property>
@@ -871,7 +871,7 @@
                                                                                 <property name="border">5</property>
                                                                                 <property name="flag">wxEXPAND</property>
                                                                                 <property name="proportion">0</property>
-                                                                                <object class="wxBoxSizer" expanded="0">
+                                                                                <object class="wxBoxSizer" expanded="1">
                                                                                     <property name="minimum_size"></property>
                                                                                     <property name="name">GSLCountrySizer</property>
                                                                                     <property name="orient">wxVERTICAL</property>
@@ -880,7 +880,7 @@
                                                                                         <property name="border">5</property>
                                                                                         <property name="flag">wxEXPAND | wxALL</property>
                                                                                         <property name="proportion">1</property>
-                                                                                        <object class="wxPanel" expanded="0">
+                                                                                        <object class="wxPanel" expanded="1">
                                                                                             <property name="bg"></property>
                                                                                             <property name="context_help"></property>
                                                                                             <property name="enabled">1</property>
@@ -922,7 +922,7 @@
                                                                                             <event name="OnSetFocus"></event>
                                                                                             <event name="OnSize"></event>
                                                                                             <event name="OnUpdateUI"></event>
-                                                                                            <object class="wxBoxSizer" expanded="0">
+                                                                                            <object class="wxBoxSizer" expanded="1">
                                                                                                 <property name="minimum_size"></property>
                                                                                                 <property name="name">bSizer41111</property>
                                                                                                 <property name="orient">wxVERTICAL</property>
@@ -990,7 +990,7 @@
                                                                                                         <property name="id">GSL_SPEAKER</property>
                                                                                                         <property name="label"></property>
                                                                                                         <property name="maximum_size"></property>
-                                                                                                        <property name="minimum_size"></property>
+                                                                                                        <property name="minimum_size">-1,30</property>
                                                                                                         <property name="name">m_GSLSpeaker</property>
                                                                                                         <property name="permission">protected</property>
                                                                                                         <property name="pos"></property>
@@ -1613,7 +1613,7 @@
                                                                                 <property name="border">5</property>
                                                                                 <property name="flag">wxALIGN_CENTER_HORIZONTAL</property>
                                                                                 <property name="proportion">0</property>
-                                                                                <object class="wxBoxSizer" expanded="0">
+                                                                                <object class="wxBoxSizer" expanded="1">
                                                                                     <property name="minimum_size"></property>
                                                                                     <property name="name">GSLtimesetsizer</property>
                                                                                     <property name="orient">wxHORIZONTAL</property>
@@ -1673,7 +1673,7 @@
                                                                                         <property name="border">5</property>
                                                                                         <property name="flag"></property>
                                                                                         <property name="proportion">0</property>
-                                                                                        <object class="wxBoxSizer" expanded="0">
+                                                                                        <object class="wxBoxSizer" expanded="1">
                                                                                             <property name="minimum_size"></property>
                                                                                             <property name="name">bSizer73</property>
                                                                                             <property name="orient">wxHORIZONTAL</property>
@@ -1702,7 +1702,7 @@
                                                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                                                     <property name="subclass"></property>
                                                                                                     <property name="tooltip"></property>
-                                                                                                    <property name="value"></property>
+                                                                                                    <property name="value">0</property>
                                                                                                     <property name="window_extra_style"></property>
                                                                                                     <property name="window_name"></property>
                                                                                                     <property name="window_style"></property>
@@ -1757,7 +1757,7 @@
                                                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                                                     <property name="subclass"></property>
                                                                                                     <property name="tooltip"></property>
-                                                                                                    <property name="value"></property>
+                                                                                                    <property name="value">0</property>
                                                                                                     <property name="window_extra_style"></property>
                                                                                                     <property name="window_name"></property>
                                                                                                     <property name="window_style"></property>
@@ -1817,6 +1817,57 @@
                                                                                     <property name="window_name"></property>
                                                                                     <property name="window_style"></property>
                                                                                     <event name="OnChar"></event>
+                                                                                    <event name="OnEnterWindow"></event>
+                                                                                    <event name="OnEraseBackground"></event>
+                                                                                    <event name="OnKeyDown"></event>
+                                                                                    <event name="OnKeyUp"></event>
+                                                                                    <event name="OnKillFocus"></event>
+                                                                                    <event name="OnLeaveWindow"></event>
+                                                                                    <event name="OnLeftDClick"></event>
+                                                                                    <event name="OnLeftDown"></event>
+                                                                                    <event name="OnLeftUp"></event>
+                                                                                    <event name="OnMiddleDClick"></event>
+                                                                                    <event name="OnMiddleDown"></event>
+                                                                                    <event name="OnMiddleUp"></event>
+                                                                                    <event name="OnMotion"></event>
+                                                                                    <event name="OnMouseEvents"></event>
+                                                                                    <event name="OnMouseWheel"></event>
+                                                                                    <event name="OnPaint"></event>
+                                                                                    <event name="OnRightDClick"></event>
+                                                                                    <event name="OnRightDown"></event>
+                                                                                    <event name="OnRightUp"></event>
+                                                                                    <event name="OnSetFocus"></event>
+                                                                                    <event name="OnSize"></event>
+                                                                                    <event name="OnUpdateUI"></event>
+                                                                                </object>
+                                                                            </object>
+                                                                            <object class="sizeritem" expanded="1">
+                                                                                <property name="border">5</property>
+                                                                                <property name="flag">wxALL|wxALIGN_CENTER_HORIZONTAL</property>
+                                                                                <property name="proportion">0</property>
+                                                                                <object class="wxChoice" expanded="1">
+                                                                                    <property name="bg"></property>
+                                                                                    <property name="choices"></property>
+                                                                                    <property name="context_help"></property>
+                                                                                    <property name="enabled">1</property>
+                                                                                    <property name="fg"></property>
+                                                                                    <property name="font"></property>
+                                                                                    <property name="hidden">0</property>
+                                                                                    <property name="id">GSL_CHOICES</property>
+                                                                                    <property name="maximum_size">370,-1</property>
+                                                                                    <property name="minimum_size"></property>
+                                                                                    <property name="name">m_GSLChoice</property>
+                                                                                    <property name="permission">protected</property>
+                                                                                    <property name="pos"></property>
+                                                                                    <property name="selection">0</property>
+                                                                                    <property name="size">370,-1</property>
+                                                                                    <property name="subclass"></property>
+                                                                                    <property name="tooltip">Add country</property>
+                                                                                    <property name="window_extra_style"></property>
+                                                                                    <property name="window_name"></property>
+                                                                                    <property name="window_style"></property>
+                                                                                    <event name="OnChar"></event>
+                                                                                    <event name="OnChoice">OnGSLChoice</event>
                                                                                     <event name="OnEnterWindow"></event>
                                                                                     <event name="OnEraseBackground"></event>
                                                                                     <event name="OnKeyDown"></event>
@@ -2112,57 +2163,6 @@
                                                                                     </object>
                                                                                 </object>
                                                                             </object>
-                                                                            <object class="sizeritem" expanded="1">
-                                                                                <property name="border">5</property>
-                                                                                <property name="flag">wxALL|wxALIGN_CENTER_HORIZONTAL</property>
-                                                                                <property name="proportion">0</property>
-                                                                                <object class="wxChoice" expanded="1">
-                                                                                    <property name="bg"></property>
-                                                                                    <property name="choices"></property>
-                                                                                    <property name="context_help"></property>
-                                                                                    <property name="enabled">1</property>
-                                                                                    <property name="fg"></property>
-                                                                                    <property name="font"></property>
-                                                                                    <property name="hidden">0</property>
-                                                                                    <property name="id">GSL_CHOICES</property>
-                                                                                    <property name="maximum_size">370,-1</property>
-                                                                                    <property name="minimum_size"></property>
-                                                                                    <property name="name">m_GSLChoice</property>
-                                                                                    <property name="permission">protected</property>
-                                                                                    <property name="pos"></property>
-                                                                                    <property name="selection">0</property>
-                                                                                    <property name="size">370,-1</property>
-                                                                                    <property name="subclass"></property>
-                                                                                    <property name="tooltip"></property>
-                                                                                    <property name="window_extra_style"></property>
-                                                                                    <property name="window_name"></property>
-                                                                                    <property name="window_style"></property>
-                                                                                    <event name="OnChar"></event>
-                                                                                    <event name="OnChoice">OnGSLChoice</event>
-                                                                                    <event name="OnEnterWindow"></event>
-                                                                                    <event name="OnEraseBackground"></event>
-                                                                                    <event name="OnKeyDown"></event>
-                                                                                    <event name="OnKeyUp"></event>
-                                                                                    <event name="OnKillFocus"></event>
-                                                                                    <event name="OnLeaveWindow"></event>
-                                                                                    <event name="OnLeftDClick"></event>
-                                                                                    <event name="OnLeftDown"></event>
-                                                                                    <event name="OnLeftUp"></event>
-                                                                                    <event name="OnMiddleDClick"></event>
-                                                                                    <event name="OnMiddleDown"></event>
-                                                                                    <event name="OnMiddleUp"></event>
-                                                                                    <event name="OnMotion"></event>
-                                                                                    <event name="OnMouseEvents"></event>
-                                                                                    <event name="OnMouseWheel"></event>
-                                                                                    <event name="OnPaint"></event>
-                                                                                    <event name="OnRightDClick"></event>
-                                                                                    <event name="OnRightDown"></event>
-                                                                                    <event name="OnRightUp"></event>
-                                                                                    <event name="OnSetFocus"></event>
-                                                                                    <event name="OnSize"></event>
-                                                                                    <event name="OnUpdateUI"></event>
-                                                                                </object>
-                                                                            </object>
                                                                         </object>
                                                                     </object>
                                                                 </object>
@@ -2279,7 +2279,7 @@
                                                                 <event name="OnSplitterUnsplit"></event>
                                                                 <event name="OnUpdateUI"></event>
                                                                 <object class="splitteritem" expanded="1">
-                                                                    <object class="wxPanel" expanded="0">
+                                                                    <object class="wxPanel" expanded="1">
                                                                         <property name="bg"></property>
                                                                         <property name="context_help"></property>
                                                                         <property name="enabled">1</property>
@@ -2476,7 +2476,7 @@
                                                                                                                 <property name="id">SINGLE_SPEAKER_NAME</property>
                                                                                                                 <property name="label"></property>
                                                                                                                 <property name="maximum_size"></property>
-                                                                                                                <property name="minimum_size"></property>
+                                                                                                                <property name="minimum_size">-1,30</property>
                                                                                                                 <property name="name">m_singleSpeakerName</property>
                                                                                                                 <property name="permission">protected</property>
                                                                                                                 <property name="pos"></property>
@@ -3070,7 +3070,7 @@
                                                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                                                     <property name="subclass"></property>
                                                                                                     <property name="tooltip">Minutes</property>
-                                                                                                    <property name="value"></property>
+                                                                                                    <property name="value">0</property>
                                                                                                     <property name="window_extra_style"></property>
                                                                                                     <property name="window_name"></property>
                                                                                                     <property name="window_style"></property>
@@ -3125,7 +3125,7 @@
                                                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                                                     <property name="subclass"></property>
                                                                                                     <property name="tooltip">Seconds</property>
-                                                                                                    <property name="value"></property>
+                                                                                                    <property name="value">30</property>
                                                                                                     <property name="window_extra_style"></property>
                                                                                                     <property name="window_name"></property>
                                                                                                     <property name="window_style"></property>
@@ -3339,7 +3339,7 @@
                                                                 <event name="OnSplitterUnsplit"></event>
                                                                 <event name="OnUpdateUI"></event>
                                                                 <object class="splitteritem" expanded="1">
-                                                                    <object class="wxPanel" expanded="0">
+                                                                    <object class="wxPanel" expanded="1">
                                                                         <property name="bg"></property>
                                                                         <property name="context_help"></property>
                                                                         <property name="enabled">1</property>
@@ -3417,7 +3417,7 @@
                                                                                         <property name="border">5</property>
                                                                                         <property name="flag">wxEXPAND</property>
                                                                                         <property name="proportion">1</property>
-                                                                                        <object class="wxBoxSizer" expanded="0">
+                                                                                        <object class="wxBoxSizer" expanded="1">
                                                                                             <property name="minimum_size"></property>
                                                                                             <property name="name">modCaucusSpeakerSizer</property>
                                                                                             <property name="orient">wxVERTICAL</property>
@@ -3426,7 +3426,7 @@
                                                                                                 <property name="border">5</property>
                                                                                                 <property name="flag">wxEXPAND | wxALL</property>
                                                                                                 <property name="proportion">1</property>
-                                                                                                <object class="wxPanel" expanded="0">
+                                                                                                <object class="wxPanel" expanded="1">
                                                                                                     <property name="bg"></property>
                                                                                                     <property name="context_help"></property>
                                                                                                     <property name="enabled">1</property>
@@ -3468,7 +3468,7 @@
                                                                                                     <event name="OnSetFocus"></event>
                                                                                                     <event name="OnSize"></event>
                                                                                                     <event name="OnUpdateUI"></event>
-                                                                                                    <object class="wxBoxSizer" expanded="0">
+                                                                                                    <object class="wxBoxSizer" expanded="1">
                                                                                                         <property name="minimum_size"></property>
                                                                                                         <property name="name">bSizer411</property>
                                                                                                         <property name="orient">wxVERTICAL</property>
@@ -3536,7 +3536,7 @@
                                                                                                                 <property name="id">MOD_CAUCUS_SPEAKER</property>
                                                                                                                 <property name="label"></property>
                                                                                                                 <property name="maximum_size"></property>
-                                                                                                                <property name="minimum_size"></property>
+                                                                                                                <property name="minimum_size">-1,30</property>
                                                                                                                 <property name="name">m_modCaucusSpeaker</property>
                                                                                                                 <property name="permission">protected</property>
                                                                                                                 <property name="pos"></property>
@@ -3820,7 +3820,7 @@
                                                                                 <property name="border">5</property>
                                                                                 <property name="flag">wxALIGN_CENTER_VERTICAL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND</property>
                                                                                 <property name="proportion">0</property>
-                                                                                <object class="wxBoxSizer" expanded="0">
+                                                                                <object class="wxBoxSizer" expanded="1">
                                                                                     <property name="minimum_size"></property>
                                                                                     <property name="name">caucusTimerSizer</property>
                                                                                     <property name="orient">wxVERTICAL</property>
@@ -3829,7 +3829,7 @@
                                                                                         <property name="border">5</property>
                                                                                         <property name="flag">wxEXPAND</property>
                                                                                         <property name="proportion">1</property>
-                                                                                        <object class="wxBoxSizer" expanded="0">
+                                                                                        <object class="wxBoxSizer" expanded="1">
                                                                                             <property name="minimum_size"></property>
                                                                                             <property name="name">modCaucusTopicSizer</property>
                                                                                             <property name="orient">wxVERTICAL</property>
@@ -3838,7 +3838,7 @@
                                                                                                 <property name="border">5</property>
                                                                                                 <property name="flag">wxEXPAND | wxALL</property>
                                                                                                 <property name="proportion">1</property>
-                                                                                                <object class="wxPanel" expanded="0">
+                                                                                                <object class="wxPanel" expanded="1">
                                                                                                     <property name="bg"></property>
                                                                                                     <property name="context_help"></property>
                                                                                                     <property name="enabled">1</property>
@@ -3880,7 +3880,7 @@
                                                                                                     <event name="OnSetFocus"></event>
                                                                                                     <event name="OnSize"></event>
                                                                                                     <event name="OnUpdateUI"></event>
-                                                                                                    <object class="wxBoxSizer" expanded="0">
+                                                                                                    <object class="wxBoxSizer" expanded="1">
                                                                                                         <property name="minimum_size"></property>
                                                                                                         <property name="name">bSizer412</property>
                                                                                                         <property name="orient">wxVERTICAL</property>
@@ -3899,7 +3899,7 @@
                                                                                                                 <property name="id">MOD_CAUCUS_TOPIC</property>
                                                                                                                 <property name="label"></property>
                                                                                                                 <property name="maximum_size"></property>
-                                                                                                                <property name="minimum_size"></property>
+                                                                                                                <property name="minimum_size">-1,30</property>
                                                                                                                 <property name="name">m_modCaucusTopic</property>
                                                                                                                 <property name="permission">protected</property>
                                                                                                                 <property name="pos"></property>
@@ -4480,7 +4480,7 @@
                                                                                 <property name="border">5</property>
                                                                                 <property name="flag">wxALIGN_CENTER_HORIZONTAL</property>
                                                                                 <property name="proportion">0</property>
-                                                                                <object class="wxFlexGridSizer" expanded="0">
+                                                                                <object class="wxFlexGridSizer" expanded="1">
                                                                                     <property name="cols">2</property>
                                                                                     <property name="flexible_direction">wxBOTH</property>
                                                                                     <property name="growablecols">1</property>
@@ -4682,7 +4682,7 @@
                                                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                                                     <property name="subclass"></property>
                                                                                                     <property name="tooltip">Hours</property>
-                                                                                                    <property name="value"></property>
+                                                                                                    <property name="value">0</property>
                                                                                                     <property name="window_extra_style"></property>
                                                                                                     <property name="window_name"></property>
                                                                                                     <property name="window_style"></property>
@@ -4737,7 +4737,7 @@
                                                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                                                     <property name="subclass"></property>
                                                                                                     <property name="tooltip">Minutes</property>
-                                                                                                    <property name="value"></property>
+                                                                                                    <property name="value">5</property>
                                                                                                     <property name="window_extra_style"></property>
                                                                                                     <property name="window_name"></property>
                                                                                                     <property name="window_style"></property>
@@ -4792,7 +4792,7 @@
                                                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                                                     <property name="subclass"></property>
                                                                                                     <property name="tooltip">Seconds</property>
-                                                                                                    <property name="value"></property>
+                                                                                                    <property name="value">0</property>
                                                                                                     <property name="window_extra_style"></property>
                                                                                                     <property name="window_name"></property>
                                                                                                     <property name="window_style"></property>
@@ -4909,7 +4909,7 @@
                                                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                                                     <property name="subclass"></property>
                                                                                                     <property name="tooltip">Minutes</property>
-                                                                                                    <property name="value"></property>
+                                                                                                    <property name="value">0</property>
                                                                                                     <property name="window_extra_style"></property>
                                                                                                     <property name="window_name"></property>
                                                                                                     <property name="window_style"></property>
@@ -4964,7 +4964,7 @@
                                                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                                                     <property name="subclass"></property>
                                                                                                     <property name="tooltip">Seconds</property>
-                                                                                                    <property name="value"></property>
+                                                                                                    <property name="value">30</property>
                                                                                                     <property name="window_extra_style"></property>
                                                                                                     <property name="window_name"></property>
                                                                                                     <property name="window_style"></property>
@@ -5201,7 +5201,7 @@
                                                 <property name="bitmap"></property>
                                                 <property name="label">Unmoderated Caucus</property>
                                                 <property name="select">0</property>
-                                                <object class="wxPanel" expanded="0">
+                                                <object class="wxPanel" expanded="1">
                                                     <property name="bg"></property>
                                                     <property name="context_help"></property>
                                                     <property name="enabled">1</property>
@@ -5383,7 +5383,7 @@
                                                                                         <property name="border">5</property>
                                                                                         <property name="flag">wxEXPAND | wxALL</property>
                                                                                         <property name="proportion">1</property>
-                                                                                        <object class="wxPanel" expanded="0">
+                                                                                        <object class="wxPanel" expanded="1">
                                                                                             <property name="bg"></property>
                                                                                             <property name="context_help"></property>
                                                                                             <property name="enabled">1</property>
@@ -5425,7 +5425,7 @@
                                                                                             <event name="OnSetFocus"></event>
                                                                                             <event name="OnSize"></event>
                                                                                             <event name="OnUpdateUI"></event>
-                                                                                            <object class="wxBoxSizer" expanded="0">
+                                                                                            <object class="wxBoxSizer" expanded="1">
                                                                                                 <property name="minimum_size"></property>
                                                                                                 <property name="name">bSizer41</property>
                                                                                                 <property name="orient">wxVERTICAL</property>
@@ -5444,7 +5444,7 @@
                                                                                                         <property name="id">UNMOD_CAUCUS_TOPIC</property>
                                                                                                         <property name="label"></property>
                                                                                                         <property name="maximum_size"></property>
-                                                                                                        <property name="minimum_size"></property>
+                                                                                                        <property name="minimum_size">-1,30</property>
                                                                                                         <property name="name">m_unModCaucusTopic</property>
                                                                                                         <property name="permission">protected</property>
                                                                                                         <property name="pos"></property>
@@ -5775,7 +5775,7 @@
                                                                     </object>
                                                                 </object>
                                                                 <object class="splitteritem" expanded="1">
-                                                                    <object class="wxPanel" expanded="0">
+                                                                    <object class="wxPanel" expanded="1">
                                                                         <property name="bg"></property>
                                                                         <property name="context_help"></property>
                                                                         <property name="enabled">1</property>
@@ -5817,7 +5817,7 @@
                                                                         <event name="OnSetFocus"></event>
                                                                         <event name="OnSize"></event>
                                                                         <event name="OnUpdateUI"></event>
-                                                                        <object class="wxBoxSizer" expanded="0">
+                                                                        <object class="wxBoxSizer" expanded="1">
                                                                             <property name="minimum_size"></property>
                                                                             <property name="name">newUnModSizer</property>
                                                                             <property name="orient">wxVERTICAL</property>
@@ -5926,7 +5926,7 @@
                                                                                 <property name="border">5</property>
                                                                                 <property name="flag">wxALIGN_CENTER_HORIZONTAL</property>
                                                                                 <property name="proportion">0</property>
-                                                                                <object class="wxFlexGridSizer" expanded="0">
+                                                                                <object class="wxFlexGridSizer" expanded="1">
                                                                                     <property name="cols">2</property>
                                                                                     <property name="flexible_direction">wxBOTH</property>
                                                                                     <property name="growablecols">1</property>
@@ -6099,7 +6099,7 @@
                                                                                         <property name="border">5</property>
                                                                                         <property name="flag">wxEXPAND</property>
                                                                                         <property name="proportion">1</property>
-                                                                                        <object class="wxBoxSizer" expanded="0">
+                                                                                        <object class="wxBoxSizer" expanded="1">
                                                                                             <property name="minimum_size"></property>
                                                                                             <property name="name">durationSizer</property>
                                                                                             <property name="orient">wxHORIZONTAL</property>
@@ -6128,7 +6128,7 @@
                                                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                                                     <property name="subclass"></property>
                                                                                                     <property name="tooltip">Hours</property>
-                                                                                                    <property name="value"></property>
+                                                                                                    <property name="value">0</property>
                                                                                                     <property name="window_extra_style"></property>
                                                                                                     <property name="window_name"></property>
                                                                                                     <property name="window_style"></property>
@@ -6183,7 +6183,7 @@
                                                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                                                     <property name="subclass"></property>
                                                                                                     <property name="tooltip">Minutes</property>
-                                                                                                    <property name="value"></property>
+                                                                                                    <property name="value">5</property>
                                                                                                     <property name="window_extra_style"></property>
                                                                                                     <property name="window_name"></property>
                                                                                                     <property name="window_style"></property>
@@ -6238,7 +6238,7 @@
                                                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                                                     <property name="subclass"></property>
                                                                                                     <property name="tooltip">Seconds</property>
-                                                                                                    <property name="value"></property>
+                                                                                                    <property name="value">0</property>
                                                                                                     <property name="window_extra_style"></property>
                                                                                                     <property name="window_name"></property>
                                                                                                     <property name="window_style"></property>
@@ -6423,7 +6423,7 @@
                                                 <property name="bitmap"></property>
                                                 <property name="label">Procedural voting</property>
                                                 <property name="select">0</property>
-                                                <object class="wxPanel" expanded="0">
+                                                <object class="wxPanel" expanded="1">
                                                     <property name="bg"></property>
                                                     <property name="context_help"></property>
                                                     <property name="enabled">1</property>
@@ -6704,7 +6704,7 @@
                                                                                 <property name="border">5</property>
                                                                                 <property name="flag">wxALIGN_CENTER_HORIZONTAL</property>
                                                                                 <property name="proportion">0</property>
-                                                                                <object class="wxBoxSizer" expanded="0">
+                                                                                <object class="wxBoxSizer" expanded="1">
                                                                                     <property name="minimum_size"></property>
                                                                                     <property name="name">bSizer84</property>
                                                                                     <property name="orient">wxHORIZONTAL</property>
@@ -6717,7 +6717,7 @@
                                                                                             <property name="bg"></property>
                                                                                             <property name="context_help"></property>
                                                                                             <property name="enabled">0</property>
-                                                                                            <property name="fg">0,79,0</property>
+                                                                                            <property name="fg">wxSYS_COLOUR_GRAYTEXT</property>
                                                                                             <property name="font">Sans,90,90,16,74,0</property>
                                                                                             <property name="hidden">0</property>
                                                                                             <property name="id">VOTING_IN_FAVOUR</property>
@@ -6768,7 +6768,7 @@
                                                                                             <property name="bg"></property>
                                                                                             <property name="context_help"></property>
                                                                                             <property name="enabled">0</property>
-                                                                                            <property name="fg"></property>
+                                                                                            <property name="fg">wxSYS_COLOUR_GRAYTEXT</property>
                                                                                             <property name="font">Sans,90,90,16,74,0</property>
                                                                                             <property name="hidden">0</property>
                                                                                             <property name="id">wxID_ANY</property>
@@ -6819,7 +6819,7 @@
                                                                                             <property name="bg"></property>
                                                                                             <property name="context_help"></property>
                                                                                             <property name="enabled">0</property>
-                                                                                            <property name="fg">187,14,14</property>
+                                                                                            <property name="fg">wxSYS_COLOUR_GRAYTEXT</property>
                                                                                             <property name="font">Sans,90,90,16,74,0</property>
                                                                                             <property name="hidden">0</property>
                                                                                             <property name="id">VOTING_AGAINST</property>
@@ -6987,7 +6987,7 @@
                                                                                                         <property name="id">VOTING_SPEAKER</property>
                                                                                                         <property name="label"></property>
                                                                                                         <property name="maximum_size"></property>
-                                                                                                        <property name="minimum_size"></property>
+                                                                                                        <property name="minimum_size">-1,30</property>
                                                                                                         <property name="name">m_votingSpeaker</property>
                                                                                                         <property name="permission">protected</property>
                                                                                                         <property name="pos"></property>
@@ -7339,7 +7339,7 @@
                                                                     </object>
                                                                 </object>
                                                                 <object class="splitteritem" expanded="1">
-                                                                    <object class="wxPanel" expanded="0">
+                                                                    <object class="wxPanel" expanded="1">
                                                                         <property name="bg"></property>
                                                                         <property name="context_help"></property>
                                                                         <property name="enabled">1</property>
@@ -7559,7 +7559,7 @@
                                                                                         <property name="border">5</property>
                                                                                         <property name="flag">wxALIGN_CENTER_HORIZONTAL|wxEXPAND</property>
                                                                                         <property name="proportion">1</property>
-                                                                                        <object class="wxBoxSizer" expanded="0">
+                                                                                        <object class="wxBoxSizer" expanded="1">
                                                                                             <property name="minimum_size"></property>
                                                                                             <property name="name">bSizer48</property>
                                                                                             <property name="orient">wxHORIZONTAL</property>
@@ -7578,17 +7578,17 @@
                                                                                                     <property name="id">VOTING_TIME_MINUTES</property>
                                                                                                     <property name="initial">0</property>
                                                                                                     <property name="max">59</property>
-                                                                                                    <property name="maximum_size"></property>
+                                                                                                    <property name="maximum_size">80,-1</property>
                                                                                                     <property name="min">0</property>
-                                                                                                    <property name="minimum_size"></property>
+                                                                                                    <property name="minimum_size">80,-1</property>
                                                                                                     <property name="name">m_votingMinutesSpinCtrl</property>
                                                                                                     <property name="permission">protected</property>
                                                                                                     <property name="pos"></property>
-                                                                                                    <property name="size"></property>
+                                                                                                    <property name="size">80,-1</property>
                                                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                                                     <property name="subclass"></property>
                                                                                                     <property name="tooltip"></property>
-                                                                                                    <property name="value"></property>
+                                                                                                    <property name="value">0</property>
                                                                                                     <property name="window_extra_style"></property>
                                                                                                     <property name="window_name"></property>
                                                                                                     <property name="window_style"></property>
@@ -7633,17 +7633,17 @@
                                                                                                     <property name="id">VOTING_TIME_SECONDS</property>
                                                                                                     <property name="initial">30</property>
                                                                                                     <property name="max">60</property>
-                                                                                                    <property name="maximum_size"></property>
+                                                                                                    <property name="maximum_size">80,-1</property>
                                                                                                     <property name="min">-1</property>
-                                                                                                    <property name="minimum_size"></property>
+                                                                                                    <property name="minimum_size">80,-1</property>
                                                                                                     <property name="name">m_votingSecondsSpinCtrl</property>
                                                                                                     <property name="permission">protected</property>
                                                                                                     <property name="pos"></property>
-                                                                                                    <property name="size"></property>
+                                                                                                    <property name="size">80,-1</property>
                                                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                                                     <property name="subclass"></property>
                                                                                                     <property name="tooltip"></property>
-                                                                                                    <property name="value"></property>
+                                                                                                    <property name="value">30</property>
                                                                                                     <property name="window_extra_style"></property>
                                                                                                     <property name="window_name"></property>
                                                                                                     <property name="window_style"></property>
@@ -7690,6 +7690,57 @@
                                                                                     <property name="orient">wxVERTICAL</property>
                                                                                     <property name="permission">none</property>
                                                                                     <event name="OnUpdateUI"></event>
+                                                                                    <object class="sizeritem" expanded="1">
+                                                                                        <property name="border">5</property>
+                                                                                        <property name="flag">wxALL|wxALIGN_CENTER_HORIZONTAL</property>
+                                                                                        <property name="proportion">0</property>
+                                                                                        <object class="wxChoice" expanded="1">
+                                                                                            <property name="bg"></property>
+                                                                                            <property name="choices"></property>
+                                                                                            <property name="context_help"></property>
+                                                                                            <property name="enabled">1</property>
+                                                                                            <property name="fg"></property>
+                                                                                            <property name="font"></property>
+                                                                                            <property name="hidden">0</property>
+                                                                                            <property name="id">SPEAKING_IN_FAVOUR_CHOICES</property>
+                                                                                            <property name="maximum_size">370,-1</property>
+                                                                                            <property name="minimum_size"></property>
+                                                                                            <property name="name">m_inFavourChoice</property>
+                                                                                            <property name="permission">protected</property>
+                                                                                            <property name="pos"></property>
+                                                                                            <property name="selection">0</property>
+                                                                                            <property name="size">370,-1</property>
+                                                                                            <property name="subclass"></property>
+                                                                                            <property name="tooltip">Add country</property>
+                                                                                            <property name="window_extra_style"></property>
+                                                                                            <property name="window_name"></property>
+                                                                                            <property name="window_style"></property>
+                                                                                            <event name="OnChar"></event>
+                                                                                            <event name="OnChoice">OnSpeakingInFavourChoice</event>
+                                                                                            <event name="OnEnterWindow"></event>
+                                                                                            <event name="OnEraseBackground"></event>
+                                                                                            <event name="OnKeyDown"></event>
+                                                                                            <event name="OnKeyUp"></event>
+                                                                                            <event name="OnKillFocus"></event>
+                                                                                            <event name="OnLeaveWindow"></event>
+                                                                                            <event name="OnLeftDClick"></event>
+                                                                                            <event name="OnLeftDown"></event>
+                                                                                            <event name="OnLeftUp"></event>
+                                                                                            <event name="OnMiddleDClick"></event>
+                                                                                            <event name="OnMiddleDown"></event>
+                                                                                            <event name="OnMiddleUp"></event>
+                                                                                            <event name="OnMotion"></event>
+                                                                                            <event name="OnMouseEvents"></event>
+                                                                                            <event name="OnMouseWheel"></event>
+                                                                                            <event name="OnPaint"></event>
+                                                                                            <event name="OnRightDClick"></event>
+                                                                                            <event name="OnRightDown"></event>
+                                                                                            <event name="OnRightUp"></event>
+                                                                                            <event name="OnSetFocus"></event>
+                                                                                            <event name="OnSize"></event>
+                                                                                            <event name="OnUpdateUI"></event>
+                                                                                        </object>
+                                                                                    </object>
                                                                                     <object class="sizeritem" expanded="1">
                                                                                         <property name="border">5</property>
                                                                                         <property name="flag">wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL</property>
@@ -7961,6 +8012,20 @@
                                                                                             </object>
                                                                                         </object>
                                                                                     </object>
+                                                                                </object>
+                                                                            </object>
+                                                                            <object class="sizeritem" expanded="1">
+                                                                                <property name="border">5</property>
+                                                                                <property name="flag">wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALL</property>
+                                                                                <property name="proportion">1</property>
+                                                                                <object class="wxStaticBoxSizer" expanded="1">
+                                                                                    <property name="id">wxID_ANY</property>
+                                                                                    <property name="label">Against</property>
+                                                                                    <property name="minimum_size"></property>
+                                                                                    <property name="name">speakingAgainstSizer</property>
+                                                                                    <property name="orient">wxVERTICAL</property>
+                                                                                    <property name="permission">none</property>
+                                                                                    <event name="OnUpdateUI"></event>
                                                                                     <object class="sizeritem" expanded="1">
                                                                                         <property name="border">5</property>
                                                                                         <property name="flag">wxALL|wxALIGN_CENTER_HORIZONTAL</property>
@@ -7973,21 +8038,21 @@
                                                                                             <property name="fg"></property>
                                                                                             <property name="font"></property>
                                                                                             <property name="hidden">0</property>
-                                                                                            <property name="id">SPEAKING_IN_FAVOUR_CHOICES</property>
+                                                                                            <property name="id">SPEAKING_AGAINST_CHOICES</property>
                                                                                             <property name="maximum_size">370,-1</property>
                                                                                             <property name="minimum_size"></property>
-                                                                                            <property name="name">m_inFavourChoice</property>
+                                                                                            <property name="name">m_againstChoice</property>
                                                                                             <property name="permission">protected</property>
                                                                                             <property name="pos"></property>
                                                                                             <property name="selection">0</property>
                                                                                             <property name="size">370,-1</property>
                                                                                             <property name="subclass"></property>
-                                                                                            <property name="tooltip"></property>
+                                                                                            <property name="tooltip">Add country</property>
                                                                                             <property name="window_extra_style"></property>
                                                                                             <property name="window_name"></property>
                                                                                             <property name="window_style"></property>
                                                                                             <event name="OnChar"></event>
-                                                                                            <event name="OnChoice">OnSpeakingInFavourChoice</event>
+                                                                                            <event name="OnChoice">OnSpeakingAgainstChoice</event>
                                                                                             <event name="OnEnterWindow"></event>
                                                                                             <event name="OnEraseBackground"></event>
                                                                                             <event name="OnKeyDown"></event>
@@ -8012,20 +8077,6 @@
                                                                                             <event name="OnUpdateUI"></event>
                                                                                         </object>
                                                                                     </object>
-                                                                                </object>
-                                                                            </object>
-                                                                            <object class="sizeritem" expanded="1">
-                                                                                <property name="border">5</property>
-                                                                                <property name="flag">wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALL</property>
-                                                                                <property name="proportion">1</property>
-                                                                                <object class="wxStaticBoxSizer" expanded="1">
-                                                                                    <property name="id">wxID_ANY</property>
-                                                                                    <property name="label">Against</property>
-                                                                                    <property name="minimum_size"></property>
-                                                                                    <property name="name">speakingAgainstSizer</property>
-                                                                                    <property name="orient">wxVERTICAL</property>
-                                                                                    <property name="permission">none</property>
-                                                                                    <event name="OnUpdateUI"></event>
                                                                                     <object class="sizeritem" expanded="1">
                                                                                         <property name="border">5</property>
                                                                                         <property name="flag">wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL</property>
@@ -8295,57 +8346,6 @@
                                                                                                     <event name="OnUpdateUI"></event>
                                                                                                 </object>
                                                                                             </object>
-                                                                                        </object>
-                                                                                    </object>
-                                                                                    <object class="sizeritem" expanded="1">
-                                                                                        <property name="border">5</property>
-                                                                                        <property name="flag">wxALL|wxALIGN_CENTER_HORIZONTAL</property>
-                                                                                        <property name="proportion">0</property>
-                                                                                        <object class="wxChoice" expanded="1">
-                                                                                            <property name="bg"></property>
-                                                                                            <property name="choices"></property>
-                                                                                            <property name="context_help"></property>
-                                                                                            <property name="enabled">1</property>
-                                                                                            <property name="fg"></property>
-                                                                                            <property name="font"></property>
-                                                                                            <property name="hidden">0</property>
-                                                                                            <property name="id">SPEAKING_AGAINST_CHOICES</property>
-                                                                                            <property name="maximum_size">370,-1</property>
-                                                                                            <property name="minimum_size"></property>
-                                                                                            <property name="name">m_againstChoice</property>
-                                                                                            <property name="permission">protected</property>
-                                                                                            <property name="pos"></property>
-                                                                                            <property name="selection">0</property>
-                                                                                            <property name="size">370,-1</property>
-                                                                                            <property name="subclass"></property>
-                                                                                            <property name="tooltip"></property>
-                                                                                            <property name="window_extra_style"></property>
-                                                                                            <property name="window_name"></property>
-                                                                                            <property name="window_style"></property>
-                                                                                            <event name="OnChar"></event>
-                                                                                            <event name="OnChoice">OnSpeakingAgainstChoice</event>
-                                                                                            <event name="OnEnterWindow"></event>
-                                                                                            <event name="OnEraseBackground"></event>
-                                                                                            <event name="OnKeyDown"></event>
-                                                                                            <event name="OnKeyUp"></event>
-                                                                                            <event name="OnKillFocus"></event>
-                                                                                            <event name="OnLeaveWindow"></event>
-                                                                                            <event name="OnLeftDClick"></event>
-                                                                                            <event name="OnLeftDown"></event>
-                                                                                            <event name="OnLeftUp"></event>
-                                                                                            <event name="OnMiddleDClick"></event>
-                                                                                            <event name="OnMiddleDown"></event>
-                                                                                            <event name="OnMiddleUp"></event>
-                                                                                            <event name="OnMotion"></event>
-                                                                                            <event name="OnMouseEvents"></event>
-                                                                                            <event name="OnMouseWheel"></event>
-                                                                                            <event name="OnPaint"></event>
-                                                                                            <event name="OnRightDClick"></event>
-                                                                                            <event name="OnRightDown"></event>
-                                                                                            <event name="OnRightUp"></event>
-                                                                                            <event name="OnSetFocus"></event>
-                                                                                            <event name="OnSize"></event>
-                                                                                            <event name="OnUpdateUI"></event>
                                                                                         </object>
                                                                                     </object>
                                                                                 </object>
@@ -9549,7 +9549,7 @@
                                                             <property name="border">5</property>
                                                             <property name="flag">wxEXPAND</property>
                                                             <property name="proportion">1</property>
-                                                            <object class="wxBoxSizer" expanded="0">
+                                                            <object class="wxBoxSizer" expanded="1">
                                                                 <property name="minimum_size"></property>
                                                                 <property name="name">rollCallOutcomeSizer</property>
                                                                 <property name="orient">wxVERTICAL</property>
@@ -9711,7 +9711,7 @@
                                                                                 <property name="border">5</property>
                                                                                 <property name="flag">wxEXPAND|wxTOP|wxBOTTOM</property>
                                                                                 <property name="proportion">0</property>
-                                                                                <object class="wxFlexGridSizer" expanded="0">
+                                                                                <object class="wxFlexGridSizer" expanded="1">
                                                                                     <property name="cols">2</property>
                                                                                     <property name="flexible_direction">wxBOTH</property>
                                                                                     <property name="growablecols">1</property>
@@ -10037,7 +10037,7 @@
                                                                                             <property name="bg"></property>
                                                                                             <property name="context_help"></property>
                                                                                             <property name="enabled">0</property>
-                                                                                            <property name="fg"></property>
+                                                                                            <property name="fg">wxSYS_COLOUR_GRAYTEXT</property>
                                                                                             <property name="font"></property>
                                                                                             <property name="hidden">0</property>
                                                                                             <property name="id">wxID_ANY</property>
@@ -10088,7 +10088,7 @@
                                                                                             <property name="bg"></property>
                                                                                             <property name="context_help"></property>
                                                                                             <property name="enabled">0</property>
-                                                                                            <property name="fg"></property>
+                                                                                            <property name="fg">wxSYS_COLOUR_GRAYTEXT</property>
                                                                                             <property name="font"></property>
                                                                                             <property name="hidden">0</property>
                                                                                             <property name="id">wxID_ANY</property>
@@ -10199,7 +10199,7 @@
                                                                                                     <property name="bg"></property>
                                                                                                     <property name="context_help"></property>
                                                                                                     <property name="enabled">0</property>
-                                                                                                    <property name="fg">0,79,0</property>
+                                                                                                    <property name="fg">wxSYS_COLOUR_GRAYTEXT</property>
                                                                                                     <property name="font">Sans,90,92,10,74,0</property>
                                                                                                     <property name="hidden">0</property>
                                                                                                     <property name="id">wxID_ANY</property>
@@ -10250,7 +10250,7 @@
                                                                                                     <property name="bg"></property>
                                                                                                     <property name="context_help"></property>
                                                                                                     <property name="enabled">0</property>
-                                                                                                    <property name="fg"></property>
+                                                                                                    <property name="fg">wxSYS_COLOUR_GRAYTEXT</property>
                                                                                                     <property name="font"></property>
                                                                                                     <property name="hidden">0</property>
                                                                                                     <property name="id">wxID_ANY</property>
@@ -10301,7 +10301,7 @@
                                                                                                     <property name="bg"></property>
                                                                                                     <property name="context_help"></property>
                                                                                                     <property name="enabled">0</property>
-                                                                                                    <property name="fg">187,14,14</property>
+                                                                                                    <property name="fg">wxSYS_COLOUR_GRAYTEXT</property>
                                                                                                     <property name="font">Sans,90,92,10,74,0</property>
                                                                                                     <property name="hidden">0</property>
                                                                                                     <property name="id">wxID_ANY</property>
@@ -11029,7 +11029,7 @@
                     <property name="flag">wxEXPAND</property>
                     <property name="proportion">0</property>
                     <object class="wxPanel" expanded="1">
-                        <property name="bg"></property>
+                        <property name="bg">wxSYS_COLOUR_BACKGROUND</property>
                         <property name="context_help"></property>
                         <property name="enabled">1</property>
                         <property name="fg"></property>
@@ -11197,7 +11197,7 @@
                 </object>
             </object>
             <object class="wxStatusBar" expanded="1">
-                <property name="bg"></property>
+                <property name="bg">wxSYS_COLOUR_BACKGROUND</property>
                 <property name="context_help"></property>
                 <property name="enabled">1</property>
                 <property name="fg"></property>
@@ -11605,7 +11605,7 @@
                                 <property name="name">ncInstructions</property>
                                 <property name="permission">protected</property>
                                 <property name="pos"></property>
-                                <property name="size">350,70</property>
+                                <property name="size">350,80</property>
                                 <property name="style">wxST_NO_AUTORESIZE</property>
                                 <property name="subclass"></property>
                                 <property name="tooltip"></property>
@@ -12752,7 +12752,7 @@
                 </object>
             </object>
         </object>
-        <object class="Dialog" expanded="1">
+        <object class="Dialog" expanded="0">
             <property name="bg"></property>
             <property name="center"></property>
             <property name="context_help"></property>
@@ -13170,7 +13170,7 @@
                 </object>
             </object>
         </object>
-        <object class="Dialog" expanded="0">
+        <object class="Dialog" expanded="1">
             <property name="bg"></property>
             <property name="center"></property>
             <property name="context_help"></property>
@@ -15308,7 +15308,7 @@
                 </object>
             </object>
         </object>
-        <object class="Dialog" expanded="0">
+        <object class="Dialog" expanded="1">
             <property name="bg"></property>
             <property name="center"></property>
             <property name="context_help"></property>

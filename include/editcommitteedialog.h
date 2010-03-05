@@ -21,7 +21,7 @@
 #ifndef __editcommitteedialog__
 #define __editcommitteedialog__
 
-#include "gui.h"
+#include "../src/gui.h"
 #include "newcommitteedialog.h"
 
 /** Implementing GUI_EditCommitteeDialog */
