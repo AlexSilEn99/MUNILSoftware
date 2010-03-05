@@ -12,7 +12,7 @@
 	<string>wxMUN @PACKAGE_VERSION@, Copyright (C) 2008-2010  Geert-Jan Besjes; website: http://wxmun.unitednetherlands.org</string>
 
 	<key>CFBundleIconFile</key>
-	<string>wxmun.icns</string>
+	<string>wxMUN.icns</string>
 
 	<key>CFBundleIdentifier</key>
 	<string>org.unitednetherlands.wxmun</string>

@@ -177,6 +177,8 @@ AM_CONDITIONAL(MACAPPBUNDLE, [test "$macappbundle" = "yes"])
 
 AC_CONFIG_FILES([Makefile 
 		src/Makefile 
+		src/resources/Makefile 
+		src/resources/icons/Makefile 
 		include/Makefile 
 		doc/Makefile
 		data/Makefile 

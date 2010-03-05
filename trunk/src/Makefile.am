@@ -34,6 +34,7 @@ $(top_builddir)/wxMUN.app/Contents/MacOS/wxmun$(EXEEXT): wxmun
 	mkdir -p $(top_builddir)/wxMUN.app/Contents/MacOS
 	mkdir -p $(top_builddir)/wxMUN.app/Contents/SharedSupport/resources
 	mkdir -p $(top_builddir)/wxMUN.app/Contents/Resources
-	$(MAKE) -C ../data/resources mac-copy-resources
-	$(MAKE) -C ../images/resources mac-copy-resources
+	$(MAKE) -C ../data mac-copy-resources
+	$(MAKE) -C ../images mac-copy-resources
+	$(MAKE) -C ../doc mac-copy-resources
 	cp -f wxmun $(top_builddir)/wxMUN.app/Contents/MacOS/wxmun
