@@ -1566,7 +1566,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	m_viewMenu = new wxMenu();
 	wxMenuItem* m_fullscreenMenu;
-	m_fullscreenMenu = new wxMenuItem( m_viewMenu, wxID_ANY, wxString( _("&Fullscreen") ) + wxT('\t') + wxT("F11"), wxEmptyString, wxITEM_NORMAL );
+	m_fullscreenMenu = new wxMenuItem( m_viewMenu, wxID_ZOOM_FIT, wxString( _("&Fullscreen") ) + wxT('\t') + wxT("Ctrl+F"), wxEmptyString, wxITEM_NORMAL );
 	m_viewMenu->Append( m_fullscreenMenu );
 	
 	m_menubar->Append( m_viewMenu, _("&View") );
@@ -1583,12 +1583,11 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	m_manageMenu->Append( -1, _("&Select topic"), m_topicSelectorMenu );
 	
-	m_countriesPresentMenuItem = new wxMenuItem( m_manageMenu, COUNTRIES_PRESENT_MENU, wxString( _("&Countries present") ) + wxT('\t') + wxT("Ctrl+Shift+C"), wxEmptyString, wxITEM_NORMAL );
+	m_countriesPresentMenuItem = new wxMenuItem( m_manageMenu, wxID_SORT_ASCENDING, wxString( _("&Countries present") ) + wxT('\t') + wxT("Ctrl+Shift+C"), wxEmptyString, wxITEM_NORMAL );
 	m_manageMenu->Append( m_countriesPresentMenuItem );
 	m_countriesPresentMenuItem->Enable( false );
 	
-	wxMenuItem* m_votingProcedureMenuItem;
-	m_votingProcedureMenuItem = new wxMenuItem( m_manageMenu, VOTING_PROCEDURE_MENU, wxString( _("Start &voting procedure") ) + wxT('\t') + wxT("Ctrl+Shift+V"), wxEmptyString, wxITEM_NORMAL );
+	m_votingProcedureMenuItem = new wxMenuItem( m_manageMenu, wxID_FORWARD, wxString( _("Start &voting procedure") ) + wxT('\t') + wxT("Ctrl+Shift+V"), wxEmptyString, wxITEM_NORMAL );
 	m_manageMenu->Append( m_votingProcedureMenuItem );
 	m_votingProcedureMenuItem->Enable( false );
 	
@@ -1596,15 +1595,15 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	m_committeeMenu = new wxMenu();
 	wxMenuItem* m_newCommitteeMenuItem;
-	m_newCommitteeMenuItem = new wxMenuItem( m_committeeMenu, wxID_ANY, wxString( _("&New") ) + wxT('\t') + wxT("Ctrl+N"), _("Create a new committee"), wxITEM_NORMAL );
+	m_newCommitteeMenuItem = new wxMenuItem( m_committeeMenu, wxID_NEW, wxString( _("&New") ) + wxT('\t') + wxT("Ctrl+N"), _("Create a new committee"), wxITEM_NORMAL );
 	m_committeeMenu->Append( m_newCommitteeMenuItem );
 	
 	wxMenuItem* m_loadCommitteeMenuItem;
-	m_loadCommitteeMenuItem = new wxMenuItem( m_committeeMenu, wxID_ANY, wxString( _("&Load") ) + wxT('\t') + wxT("Ctrl+L"), _("Load an existing committee to start a new session. Load a state file if you want to resume debate!"), wxITEM_NORMAL );
+	m_loadCommitteeMenuItem = new wxMenuItem( m_committeeMenu, wxID_OPEN, wxString( _("&Load") ) + wxT('\t') + wxT("Ctrl+L"), _("Load an existing committee to start a new session. Load a state file if you want to resume debate!"), wxITEM_NORMAL );
 	m_committeeMenu->Append( m_loadCommitteeMenuItem );
 	
 	wxMenuItem* m_editCommitteeMenuItem;
-	m_editCommitteeMenuItem = new wxMenuItem( m_committeeMenu, wxID_ANY, wxString( _("&Edit") ) + wxT('\t') + wxT("Ctrl+E"), _("Edit a committee file"), wxITEM_NORMAL );
+	m_editCommitteeMenuItem = new wxMenuItem( m_committeeMenu, wxID_EDIT, wxString( _("&Edit") ) + wxT('\t') + wxT("Ctrl+E"), _("Edit a committee file"), wxITEM_NORMAL );
 	m_committeeMenu->Append( m_editCommitteeMenuItem );
 	
 	m_menubar->Append( m_committeeMenu, _("&Committee") );

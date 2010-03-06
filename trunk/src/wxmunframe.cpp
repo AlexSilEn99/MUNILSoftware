@@ -591,7 +591,7 @@ void wxMUNFrame::StartSingleSpeaker(wxString name)
 
 	wxStaticText *timeLeft = (wxStaticText*) wxWindow::FindWindowById(SINGLE_SPEAKER_TIME_LEFT);
 	timeLeft->SetLabel(wxString::Format(wxT("%02d:%02d"), min, sec));
-	timeLeft->SetForegroundColour(*wxBLACK);
+	timeLeft->SetForegroundColour( wxColour( wxSYS_COLOUR_WINDOWTEXT) );
 
 	wxGauge* progressBar = (wxGauge*) wxWindow::FindWindowById(SINGLE_SPEAKER_GAUGE);
 	progressBar->SetValue(0);
@@ -779,7 +779,7 @@ void wxMUNFrame::StartNextGSLSpeaker(wxListBox *GSLList){
 
 	wxStaticText *timeLeft = (wxStaticText*) wxWindow::FindWindowById(GSL_TIME_LEFT);
 	timeLeft->SetLabel(wxString::Format(wxT("%02d:%02d"), minutes, seconds));
-	timeLeft->SetForegroundColour(*wxBLACK);
+	timeLeft->SetForegroundColour( wxColour( wxSYS_COLOUR_WINDOWTEXT) );
 
 	wxGauge* progressBar = (wxGauge*) wxWindow::FindWindowById(GSL_GAUGE);
 	progressBar->SetValue(0);
@@ -1203,7 +1203,7 @@ void wxMUNFrame::OnModCaucusCountrySelect( wxCommandEvent& event ){
 
 	wxStaticText *STtimeLeft = (wxStaticText*) wxWindow::FindWindowById(MOD_CAUCUS_SPEAKER_TIME_LEFT);
 	STtimeLeft->SetLabel(wxString::Format(wxT("%02d:%02d"), minutes, seconds));
-	STtimeLeft->SetForegroundColour(*wxBLACK);
+	STtimeLeft->SetForegroundColour( wxColour( wxSYS_COLOUR_WINDOWTEXT) );
 
 	wxGauge* STprogressBar = (wxGauge*) wxWindow::FindWindowById(MOD_CAUCUS_SPEAKER_GAUGE);
 	STprogressBar->SetValue(0);
@@ -1513,8 +1513,7 @@ void wxMUNFrame::LoadSetLabels()
 	if(wxGetApp().session()->GSL()->size() > 0 && wxGetApp().session()->committee()->numPresent() > 0)
 		EnableGSLNextButton();
 		
-	wxMenuItem *presentMenu = m_manageMenu->FindItem(COUNTRIES_PRESENT_MENU);
-	presentMenu->Enable(true);
+	m_countriesPresentMenuItem->Enable(true);
 		
 	wxStaticText *presentLabel = (wxStaticText*) wxWindow::FindWindowById(MEMBERS_PRESENT);	
 	presentLabel->SetLabel(wxString::Format(wxT("%i / %i  (1/2 = %i; 2/3 = %i)"), wxGetApp().session()->committee()->numPresent(), 
@@ -1522,7 +1521,7 @@ void wxMUNFrame::LoadSetLabels()
 					(wxGetApp().session()->committee()->numPresent() == 0) ? 0 : 1 + wxGetApp().session()->committee()->numPresent()/2, 
 					(int) ceil((float) wxGetApp().session()->committee()->numPresent()*(2.0/3.0))  ));
 	
-	wxMenuItem *votingMenu = this->m_manageMenu->FindItem(VOTING_PROCEDURE_MENU); 
+	//wxMenuItem *votingMenu = this->m_manageMenu->FindItem(VOTING_PROCEDURE_MENU); 
 	
 	if(wxGetApp().session()->committee()->numPresent() == 0){
 		presentLabel->SetForegroundColour(DARK_RED);
@@ -1530,15 +1529,15 @@ void wxMUNFrame::LoadSetLabels()
 		presFont.SetWeight(wxFONTWEIGHT_BOLD);
 		presentLabel->SetFont(presFont);
 
-		votingMenu->Enable(false);
+		m_votingProcedureMenuItem->Enable(false);
 	} else {
-		presentLabel->SetForegroundColour(*wxBLACK);
+		presentLabel->SetForegroundColour(wxColour( wxSYS_COLOUR_WINDOWTEXT));
 		wxFont presFont = presentLabel->GetFont();
 		presFont.SetWeight(wxFONTWEIGHT_NORMAL);
 		presentLabel->SetFont(presFont);
 
 		if(wxGetApp().session()->topicChosen())
-			votingMenu->Enable(true);
+			m_votingProcedureMenuItem->Enable(true);
 	}
 			
 	wxMenuItem *tA = this->m_topicSelectorMenu->FindItem(TOPIC_A_MENU); 
@@ -1699,14 +1698,15 @@ void wxMUNFrame::OnTopicAMenuSelect ( wxCommandEvent& event ){
 	topic_label->SetLabel(wxGetApp().session()->committee()->topicA());
 
 	wxGetApp().session()->setTopic(wxGetApp().session()->committee()->topicA());
-	
+
+//TODO: following should move to shared function with OnTopicBSelect!	
+
 	//clear GSL
 	wxListBox *GSLList = (wxListBox*) wxWindow::FindWindowById(GSL_LIST);
 	GSLList->Clear();
 
 	// if roll call locked this, bring it back
-	wxMenuItem *presentMenu = m_manageMenu->FindItem(COUNTRIES_PRESENT_MENU);
-	presentMenu->Enable(true);
+	m_countriesPresentMenuItem->Enable(true);
 	
 	m_GSLpanel->Enable(true); m_singleSpeakerPanel->Enable(true); m_procVotingPanel->Enable(true);
 	m_modCaucusPanel->Enable(true); m_unModCaucusPanel->Enable(true); 
@@ -1721,8 +1721,8 @@ void wxMUNFrame::OnTopicAMenuSelect ( wxCommandEvent& event ){
 		EnableCaucusCtrls();
 		EnableSingleSpeakerCtrls();
 		
-		wxMenuItem *votingMenu = this->m_manageMenu->FindItem(VOTING_PROCEDURE_MENU); 
-		votingMenu->Enable(true);
+		//wxMenuItem *votingMenu = this->m_manageMenu->FindItem(VOTING_PROCEDURE_MENU); 
+		m_votingProcedureMenuItem->Enable(true);
 	}
 	m_mainauinotebook->SetSelection(m_mainauinotebook->GetPageIndex(m_GSLpanel));
 
@@ -1747,14 +1747,15 @@ void wxMUNFrame::OnTopicBMenuSelect ( wxCommandEvent& event ){
 
 	wxGetApp().session()->setTopic(wxGetApp().session()->committee()->topicB());
 	
+//TODO: following should move to shared function with OnTopicASelect!	
+
 	//clear GSL
 	wxListBox *GSLList = (wxListBox*) wxWindow::FindWindowById(GSL_LIST);
 	GSLList->Clear();	
 
 	// if roll call locked this, bring it back
-	wxMenuItem *presentMenu = m_manageMenu->FindItem(COUNTRIES_PRESENT_MENU);
-	presentMenu->Enable(true);
-	
+	m_countriesPresentMenuItem->Enable(true);	
+
 	m_GSLpanel->Enable(true); m_singleSpeakerPanel->Enable(true); m_procVotingPanel->Enable(true);
 	m_modCaucusPanel->Enable(true); m_unModCaucusPanel->Enable(true); 
 	//m_rollCallVotePanel->Enable(false);
@@ -1768,8 +1769,8 @@ void wxMUNFrame::OnTopicBMenuSelect ( wxCommandEvent& event ){
 		EnableCaucusCtrls();
 		EnableSingleSpeakerCtrls();
 		
-		wxMenuItem *votingMenu = this->m_manageMenu->FindItem(VOTING_PROCEDURE_MENU); 
-		votingMenu->Enable(true);
+		//wxMenuItem *votingMenu = this->m_manageMenu->FindItem(VOTING_PROCEDURE_MENU); 
+		m_votingProcedureMenuItem->Enable(true);
 	}
 	m_mainauinotebook->SetSelection(m_mainauinotebook->GetPageIndex(m_GSLpanel));
 
@@ -1852,7 +1853,7 @@ void wxMUNFrame::OnCountriesPresentMenuSelect( wxCommandEvent& event){
 						(nPresent == 0) ? 0 : 1 + nPresent/2, 
 						(int) ceil((float) nPresent*(2.0/3.0))  ));
 
-	wxMenuItem *votingMenu = this->m_manageMenu->FindItem(VOTING_PROCEDURE_MENU); 
+	//wxMenuItem *votingMenu = this->m_manageMenu->FindItem(VOTING_PROCEDURE_MENU); 
 	
 	if(nPresent == 0){
 		presentLabel->SetForegroundColour(DARK_RED);
@@ -1860,14 +1861,14 @@ void wxMUNFrame::OnCountriesPresentMenuSelect( wxCommandEvent& event){
 		presFont.SetWeight(wxFONTWEIGHT_BOLD);
 		presentLabel->SetFont(presFont);
 
-		votingMenu->Enable(false);
+		m_votingProcedureMenuItem->Enable(false);
 	} else {
-		presentLabel->SetForegroundColour(*wxBLACK);
+		presentLabel->SetForegroundColour(wxColour( wxSYS_COLOUR_WINDOWTEXT));
 		wxFont presFont = presentLabel->GetFont();
 		presFont.SetWeight(wxFONTWEIGHT_NORMAL);
 		presentLabel->SetFont(presFont);
 
-		votingMenu->Enable();
+		m_votingProcedureMenuItem->Enable();
 	}
 	
 	wxGetApp().session()->saveState();	
@@ -2220,11 +2221,10 @@ void wxMUNFrame::OnStartVotingProcedureMenuSelect( wxCommandEvent& event)
 
 	StopAllSpeakers();
 
-	wxMenuItem *presentMenu = m_manageMenu->FindItem(COUNTRIES_PRESENT_MENU);
-	presentMenu->Enable(false);
-	
-	wxMenuItem *votingMenu = m_manageMenu->FindItem(VOTING_PROCEDURE_MENU); 
-	votingMenu->Enable(false);
+	m_countriesPresentMenuItem->Enable(false);	
+
+	//wxMenuItem *votingMenu = m_manageMenu->FindItem(VOTING_PROCEDURE_MENU); 
+	m_votingProcedureMenuItem->Enable(false);
 	
 	//m_GSLpanel->Enable(false); m_singleSpeakerPanel->Enable(false);
 	//m_modCaucusPanel->Enable(false); m_unModCaucusPanel->Enable(false);
