@@ -22,8 +22,7 @@ static wxFBContextSensitiveHelpSetter s_wxFBSetTheHelpProvider;
 
 GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
 {
-	this->SetSizeHints( wxSize( -1,-1 ), wxDefaultSize );
-	this->SetExtraStyle( wxFRAME_EX_METAL );
+	this->SetSizeHints( wxSize( 800,600 ), wxDefaultSize );
 	
 	wxBoxSizer* containerSizer;
 	containerSizer = new wxBoxSizer( wxVERTICAL );
