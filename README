@@ -1,3 +1,17 @@
+Linux missing icons on buttons and menuitems
+--------------------------------------------
+
+Using KDE and a GTK theme like qtcurve? Set 
+
+gtk-menu-images = 1
+gtk-button-images = 1
+
+in the gtkrc file the theme uses, e.g. /usr/share/themes/QtCurve/gtk-2.0/gtkrc.
+
+On a GNOME prior to 2.28 this works the same: add it to ~/.gtkrc. 
+For newer GNOMEs, start gconf-editor and edit:
+/desktop/gnome/interfaces/buttons_have_icons, and menus_have_icons (under the same root)
+
 Win32 build
 -----------
 

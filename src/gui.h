@@ -119,22 +119,21 @@
 #define ROLL_CALL_SECOND_ROUND_CHOICES 1070
 #define TOPIC_A_MENU 1071
 #define TOPIC_B_MENU 1072
-#define COUNTRIES_PRESENT_MENU 1073
-#define VOTING_PROCEDURE_MENU 1074
-#define ID_MEMBERS_CHECK_LIST 1075
-#define ID_OBSERVERS_CHECK_LIST 1076
-#define COUNTRIES_PRESENT 1077
-#define ID_EDIT_MEMBERS_CHECK_LIST 1078
-#define ID_EDIT_OBSERVERS_CHECK_LIST 1079
-#define ABOUT_LOGO 1080
-#define ABOUT_DESCRIPTION 1081
-#define ABOUT_NAME 1082
-#define ABOUT_VERSION 1083
-#define ABOUT_AUTHOR 1084
-#define ABOUT_EMAIL 1085
-#define ABOUT_LICENSE 1086
-#define UNL_LOGO_BITMAP 1087
-#define YIELD_TO_DELEGATE_CHOICES 1088
+#define wxID_SORT_ASCENDING 1073
+#define ID_MEMBERS_CHECK_LIST 1074
+#define ID_OBSERVERS_CHECK_LIST 1075
+#define COUNTRIES_PRESENT 1076
+#define ID_EDIT_MEMBERS_CHECK_LIST 1077
+#define ID_EDIT_OBSERVERS_CHECK_LIST 1078
+#define ABOUT_LOGO 1079
+#define ABOUT_DESCRIPTION 1080
+#define ABOUT_NAME 1081
+#define ABOUT_VERSION 1082
+#define ABOUT_AUTHOR 1083
+#define ABOUT_EMAIL 1084
+#define ABOUT_LICENSE 1085
+#define UNL_LOGO_BITMAP 1086
+#define YIELD_TO_DELEGATE_CHOICES 1087
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class GUI_MainFrame
@@ -353,6 +352,8 @@ class GUI_MainFrame : public wxFrame
 		wxMenuBar* m_menubar;
 		wxMenu* m_fileMenu;
 		wxMenu* m_viewMenu;
+		wxMenuItem* m_countriesPresentMenuItem;
+		wxMenuItem* m_votingProcedureMenuItem;
 		wxMenu* m_committeeMenu;
 		wxMenu* m_helpMenu;
 		
@@ -439,7 +440,6 @@ class GUI_MainFrame : public wxFrame
 		wxMenu* m_topicSelectorMenu;
 		wxMenuItem* m_topicAMenuItem;
 		wxMenuItem* m_topicBMenuItem;
-		wxMenuItem* m_countriesPresentMenuItem;
 		GUI_MainFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1000,780 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		~GUI_MainFrame();
 		void m_GSLsplitterOnIdle( wxIdleEvent& )

@@ -18,7 +18,7 @@
         <property name="relative_path">1</property>
         <property name="use_enum">0</property>
         <property name="use_microsoft_bom">0</property>
-        <object class="Frame" expanded="0">
+        <object class="Frame" expanded="1">
             <property name="bg"></property>
             <property name="center"></property>
             <property name="context_help"></property>
@@ -79,7 +79,7 @@
                     <property name="border">5</property>
                     <property name="flag">wxEXPAND</property>
                     <property name="proportion">1</property>
-                    <object class="wxPanel" expanded="1">
+                    <object class="wxPanel" expanded="0">
                         <property name="bg">wxSYS_COLOUR_BACKGROUND</property>
                         <property name="context_help"></property>
                         <property name="enabled">1</property>
@@ -632,7 +632,7 @@
                                 <property name="border">5</property>
                                 <property name="flag">wxEXPAND</property>
                                 <property name="proportion">1</property>
-                                <object class="wxBoxSizer" expanded="1">
+                                <object class="wxBoxSizer" expanded="0">
                                     <property name="minimum_size"></property>
                                     <property name="name">bSizer42</property>
                                     <property name="orient">wxHORIZONTAL</property>
@@ -11028,7 +11028,7 @@
                     <property name="border">5</property>
                     <property name="flag">wxEXPAND</property>
                     <property name="proportion">0</property>
-                    <object class="wxPanel" expanded="1">
+                    <object class="wxPanel" expanded="0">
                         <property name="bg">wxSYS_COLOUR_BACKGROUND</property>
                         <property name="context_help"></property>
                         <property name="enabled">1</property>
@@ -11350,12 +11350,12 @@
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help"></property>
-                        <property name="id">wxID_ANY</property>
+                        <property name="id">wxID_ZOOM_FIT</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;Fullscreen</property>
                         <property name="name">m_fullscreenMenu</property>
                         <property name="permission">none</property>
-                        <property name="shortcut">F11</property>
+                        <property name="shortcut">Ctrl+F</property>
                         <property name="unchecked_bitmap"></property>
                         <event name="OnMenuSelection">ToggleFullScreen</event>
                         <event name="OnUpdateUI"></event>
@@ -11365,7 +11365,7 @@
                     <property name="label">&amp;Manage debate</property>
                     <property name="name">m_manageMenu</property>
                     <property name="permission">public</property>
-                    <object class="submenu" expanded="0">
+                    <object class="submenu" expanded="1">
                         <property name="label">&amp;Select topic</property>
                         <property name="name">m_topicSelectorMenu</property>
                         <property name="permission">public</property>
@@ -11405,11 +11405,11 @@
                         <property name="checked">0</property>
                         <property name="enabled">0</property>
                         <property name="help"></property>
-                        <property name="id">COUNTRIES_PRESENT_MENU</property>
+                        <property name="id">wxID_SORT_ASCENDING</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;Countries present</property>
                         <property name="name">m_countriesPresentMenuItem</property>
-                        <property name="permission">public</property>
+                        <property name="permission">protected</property>
                         <property name="shortcut">Ctrl+Shift+C</property>
                         <property name="unchecked_bitmap"></property>
                         <event name="OnMenuSelection">OnCountriesPresentMenuSelect</event>
@@ -11420,11 +11420,11 @@
                         <property name="checked">0</property>
                         <property name="enabled">0</property>
                         <property name="help"></property>
-                        <property name="id">VOTING_PROCEDURE_MENU</property>
+                        <property name="id">wxID_FORWARD</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">Start &amp;voting procedure</property>
                         <property name="name">m_votingProcedureMenuItem</property>
-                        <property name="permission">none</property>
+                        <property name="permission">protected</property>
                         <property name="shortcut">Ctrl+Shift+V</property>
                         <property name="unchecked_bitmap"></property>
                         <event name="OnMenuSelection">OnStartVotingProcedureMenuSelect</event>
@@ -11440,7 +11440,7 @@
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">Create a new committee</property>
-                        <property name="id">wxID_ANY</property>
+                        <property name="id">wxID_NEW</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;New</property>
                         <property name="name">m_newCommitteeMenuItem</property>
@@ -11455,7 +11455,7 @@
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">Load an existing committee to start a new session. Load a state file if you want to resume debate!</property>
-                        <property name="id">wxID_ANY</property>
+                        <property name="id">wxID_OPEN</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;Load</property>
                         <property name="name">m_loadCommitteeMenuItem</property>
@@ -11470,7 +11470,7 @@
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">Edit a committee file</property>
-                        <property name="id">wxID_ANY</property>
+                        <property name="id">wxID_EDIT</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;Edit</property>
                         <property name="name">m_editCommitteeMenuItem</property>
