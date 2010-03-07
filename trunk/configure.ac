@@ -99,6 +99,83 @@ if test "$buildmain" = "yes"; then
 
 	AC_CACHE_SAVE
 
+	# Check for windres on MinGW builds
+	# ---------------------------------
+
+	# Small function to filter the flags for windres,
+	# so that only includes and defines are passed to windres.
+	parseflags() {
+		WINDRESFLAGS=""
+        	for opt in "$@"
+        	do
+        	        case "$opt" in
+        	        	-I*)
+        	          	      WINDRESFLAGS="$WINDRESFLAGS --include-dir=${opt#-I}"
+               	        	 ;;
+               	 	-D*)
+               	        	WINDRESFLAGS="$WINDRESFLAGS $opt"
+                        ;;
+                	esac
+        	done
+  	}
+
+	WINDRESFLAGS=
+	use_resourcefile=
+	AC_MSG_CHECKING([whether to use windres])
+	if echo $host_os | grep "cygwin\|mingw" > /dev/null 2>&1; then
+		if echo $WX_CPPFLAGS | grep __WXMSW__ > /dev/null 2>&1; then
+	                if test -z "$host_alias"; then
+	                        hostaliaswindres=
+	                else
+	                        hostaliaswindres="$host_alias-windres"
+	                fi
+	                AC_MSG_RESULT([yes])
+       	       	 	AC_PATH_PROGS([WINDRES], [windres $hostaliaswindres $host_os-windres])
+       	         	if test "x$WINDRES" = "x"; then
+                        	AC_MSG_ERROR([windres could not be found, please make sure this program is within your path.])
+                	fi
+                	use_resourcefile=true
+                	parseflags $WX_CPPFLAGS
+        	else
+                	AC_MSG_RESULT([no])
+        	fi
+  	else
+        	AC_MSG_RESULT([no])
+	fi
+	AC_SUBST(WINDRES)
+	AC_SUBST(WINDRESFLAGS)
+
+	# version.rc.in needs a major, minor and micro version number
+	vnumber=${PACKAGE_VERSION%-*}
+	PACKAGE_VERSION_MAJOR=${vnumber%%.*}
+	vnumber=${vnumber#$PACKAGE_VERSION_MAJOR}
+	vnumber=${vnumber#.}
+	PACKAGE_VERSION_MINOR=${vnumber%%.*}
+	vnumber=${vnumber#$PACKAGE_VERSION_MINOR}
+	vnumber=${vnumber#.}
+	PACKAGE_VERSION_MICRO=${vnumber%%.*}
+	vnumber=${vnumber#$PACKAGE_VERSION_MICRO}
+	vnumber=${vnumber#.}
+	PACKAGE_VERSION_NANO=${vnumber%%.*}
+
+	if test -z "$PACKAGE_VERSION_MAJOR"; then
+		PACKAGE_VERSION_MAJOR=0
+	fi
+	if test -z "$PACKAGE_VERSION_MINOR"; then
+		PACKAGE_VERSION_MINOR=0
+	fi
+	if test -z "$PACKAGE_VERSION_MICRO"; then
+		PACKAGE_VERSION_MICRO=0
+	fi
+	if test -z "$PACKAGE_VERSION_NANO"; then
+		PACKAGE_VERSION_NANO=0
+	fi
+
+	AC_SUBST(PACKAGE_VERSION_MAJOR)
+	AC_SUBST(PACKAGE_VERSION_MINOR)
+	AC_SUBST(PACKAGE_VERSION_MICRO)
+	AC_SUBST(PACKAGE_VERSION_NANO)
+
 	# Create application bundle on OS X
 	# ----------------------------
 
@@ -107,6 +184,21 @@ if test "$buildmain" = "yes"; then
 	else
 	    macappbundle="no"
 	fi
+
+	# Installer creation under Windows
+	# --------------------------------
+
+	# Create installer under Windows
+	if echo $host_os | grep "mingw" > /dev/null 2>&1; then
+		makensisscript="yes"
+	else
+		makensisscript="no"
+	fi
+
+	if echo $host_os | grep "mingw" > /dev/null 2>&1; then
+		AC_CONFIG_FILES(data/install.nsi)
+		AC_CONFIG_FILES(data/makezip.sh)
+	fi	
 
 fi
 
@@ -174,18 +266,22 @@ AC_SUBST(WXMUN_LINGUAS_MO)
 AM_CONDITIONAL([LOCALES_ONLY], [test "$localesonly" = "yes"])
 AM_CONDITIONAL([LOCALES], [test "$locales" = "yes"])
 AM_CONDITIONAL(MACAPPBUNDLE, [test "$macappbundle" = "yes"])
+AM_CONDITIONAL([MINGW], [echo $host_os | grep "mingw"])
+AM_CONDITIONAL(MAKENSISSCRIPT, [test "$makensisscript" = "yes"])
+AM_CONDITIONAL(USE_RESOURCEFILE, test "$use_resourcefile" = "true")
 
 AC_CONFIG_FILES([Makefile 
 		src/Makefile 
 		src/resources/Makefile 
-		src/resources/icons/Makefile 
+		src/resources/16x16/Makefile 
+		src/resources/32x32/Makefile 
+		src/resources/MacInfo.plist
+		src/resources/version.rc
 		include/Makefile 
 		doc/Makefile
 		data/Makefile 
 		data/flags/Makefile 
 		images/Makefile 
-		MSVC/Makefile 
 		m4/Makefile
-		po/Makefile
-		MacInfo.plist ])
+		po/Makefile])
 AC_OUTPUT
