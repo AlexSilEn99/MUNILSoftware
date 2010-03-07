@@ -2,22 +2,22 @@ SUBDIRS = 16x16 32x32 flags
 
 resourcesdir = $(pkgdatadir)/resources
 
-dist_resources_DATA = 
+dist_resources_DATA = countries.xml
 
 resources48dir = $(pkgdatadir)/resources/48x48
-dist_resources48_DATA = 48x48/wxMUN.png
+dist_resources48_DATA = 48x48/wxmun.png
 
 if USE_RESOURCEFILE
-nodist_noinst_DATA = wxMUN.o
+nodist_noinst_DATA = wxmun.o
 
-wxMUN.o: $(srcdir)/wxMUN.rc version.rc
+wxmun.o: $(srcdir)/wxmun.rc version.rc
 	@if [ -f $@~ ]; then rm $@~; fi
-	@WINDRES@ --include-dir=. --include-dir=$(srcdir) $(WINDRESFLAGS) $(srcdir)/wxMUN.rc -D GNU_WINDRES -D HAS_VERSIONRC $@~ || rm $@~
+	@WINDRES@ --include-dir=. --include-dir=$(srcdir) $(WINDRESFLAGS) $(srcdir)/wxmun.rc -D GNU_WINDRES -D HAS_VERSIONRC $@~ || rm $@~
 	@if [ -f $@ ]; then rm $@; fi
 	mv $@~ $@
 endif
 
-dist_noinst_DATA = wxMUN.rc wxMUN.ico \
+dist_noinst_DATA = wxmun.rc wxMUN.ico \
                 wxMUN.icns MacInfo.plist.in \
                 version.rc.in 
 
@@ -41,11 +41,11 @@ mac-copy-resources: $(dist_resources_DATA)
 endif
 
 pixmapsdir = $(datadir)/pixmaps
-pixmaps_DATA = 48x48/wxMUN.png
+pixmaps_DATA = 48x48/wxmun.png
 
 hicolorapps16dir = $(datadir)/icons/hicolor/16x16/apps
-hicolorapps16_DATA = 16x16/wxMUN.png
+hicolorapps16_DATA = 16x16/wxmun.png
 hicolorapps32dir = $(datadir)/icons/hicolor/32x32/apps
-hicolorapps32_DATA = 32x32/wxMUN.png
+hicolorapps32_DATA = 32x32/wxmun.png
 hicolorapps48dir = $(datadir)/icons/hicolor/48x48/apps
-hicolorapps48_DATA = 48x48/wxMUN.png
+hicolorapps48_DATA = 48x48/wxmun.png

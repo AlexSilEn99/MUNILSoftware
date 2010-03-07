@@ -275,12 +275,12 @@ AC_CONFIG_FILES([Makefile
 		src/resources/Makefile 
 		src/resources/16x16/Makefile 
 		src/resources/32x32/Makefile 
+		src/resources/flags/Makefile 
 		src/resources/MacInfo.plist
 		src/resources/version.rc
 		include/Makefile 
 		doc/Makefile
 		data/Makefile 
-		data/flags/Makefile 
 		images/Makefile 
 		m4/Makefile
 		po/Makefile])

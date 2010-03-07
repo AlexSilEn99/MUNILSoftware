@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=wxMUN
+GenericName=MUN debate manager
+Comment=Manage MUN debates with wxMUN
+Exec=wxmun
+Terminal=false
+Icon=wxmun
+Type=Application
+Categories=Utilities
+Version=1.0

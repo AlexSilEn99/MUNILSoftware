@@ -116,7 +116,7 @@ void Session::readState(wxString file){ //file default NULL
 #ifdef __WXMSW__
 			wxMkDir(ConfigManager::GetFolder(sdConfig));
 #else
-			wxMkDir(ConfigManager::GetFolder(sdConfig), 0700);
+			wxMkDir(ConfigManager::GetFolder(sdConfig).mb_str(), 0700);
 #endif
 		}
 		
@@ -324,7 +324,7 @@ void Session::saveState(wxString file){ //file default NULL
 #ifdef __WXMSW__
 			wxMkDir(ConfigManager::GetFolder(sdConfig));
 #else				
-			wxMkDir(ConfigManager::GetFolder(sdConfig), 0700);
+			wxMkDir(ConfigManager::GetFolder(sdConfig).mb_str(), 0700);
 #endif
 		}
 

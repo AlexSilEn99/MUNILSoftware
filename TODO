@@ -3,6 +3,8 @@ TODO
 
 * Locales!! (see filezilla code!)
 
+* split country, committee, configmanager etc off to libwxmun
+
 * Ghost voting lists (for closure of debate) (+ auto clear ghosts if tab is left)
 * write help data
 
