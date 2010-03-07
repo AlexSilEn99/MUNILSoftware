@@ -1,22 +1,52 @@
-SUBDIRS = flags
+dist_noinst_DATA = install.nsi.in \
+		makezip.sh.in \
+		mingwm10.dll \
+		nsis_appid.dll \
+		nsis_appid.txt \
+		process_running.nsh \
+		UAC_unicode.dll \
+		UAC_unicode.dll.txt 
 
-wxmundatadir = $(pkgdatadir)/data
+if MAKENSISSCRIPT
 
-dist_wxmundata_DATA = correct_committee.xml\
-		correct_sc.xml\
-		countries.xml\
-		kabouter.xml\
-		RIMUN.xml\
-		sc.xml
+if LOCALES
+  MAYBE_LANGFILES = installlangfiles.nsh uninstalllangfiles.nsh
+endif
 
-if MACAPPBUNDLE
-mac-copy-resources: $(data_DATA)
-	cp ../MacInfo.plist $(top_builddir)/wxMUN.app/Contents/Info.plist
-	mkdir -p $(top_builddir)/wxMUN.app/Contents/Resources/share/wxmun/data
+noinst_DATA = $(MAYBE_LANGFILES) libtoolexecutablesubdir.nsh
 
-	for i in $(dist_wxmundata_DATA); \
-		do cp -f "$(srcdir)/$$i" "$(top_builddir)/wxMUN.app/Contents/Resources/share/wxmun/data"; \
+installlangfiles.nsh: Makefile
+	rm -f $@
+	for i in @WXMUN_LINGUAS@; do\
+	  echo !insertmacro INSTALLLANGFILE $$i >> $@; \
 	done
 
-	$(MAKE) -C flags mac-copy-resources
+uninstalllangfiles.nsh: Makefile
+	rm -f $@
+	for i in @WXMUN_LINGUAS@; do\
+	  echo !insertmacro UNINSTALLLANGFILE $$i >> $@; \
+	done
+
+# Some versions of libtool create executables as foo.exe
+# while otheres create executables as .libs/foo.exe
+# NSIS needs to know the actual path.
+
+libtoolexecutablesubdir.nsh: Makefile
+	rm -f $@
+	touch test_libtool_exedir.c
+	$(CC) -c -o test_libtool_exedir.o test_libtool_exedir.c
+	exedir=`$(LIBTOOL) -n --mode=link $(CC) -o test_libtool_exedir$(EXEEXT) test_libtool_exedir.o`; \
+	if echo "$$exedir" | grep -- '-o \.libs' > /dev/null; then \
+	  echo "!define LT_EXEDIR \".libs\\\"" > libtoolexecutablesubdir.nsh; \
+	else \
+	  touch libtoolexecutablesubdir.nsh; \
+	fi
+	rm -f test_libtool_exedir.o test_libtool_exedir.c
+
+CLEANFILES = installlangfiles.nsh uninstalllangfiles.nsh libtoolexecutablesubdir.nsh
+
 endif
+
+desktopentrydir = $(datadir)/applications
+dist_desktopentry_DATA = wxmun.desktop
+

@@ -28,15 +28,16 @@
 #include <wx/taskbar.h>
 #include <wx/sstream.h>
 #include <wx/url.h>
+#include <wx/artprov.h>
 #include "wx/aui/aui.h"
 
 #include "app.h"
 #include "configmanager.h"
 #include "defs.h"
 
-#if defined(__WXGTK__) || defined(__WXMOTIF__) || defined(__WXMAC__) || defined(__WXMGL__) || defined(__WXX11__)
-    #include "resources/icons/wxMUN.xpm"
-#endif
+//#if defined(__WXGTK__) || defined(__WXMOTIF__) || defined(__WXMAC__) || defined(__WXMGL__) || defined(__WXX11__)
+//    #include "resources/icons/wxMUN.xpm"
+//#endif
 
 //using namespace xercesc_2_8;
 XERCES_CPP_NAMESPACE_USE
@@ -428,9 +429,12 @@ bool wxMUN::OnInit(){
 	//wxTaskBarIcon* tbIcon = new wxTaskBarIcon();
 #ifdef __WXMSW__
 	parentFrame->SetIcon(wxICON(MAIN_ICON));
+
 	//tbIcon->SetIcon(wxICON(MAIN_ICON))
 #else
-	parentFrame->SetIcon(wxIcon(wxMUN_xpm));
+	//parentFrame->SetIcon(wxIcon(wxMUN_xpm));
+	parentFrame->SetIcon(wxArtProvider::GetIcon(_T("ART_FILEZILLA")));
+
 	//tbIcon->SetIcon(wxMUN_xpm);
 #endif // __WXMSW__
 	
