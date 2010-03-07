@@ -112,12 +112,14 @@ void Session::readState(wxString file){ //file default NULL
 	if(file != wxEmptyString) {
 		filename = file;
 	} else {
-		if(!wxDirExists(ConfigManager::GetFolder(sdConfig)) )
+		if(!wxDirExists(ConfigManager::GetFolder(sdConfig)) ){
 #ifdef __WXMSW__
-			wxMkDir(ConfigManager::GetFolder(sdConfig).mb_str());
+			wxMkDir(ConfigManager::GetFolder(sdConfig));
 #else
-			wxMkDir(ConfigManager::GetFolder(sdConfig).mb_str(), 0700);
+			wxMkDir(ConfigManager::GetFolder(sdConfig), 0700);
 #endif
+		}
+		
 		filename = ConfigManager::GetFolder(sdConfig) + wxFILE_SEP_PATH + _T("state.xml");
 	}
 	
@@ -318,12 +320,14 @@ void Session::saveState(wxString file){ //file default NULL
 		filename = file;
 	} else {
 		m_stateManuallySaved=false; //modified, so modifications are not saved manually (yet)
-		if(!wxDirExists(ConfigManager::GetFolder(sdConfig)) )
+		if(!wxDirExists(ConfigManager::GetFolder(sdConfig)) ) {
 #ifdef __WXMSW__
-			wxMkDir(ConfigManager::GetFolder(sdConfig).mb_str());
+			wxMkDir(ConfigManager::GetFolder(sdConfig));
 #else				
-		wxMkDir(ConfigManager::GetFolder(sdConfig).mb_str(), 0700);
+			wxMkDir(ConfigManager::GetFolder(sdConfig), 0700);
 #endif
+		}
+
 		filename = ConfigManager::GetFolder(sdConfig) + wxFILE_SEP_PATH + _T("state.xml");
 	}
 	wxFile XMLoutput;
@@ -344,7 +348,7 @@ void Session::saveState(wxString file){ //file default NULL
 
 	//loop
 	std::map<wxString, Country >::iterator it = m_committee.countries()->begin();
-	for(it; it != m_committee.countries()->end(); it++){
+	for(; it != m_committee.countries()->end(); it++){
 		XMLoutput.Write(wxT("\t\t<country "));
 		XMLoutput.Write(wxT("name=\"")+it->second.name()+wxT("\" "));
 		XMLoutput.Write(wxT("code=\"")+it->second.code()+wxT("\" "));

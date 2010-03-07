@@ -1,6 +1,6 @@
 INCLUDES = -I.. -I../include
 
-EXTRA_DIST = resources.rc
+EXTRA_DIST = gui.h resources.rc
 DIST_SUBDIRS = resources
 
 bin_PROGRAMS = wxmun

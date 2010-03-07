@@ -1,4 +1,4 @@
-flagsdir = $(pkgdatadir)/data/flags
+flagsdir = $(pkgdatadir)/resources/flags
 
 flags_DATA = ABKH.png \
 AFGH.png \
