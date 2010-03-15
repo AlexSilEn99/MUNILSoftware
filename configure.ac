@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.61)
+AC_PREREQ(2.60)
 AC_INIT(wxMUN, 0.38, g.besjes@student.science.ru.nl)
 
 if test `pwd | wc -w` -ne 1; then
@@ -26,7 +26,6 @@ AC_PROG_CC
 AM_PROG_LIBTOOL
 
 # Checks for typedefs, structures, and compiler characteristics.
-AC_HEADER_STDBOOL
 AC_C_CONST
 
 AC_CACHE_SAVE
@@ -280,6 +279,7 @@ AC_CONFIG_FILES([Makefile
 		src/resources/version.rc
 		include/Makefile 
 		doc/Makefile
+		doc/manual/Makefile
 		data/Makefile 
 		images/Makefile 
 		m4/Makefile
