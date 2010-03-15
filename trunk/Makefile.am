@@ -2,7 +2,7 @@ ACLOCAL_AMFLAGS = -I m4
 AUTOMAKE_OPTIONS = foreign 1.7 dist-bzip2
 
 if !LOCALES_ONLY
-MAYBE_DIRS = src include data images doc
+MAYBE_DIRS = src include data doc
 endif
 
 if LOCALES
@@ -12,7 +12,7 @@ endif
 SUBDIRS = $(MAYBE_DIRS) $(MAYBE_LOCALES)
 
 EXTRA_SUBDIRS = m4
-DIST_SUBDIRS = $(MAYBE_DIRS) $(EXTRA_SUBDIRS)
+DIST_SUBDIRS = $(SUBDIRS) $(EXTRA_SUBDIRS)
 EXTRA_DIST = autogen.sh
 
 if !LOCALES_ONLY
