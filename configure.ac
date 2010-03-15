@@ -281,7 +281,7 @@ AC_CONFIG_FILES([Makefile
 		doc/Makefile
 		doc/manual/Makefile
 		data/Makefile 
-		images/Makefile 
+		data/installer-pixmaps/Makefile 
 		m4/Makefile
 		po/Makefile])
 AC_OUTPUT

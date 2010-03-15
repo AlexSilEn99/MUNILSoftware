@@ -28,8 +28,6 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	containerSizer = new wxBoxSizer( wxVERTICAL );
 	
 	m_mainPanel = new wxPanel( this, MAIN_PANEL, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	m_mainPanel->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_BACKGROUND ) );
-	
 	wxBoxSizer* panelContainerSizer;
 	panelContainerSizer = new wxBoxSizer( wxVERTICAL );
 	
@@ -154,7 +152,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	GSLTimerSizer->Add( GSLCountrySizer, 0, wxEXPAND, 5 );
 	
-	m_GSLSpeechGauge = new wxGauge( m_GSLleftpanel, GSL_GAUGE, 30, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL );
+	m_GSLSpeechGauge = new wxGauge( m_GSLleftpanel, GSL_GAUGE, 30, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL|wxGA_SMOOTH );
 	GSLTimerSizer->Add( m_GSLSpeechGauge, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
 	
 	wxBoxSizer* GSLtimeleftSizer;
@@ -307,7 +305,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_GSLpanel->SetSizer( GSLcontainerSizer );
 	m_GSLpanel->Layout();
 	GSLcontainerSizer->Fit( m_GSLpanel );
-	m_mainauinotebook->AddPage( m_GSLpanel, _("General Speakers List"), true, wxNullBitmap );
+	m_mainauinotebook->AddPage( m_GSLpanel, _("General Speakers List"), false, wxNullBitmap );
 	m_singleSpeakerPanel = new wxPanel( m_mainauinotebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	m_singleSpeakerPanel->Hide();
 	m_singleSpeakerPanel->SetToolTip( _("The single speaker tab can be used in conjuction with the GSL, to deal with a yield to questions or handle comments.") );
@@ -360,7 +358,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	singleSpeakerCountryTimerSizer->Add( singleSpeakerSpeakerSizer, 1, wxEXPAND, 5 );
 	
-	m_singleSpeakerTimeGauge = new wxGauge( m_singleSpeakerCaucusLeftPanel, SINGLE_SPEAKER_GAUGE, 30, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL|wxFULL_REPAINT_ON_RESIZE );
+	m_singleSpeakerTimeGauge = new wxGauge( m_singleSpeakerCaucusLeftPanel, SINGLE_SPEAKER_GAUGE, 30, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL|wxGA_SMOOTH|wxFULL_REPAINT_ON_RESIZE );
 	singleSpeakerCountryTimerSizer->Add( m_singleSpeakerTimeGauge, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
 	
 	wxBoxSizer* singleSpeakerTimeleftSizer;
@@ -519,7 +517,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	countryTimerSizer->Add( modCaucusSpeakerSizer, 1, wxEXPAND, 5 );
 	
-	m_modCaucusSpeakerTimeGauge = new wxGauge( m_modCaucusLeftPanel, MOD_CAUCUS_SPEAKER_GAUGE, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL|wxFULL_REPAINT_ON_RESIZE );
+	m_modCaucusSpeakerTimeGauge = new wxGauge( m_modCaucusLeftPanel, MOD_CAUCUS_SPEAKER_GAUGE, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL|wxGA_SMOOTH|wxFULL_REPAINT_ON_RESIZE );
 	countryTimerSizer->Add( m_modCaucusSpeakerTimeGauge, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
 	
 	wxBoxSizer* modCaucusTimeleftSizer1;
@@ -579,7 +577,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	caucusTimerSizer->Add( modCaucusTopicSizer, 1, wxEXPAND, 5 );
 	
-	m_modCaucusTimeGauge = new wxGauge( m_modCaucusLeftPanel, MOD_CAUCUS_GAUGE, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL );
+	m_modCaucusTimeGauge = new wxGauge( m_modCaucusLeftPanel, MOD_CAUCUS_GAUGE, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL|wxGA_SMOOTH );
 	caucusTimerSizer->Add( m_modCaucusTimeGauge, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
 	
 	wxBoxSizer* modCaucusTimeleftSizer;
@@ -777,7 +775,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	unModCaucusTimerSizer->Add( unModCaucusTopicSizer, 0, wxEXPAND, 5 );
 	
-	m_UnModCaucusTimeGauge = new wxGauge( m_unModCaucusLeftPanel, UNMOD_CAUCUS_GAUGE, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL );
+	m_UnModCaucusTimeGauge = new wxGauge( m_unModCaucusLeftPanel, UNMOD_CAUCUS_GAUGE, 100, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL|wxGA_SMOOTH );
 	unModCaucusTimerSizer->Add( m_UnModCaucusTimeGauge, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
 	
 	wxBoxSizer* timeleftSizer;
@@ -993,7 +991,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	votingTimerSizer->Add( votingCountrySizer, 0, wxEXPAND, 5 );
 	
-	m_votingSpeechGauge = new wxGauge( m_procVotingLeftPanel, VOTING_GAUGE, 30, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL );
+	m_votingSpeechGauge = new wxGauge( m_procVotingLeftPanel, VOTING_GAUGE, 30, wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL|wxGA_SMOOTH );
 	votingTimerSizer->Add( m_votingSpeechGauge, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
 	
 	wxBoxSizer* votingtimeleftSizer;
@@ -1178,7 +1176,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_procVotingPanel->SetSizer( procVotingContainerSizer );
 	m_procVotingPanel->Layout();
 	procVotingContainerSizer->Fit( m_procVotingPanel );
-	m_mainauinotebook->AddPage( m_procVotingPanel, _("Procedural voting"), false, wxNullBitmap );
+	m_mainauinotebook->AddPage( m_procVotingPanel, _("Procedural voting"), true, wxNullBitmap );
 	m_rollCallVotePanel = new wxPanel( m_mainauinotebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* rollCallVoteSizer;
 	rollCallVoteSizer = new wxBoxSizer( wxHORIZONTAL );
@@ -1516,8 +1514,6 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	containerSizer->Add( m_mainPanel, 1, wxEXPAND, 5 );
 	
 	m_bannerSizer = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	m_bannerSizer->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_BACKGROUND ) );
-	
 	wxBoxSizer* bBannerMainSizer;
 	bBannerMainSizer = new wxBoxSizer( wxVERTICAL );
 	
@@ -1541,8 +1537,6 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	this->SetSizer( containerSizer );
 	this->Layout();
 	m_statusBar = this->CreateStatusBar( 1, wxST_SIZEGRIP, wxID_ANY );
-	m_statusBar->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_BACKGROUND ) );
-	
 	m_menubar = new wxMenuBar( 0 );
 	m_fileMenu = new wxMenu();
 	wxMenuItem* m_openMenuItem;

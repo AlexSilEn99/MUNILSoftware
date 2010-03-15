@@ -1,3 +1,5 @@
+SUBDIRS = installer-pixmaps
+
 dist_noinst_DATA = install.nsi.in \
 		makezip.sh.in \
 		mingwm10.dll \
@@ -5,7 +7,8 @@ dist_noinst_DATA = install.nsi.in \
 		nsis_appid.txt \
 		process_running.nsh \
 		UAC_unicode.dll \
-		UAC_unicode.dll.txt 
+		UAC_unicode.dll.txt \
+	 	WinVer.nsh
 
 if MAKENSISSCRIPT
 

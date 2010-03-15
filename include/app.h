@@ -42,6 +42,7 @@
 #include <wx/defs.h>
 #include <wx/string.h>
 #include <wx/filename.h>
+#include <wx/artprov.h>
 
 #include <map>
 #include "wxmunframe.h"
@@ -71,6 +72,8 @@ public:
 	Country findCountry(wxString);
 	wxString findCountryCode(wxString);
 	wxString findCountryFlagByName(wxString);
+
+	wxIconBundle GetIconBundle(const wxArtID& id, const wxArtClient& client=wxART_OTHER);
 	
 	std::map<wxString, Country> *availableCountries();
 	std::map<wxString, Country*> *committeeCountries();

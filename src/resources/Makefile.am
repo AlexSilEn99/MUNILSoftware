@@ -2,7 +2,7 @@ SUBDIRS = 16x16 32x32 flags
 
 resourcesdir = $(pkgdatadir)/resources
 
-dist_resources_DATA = countries.xml
+dist_resources_DATA = countries.xml clear.png logo.png splash.png wxMUNlogo_medium.png
 
 resources48dir = $(pkgdatadir)/resources/48x48
 dist_resources48_DATA = 48x48/wxmun.png

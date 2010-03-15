@@ -35,10 +35,6 @@
 #include "configmanager.h"
 #include "defs.h"
 
-//#if defined(__WXGTK__) || defined(__WXMOTIF__) || defined(__WXMAC__) || defined(__WXMGL__) || defined(__WXX11__)
-//    #include "resources/icons/wxMUN.xpm"
-//#endif
-
 //using namespace xercesc_2_8;
 XERCES_CPP_NAMESPACE_USE
 
@@ -185,6 +181,44 @@ std::map<wxString, Country>* wxMUN::availableCountries() {
 
 std::map<wxString, Country*>* wxMUN::committeeCountries() {
 	return &m_committeeCountries;
+}
+
+void MakeLowerAscii(wxString& str){
+        for (size_t i = 0; i < str.Len(); i++)
+        {
+                wxChar& c = str[i];
+                if (c >= 'A' && c <= 'Z')
+                        c += 32;
+        }
+}
+
+wxIconBundle wxMUN::GetIconBundle(const wxArtID& id, const wxArtClient& client /*=wxART_OTHER*/) {
+        wxIconBundle iconBundle;
+
+        if (id.Left(4) != _T("ART_"))
+                return iconBundle;
+
+        wxString name = id.Mid(4);
+        MakeLowerAscii(name);
+
+        const wxChar* dirs[3] = { _T("16x16/"), _T("32x32/"), _T("48x48/") };
+
+        const wxString& resourcePath = ConfigManager::GetFolder(sdDataGlobal)+_T("/resources/");
+
+	std::cout << resourcePath.mb_str() << std::endl;
+
+        for (int i = 0; i < 3; i++) {
+                wxString file = resourcePath + dirs[i] + name + _T(".png");
+	
+		std::cout << file.mb_str() << std::endl;
+
+                if (!wxFileName::FileExists(file))
+                        continue;
+
+                iconBundle.AddIcon(wxIcon(file, wxBITMAP_TYPE_PNG));
+        }
+
+        return iconBundle;
 }
 
 bool wxMUN::ReadCountries(const char *filename){
@@ -363,7 +397,7 @@ bool wxMUN::OnInit(){
 	//std::cout << ConfigManager::GetFolder(sdDataGlobal).mb_str() << std::endl;
 	//std::cout << ConfigManager::GetFolder(sdBase).mb_str() << std::endl;
 	//std::cout << ConfigManager::GetFolder(sdTemp).mb_str() << std::endl;
-	//std::cout << ConfigManager::FindDataFile(_T("data/countries.xml")).mb_str() << std::endl;
+	//std::cout << ConfigManager::FindDataFile(_T("resources/countries.xml")).mb_str() << std::endl;
 
 	try {
 		xercesc::XMLPlatformUtils::Initialize();
@@ -381,8 +415,8 @@ bool wxMUN::OnInit(){
 #ifndef DEBUG
 	wxBitmap bitmap;
 	wxSplashScreen *splash=NULL;
-	if (bitmap.LoadFile(ConfigManager::FindDataFile(_T("images/splash.png")), wxBITMAP_TYPE_PNG)){
-		std::cout << ConfigManager::FindDataFile(_T("images/splash.png")).mb_str() << std::endl;			
+	if (bitmap.LoadFile(ConfigManager::FindDataFile(_T("resources/splash.png")), wxBITMAP_TYPE_PNG)){
+		std::cout << ConfigManager::FindDataFile(_T("resources/splash.png")).mb_str() << std::endl;			
 		splash = new wxSplashScreen(bitmap,
 				wxSPLASH_CENTRE_ON_SCREEN|wxSPLASH_TIMEOUT,
 				3500, NULL, -1, wxDefaultPosition, wxDefaultSize,
@@ -399,17 +433,17 @@ bool wxMUN::OnInit(){
 #endif
 
 	try { 
-		if(ConfigManager::FindDataFile(_T("data/countries.xml")) == wxEmptyString){
+		if(ConfigManager::FindDataFile(_T("resources/countries.xml")) == wxEmptyString){
 			throw "Could not find datafile";
 		}
-		ReadCountries(ConfigManager::FindDataFile(_T("data/countries.xml")).mb_str());
+		ReadCountries(ConfigManager::FindDataFile(_T("resources/countries.xml")).mb_str());
 	} catch (const char *error) {
 		wxString message = wxT("wxMUN could not read country data file data");
 		message << wxFILE_SEP_PATH << wxT("countries.xml.\n");
 		message << wxT("(Expecting file to be at ");
-		message << ConfigManager::GetFolder(sdDataGlobal) + wxFILE_SEP_PATH + _T("data") + wxFILE_SEP_PATH + _T("countries.xml");
+		message << ConfigManager::GetFolder(sdDataGlobal) + wxFILE_SEP_PATH + _T("resources") + wxFILE_SEP_PATH + _T("countries.xml");
 		message << wxT("\nor, if you have made your own version, at:\n");		
-		message << ConfigManager::GetFolder(sdDataUser) + wxFILE_SEP_PATH + _T("data") + wxFILE_SEP_PATH + _T("countries.xml");
+		message << ConfigManager::GetFolder(sdDataUser) + wxFILE_SEP_PATH + _T("resources") + wxFILE_SEP_PATH + _T("countries.xml");
 		message << wxT(")\n");		
 
 		wxMessageBox(message,
@@ -428,12 +462,12 @@ bool wxMUN::OnInit(){
 
 	//wxTaskBarIcon* tbIcon = new wxTaskBarIcon();
 #ifdef __WXMSW__
-	parentFrame->SetIcon(wxICON(MAIN_ICON));
+	parentFrame->SetIcon(wxICON(appicon));
 
 	//tbIcon->SetIcon(wxICON(MAIN_ICON))
 #else
 	//parentFrame->SetIcon(wxIcon(wxMUN_xpm));
-	parentFrame->SetIcon(wxArtProvider::GetIcon(_T("ART_FILEZILLA")));
+	parentFrame->SetIcons(GetIconBundle(_T("ART_WXMUN")));
 
 	//tbIcon->SetIcon(wxMUN_xpm);
 #endif // __WXMSW__

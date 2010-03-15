@@ -42,7 +42,7 @@ wxString Country::code(){
 }
 
 wxString Country::flag(){
-	wxString path = wxT("data/flags/");
+	wxString path = wxT("resources/flags/"); //TODO move this to configmanager element
 	wxString s(m_code);
 	return path+s.append(wxString(wxT(".png")));
 }
