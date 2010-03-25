@@ -24,13 +24,13 @@ dist_noinst_DATA = wxmun.rc wxMUN.ico \
 if MACAPPBUNDLE
 mac-copy-resources: $(dist_resources_DATA)
 	cp MacInfo.plist $(top_builddir)/wxMUN.app/Contents/Info.plist
-	cp $(srcdir)/FileZilla.icns $(top_builddir)/wxMUN.app/Contents/Resources/wxMUN.icns
+	cp $(srcdir)/wxMUN.icns $(top_builddir)/wxMUN.app/Contents/Resources/wxMUN.icns
 
 	for i in $(dist_resources_DATA); \
-		do cp -f "$(srcdir)/$$i" "$(top_builddir)/wxMUN.app/Contents/SharedSupport/resources"; \
+		do cp -f "$(srcdir)/$$i" "$(top_builddir)/wxMUN.app/Contents/Resources"; \
 	done
 	
-	mkdir -p "$(top_builddir)/FileZilla.app/Contents/SharedSupport/resources/48x48"
+	mkdir -p "$(top_builddir)/wxMUN.app/Contents/SharedSupport/resources/48x48"
 	for i in $(dist_resources48_DATA); \
 		do cp -f "$(srcdir)/$$i" "$(top_builddir)/wxMUN.app/Contents/SharedSupport/resources/48x48"; \
 	done

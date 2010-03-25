@@ -47,6 +47,7 @@ wxString ConfigManager::home_folder;
 wxString ConfigManager::data_path_user;
 wxString ConfigManager::data_path_global;
 wxString ConfigManager::app_path;
+wxString ConfigManager::resource_path;
 wxString ConfigManager::temp_folder;
 bool ConfigManager::relo = 0;
 
@@ -105,9 +106,6 @@ wxString ConfigManager::FindDataFile(const wxString& filename){
 	wxString u(wxStandardPathsBase::Get().GetUserDataDir() + wxFILE_SEP_PATH + filename);
 	wxString e(ConfigManager::GetFolder(sdDataGlobal) + wxFILE_SEP_PATH + filename);
 
-	//std::cout << u.mb_str() << std::endl;
-	//std::cout << e.mb_str() << std::endl;
-
 	if(::wxFileExists(u))
 		return u;
 	
@@ -117,6 +115,17 @@ wxString ConfigManager::FindDataFile(const wxString& filename){
 	}
 
 	return wxEmptyString;
+}
+
+wxString ConfigManager::FindResourceFile(const wxString& filename){
+        wxPathList searchPaths;
+ 
+        wxString f(ConfigManager::GetFolder(sdResources) + wxFILE_SEP_PATH + filename);
+ 
+        if(::wxFileExists(f))
+                return f;
+
+        return wxEmptyString;
 }
 
 wxString ConfigManager::GetFolder(SearchDirs dir){
@@ -149,6 +158,9 @@ wxString ConfigManager::GetFolder(SearchDirs dir){
 		case sdDataUser:
 			return ConfigManager::data_path_user;
 
+		case sdResources:
+			return ConfigManager::resource_path;
+
 		default:
 			return wxEmptyString;
 	}
@@ -162,12 +174,16 @@ void ConfigManager::InitPaths() {
 
 	// if non-empty, the app has overriden it (e.g. "--prefix" was passed in the command line)
 	if (data_path_global.IsEmpty()) {
-		if(platform::windows)
+		if(platform::windows){
 			ConfigManager::data_path_global = app_path + wxFILE_SEP_PATH + _T("share") + wxFILE_SEP_PATH +_T("wxmun");
-		else if(platform::macosx)
-			ConfigManager::data_path_global = res_path + wxFILE_SEP_PATH + _T("share") + wxFILE_SEP_PATH +_T("wxmun");
-		else
+			ConfigManager::resource_path = ConfigManager::data_path_global + wxFILE_SEP_PATH + _T("resources");
+		} else if(platform::macosx) {
+			ConfigManager::data_path_global = res_path; // + wxFILE_SEP_PATH + _T("share") + wxFILE_SEP_PATH +_T("wxmun");
+			ConfigManager::resource_path = ConfigManager::data_path_global;
+		} else {
 			ConfigManager::data_path_global = wxStandardPathsBase::Get().GetDataDir();
+			ConfigManager::resource_path = ConfigManager::data_path_global + wxFILE_SEP_PATH + _T("resources");
+		} 
 	}
 
 	ConfigManager::data_path_user = ConfigManager::relo ? data_path_global : config_folder + wxFILE_SEP_PATH + _T("share") + wxFILE_SEP_PATH +_T("wxmun");

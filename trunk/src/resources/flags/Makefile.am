@@ -1,6 +1,6 @@
 flagsdir = $(pkgdatadir)/resources/flags
 
-flags_DATA = ABKH.png \
+dist_flags_DATA = ABKH.png \
 AFGH.png \
 AGLA.png \
 ALBA.png \
@@ -272,12 +272,10 @@ YEMN.png \
 ZAMB.png \
 ZBWE.png
 
-EXTRA_DIST = $(flags_DATA)
-
 if MACAPPBUNDLE
-mac-copy-resources: $(flags_DATA)
-	mkdir -p $(top_builddir)/wxMUN.app/Contents/Resources/share/wxmun/data/flags
-	for i in $(flags_DATA); \
-		do cp -f $(srcdir)/$$i $(top_builddir)/wxMUN.app/Contents/Resources/share/wxmun/data/flags; \
+mac-copy-resources: $(dist_flags_DATA)
+	mkdir -p $(top_builddir)/wxMUN.app/Contents/Resources/flags
+	for i in $(dist_flags_DATA); \
+		do cp -f $(srcdir)/$$i $(top_builddir)/wxMUN.app/Contents/Resources/flags; \
 	done
 endif
