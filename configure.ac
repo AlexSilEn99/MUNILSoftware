@@ -3,6 +3,7 @@
 
 AC_PREREQ(2.60)
 AC_INIT(wxMUN, 0.38, g.besjes@student.science.ru.nl)
+AC_CONFIG_MACRO_DIR([m4])
 
 if test `pwd | wc -w` -ne 1; then
         AC_MSG_ERROR([
@@ -30,6 +31,9 @@ AC_C_CONST
 
 AC_CACHE_SAVE
 
+AC_ARG_ENABLE(debug, AC_HELP_STRING([--enable-debug], [Create debug bui;d]), \
+                [debug="$enableval"], [debug="no"])
+
 AC_ARG_ENABLE(locales, AC_HELP_STRING([--enable-locales], [Build message catalogs]), \
                 [locales="$enableval"], [locales="yes"])
 
@@ -40,36 +44,15 @@ if test "$locales" != "yes" -a "$localesonly" = "yes"; then
   AC_MSG_ERROR([invalid flags: --disable-locales cannot be used together with --enable-localesonly])
 fi
 
+if test "$debug" = yes ; then
+        AC_DEFINE(DEBUG, 1, [Define if debugging is enabled.])
+fi
+
 if test "$localesonly" = "yes"; then
   buildmain="no"
 else
   buildmain="yes"
 fi
-
-if ! test "$localesonly" = "yes"; then
-
-  if test "X$GCC" = Xyes; then
-    CFLAGS="$CFLAGS -Wall -g -fexceptions"
-    CXXFLAGS="$CXXFLAGS -Wall -g -fexceptions"
-  fi
-
-  # Add build information to config.h
-  # ---------------------------------
-
-  # Add host to config.h
-  AC_DEFINE_UNQUOTED(USED_HOST, ["$host"], [Host system under which the program will run.])
-  AC_DEFINE_UNQUOTED(USED_BUILD, ["$build"], [Build system under which the program was compiled on.])
-
-  # Add used CXXFLAGS to config.h
-  AC_DEFINE_UNQUOTED(USED_CXXFLAGS, ["$CXXFLAGS"], [Define to the used CXXFLAGS to compile this package.])
-
-  # Get compiler (version)
-  AH_TEMPLATE(USED_COMPILER, [Define to name and version of used compiler])
-  if COMPILER=`$CC --version | head -n 1`; then
-    AC_DEFINE_UNQUOTED(USED_COMPILER, ["$COMPILER"])
-  fi
-fi
-
 
 if test "$buildmain" = "yes"; then
 
@@ -258,6 +241,30 @@ AC_SUBST(WXMUN_LINGUAS)
 AC_SUBST(WXMUN_LINGUAS_PO)
 AC_SUBST(WXMUN_LINGUAS_PO_NEW)
 AC_SUBST(WXMUN_LINGUAS_MO)
+
+if ! test "$localesonly" = "yes"; then
+
+  if test "X$GCC" = Xyes; then
+    CFLAGS="$CFLAGS -Wall -fexceptions"
+    CXXFLAGS="$CXXFLAGS -Wall -fexceptions"
+  fi
+
+  # Add build information to config.h
+  # ---------------------------------
+
+  # Add host to config.h
+  AC_DEFINE_UNQUOTED(USED_HOST, ["$host"], [Host system under which the program will run.])
+  AC_DEFINE_UNQUOTED(USED_BUILD, ["$build"], [Build system under which the program was compiled on.])
+
+  # Add used CXXFLAGS to config.h
+  AC_DEFINE_UNQUOTED(USED_CXXFLAGS, ["$CXXFLAGS"], [Define to the used CXXFLAGS to compile this package.])
+
+  # Get compiler (version)
+  AH_TEMPLATE(USED_COMPILER, [Define to name and version of used compiler])
+  if COMPILER=`$CC --version | head -n 1`; then
+    AC_DEFINE_UNQUOTED(USED_COMPILER, ["$COMPILER"])
+  fi
+fi
 
 # Output automake conditionals
 # ----------------------------

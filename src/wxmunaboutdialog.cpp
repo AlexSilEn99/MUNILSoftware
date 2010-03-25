@@ -29,7 +29,7 @@ GUI_wxMUNAboutDialog( parent )
 	wxStaticBitmap *bmpControl = (wxStaticBitmap*) wxWindow::FindWindowById(ABOUT_LOGO);
 
 	wxImage im;
-	if(im.LoadFile(ConfigManager::FindDataFile(_T("images/wxMUNlogo_medium.png")))){
+	if(im.LoadFile(ConfigManager::FindResourceFile(wxT("wxMUNlogo_medium.png")))){
 		im.ConvertAlphaToMask();
 		wxBitmap bmp(im);
 		bmpControl->SetBitmap(bmp);  

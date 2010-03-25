@@ -19,8 +19,15 @@
  */
 
 #include <iostream>
+
 #include <wx/defs.h>
+#include <wx/sstream.h>
 #include <wx/string.h>
+#include <wx/file.h>
+#include <wx/filename.h>
+#include <wx/stdpaths.h>
+
+#include "configmanager.h"
 #include "country.h"
 
 Country::Country(const Country &c){
@@ -42,9 +49,13 @@ wxString Country::code(){
 }
 
 wxString Country::flag(){
-	wxString path = wxT("resources/flags/"); //TODO move this to configmanager element
+	wxString path = ConfigManager::GetFolder(sdResources) + wxFILE_SEP_PATH + wxT("flags") + wxFILE_SEP_PATH; //TODO move this to configmanager element
+
 	wxString s(m_code);
-	return path+s.append(wxString(wxT(".png")));
+	s.append(wxString(wxT(".png")));
+	path.append(s);
+
+	return path;
 }
 
 void Country::makeObserver() {

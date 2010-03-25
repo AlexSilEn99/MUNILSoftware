@@ -51,8 +51,6 @@ protected:
 	wxStaticBitmap* m_logoBitmap;
 
 	// Handlers for GUI_MainFrame events.
-	void OnPageChanging( wxNotebookEvent& event );
-	void OnLeaveVoting();
 	void ToggleFullScreen( wxCommandEvent& event );
 	void StopAllSpeakers();
 
