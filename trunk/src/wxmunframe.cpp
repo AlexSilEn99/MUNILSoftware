@@ -43,32 +43,11 @@
 #include "unl_logo.h"
 #include "rollcallvote.h"
 
-//helper functions
-enum wxbuildinfoformat {
-    short_f, long_f 
-};
-
-wxString wxbuildinfo(wxbuildinfoformat format) {
-        wxString wxbuild(wxVERSION_STRING);
-
-        if (format == long_f ) {
-#if defined(__WXMSW__)
-                wxbuild << _T("-Windows");
-#elif defined(__WXMAC__)
-                wxbuild << _T("-Mac");
-#elif defined(__UNIX__)
-                wxbuild << _T("-Linux");
+#ifdef HAVE_CONFIG_H
+ #include "../config.h"
 #endif
 
-#if wxUSE_UNICODE
-                wxbuild << _T("-Unicode build");
-#else
-                wxbuild << _T("-ANSI build");
-#endif // wxUSE_UNICODE
-        }
-
-        return wxbuild;
-}
+//TODO: the various up/down/clear functions should be combined into e..g. a template!
 
 // silly utility
 // TODO: we should inherit from wxListBox and make this a new member
@@ -148,21 +127,21 @@ void setCountryFlag(int id, wxString name) {
 
         clearCountryFlag(id);
 
-        std::cout << wxGetApp().findCountryFlagByName(name) << std::endl;
-
+#ifdef DEBUG
+        std::cout << "setCountryFlag(): loading " << wxGetApp().findCountryFlagByName(name) << std::endl;
+#endif
+        
         if( !wxFile::Exists(wxGetApp().findCountryFlagByName(name)) ) {
-                std::cout << "flag not there! " << std::endl;
-
-                //clearCountryFlag(id); 
+#ifdef DEBUG
+                std::cout << "setCountryFlag(): file does not exist" << std::endl;
+#endif
                 return;
-
         }
 
         if ( !flag.LoadFile(wxGetApp().findCountryFlagByName(name))) {
-
-                std::cout << "flag not loading! " << std::endl;
-
-                //clearCountryFlag(id); 
+#ifdef DEBUG
+                std::cout << "setCountryFlag(): image cannot load " << std::endl;
+#endif
                 return;
         }
 
@@ -177,6 +156,7 @@ void setCountryFlag(int id, wxString name) {
                 newH = 100;
                 newW = 100 * w / h;
         }
+        
         flag = flag.Scale(newW,newH);
 
         wxBitmap fb(flag);
@@ -186,15 +166,16 @@ void setCountryFlag(int id, wxString name) {
 wxMUNFrame::wxMUNFrame( wxWindow* parent )
 :
 GUI_MainFrame( parent ), 
-_speakerRunning(false), _caucusRunning(false), _timerPaused(false),
-_caucusSeconds(0), _speakerSeconds(0), 
-_modCaucusTimer(this, MOD_CAUCUS_TIMER),
-_unmodCaucusTimer(this, UNMOD_CAUCUS_TIMER),
 _caucusSpeakerTimer(this,CAUCUS_SPEAKER_TIMER),
 _votingSpeakerTimer(this,VOTING_SPEAKER_TIMER),
 _GSLSpeakerTimer(this,GSL_SPEAKER_TIMER),
-_singleSpeakerTimer(this,SINGLE_SPEAKER_TIMER)
+_singleSpeakerTimer(this,SINGLE_SPEAKER_TIMER),
+_unmodCaucusTimer(this, UNMOD_CAUCUS_TIMER),
+_modCaucusTimer(this, MOD_CAUCUS_TIMER)
 {
+        _speakerRunning = false; _timerPaused = false; _caucusRunning = false;
+        _caucusSeconds = 0; _speakerSeconds = 0;
+        
         DisableCaucusCtrls();
         DisableVotingCtrls();
         DisableGSLCtrls();
@@ -421,6 +402,10 @@ void wxMUNFrame::EnableGSLCtrls() {
         wxChoice *GSLChoices = (wxChoice*) wxWindow::FindWindowById(GSL_CHOICES);
         wxListBox *GSLList = (wxListBox*) wxWindow::FindWindowById(GSL_LIST);
 
+        //don't do anything if no countries present
+        if(GSLChoices->GetCount() == 0)
+                return;
+        
         GSLChoices->Enable(true);
         GSLList->Enable(true);
         EnableGSLTimerCtrls();
@@ -437,11 +422,13 @@ void wxMUNFrame::DisableGSLTimerCtrls() {
         GSLseconds->Enable(false);
 }
 
-void wxMUNFrame::DisableGSLCtrls() {
-        //wxChoice *GSLChoices = (wxChoice*) wxWindow::FindWindowById(GSL_CHOICES);
+void wxMUNFrame::DisableGSLCtrls(bool disableChoice /* = true */) {
+        wxChoice *GSLChoices = (wxChoice*) wxWindow::FindWindowById(GSL_CHOICES);
         wxListBox *GSLList = (wxListBox*) wxWindow::FindWindowById(GSL_LIST);
 
-        //GSLChoices->Enable(false);
+        if(disableChoice)
+                GSLChoices->Enable(false);
+                
         GSLList->Enable(false);
         DisableGSLTimerCtrls();
 
@@ -467,7 +454,7 @@ void wxMUNFrame::OnGSLTimeChange () {
         unsigned int duration = 60*min + sec;
 
         if(duration == 0) {
-                wxMessageBox(wxT("Warning: you just set the speakers time to 0 seconds!"),
+                wxMessageBox(wxT("Warning: you just set the time to 0 seconds!"),
                                 wxT("Cannot execute action"),
                                 wxICON_WARNING | wxOK, this);
         }
@@ -535,7 +522,7 @@ void wxMUNFrame::OnSingleSpeakerTimeChange () {
         unsigned int duration = 60*min + sec;
 
         if(duration == 0) {
-                wxMessageBox(wxT("Warning: you just set the speakers time to 0 seconds!"),
+                wxMessageBox(wxT("Warning: you just set the time to 0 seconds!"),
                                 wxT("Cannot execute action"),
                                 wxICON_WARNING | wxOK, this);
         }
@@ -734,9 +721,7 @@ void wxMUNFrame::StartNextGSLSpeaker(wxListBox *GSLList) {
         wxString name = GSLList->GetStringSelection();
         std::map<wxString, Country> *countries = wxGetApp().session()->committee()->countries();
         std::map<wxString, Country>::iterator it = countries->find(name);
-        if(!it->second.isPresent()) {
-                //std::cout << "Country is not present! " << std::endl;
-                
+        if(!it->second.isPresent()) {                
                 wxMessageDialog dialog( NULL, 
                                 wxT("The country first on the General Speakers List is not present.\n\nIf you proceed, the member will be removed and the second of the list will start."), 
                                 wxT("General Speakers List"),
@@ -814,8 +799,9 @@ void wxMUNFrame::OnGSLUpClick( wxCommandEvent& event ) {
 void wxMUNFrame::OnGSLDownClick( wxCommandEvent& event ) {
         wxListBox *GSLList = (wxListBox*) wxWindow::FindWindowById(GSL_LIST);
         int i = GSLList->GetSelection();
-
-        if(i == wxNOT_FOUND || i == GSLList->GetCount()-1 ) //can't move last downwards
+        int last = GSLList->GetCount()-1;
+        
+        if(i == wxNOT_FOUND || i == last) //can't move last downwards
                 return;
         
         swapListStrings(GSLList, i, i+1);
@@ -856,13 +842,10 @@ void wxMUNFrame::OnGSLClearClick( wxCommandEvent& event ) {
 }
 
 void wxMUNFrame::OnGSLChoice( wxCommandEvent& event ) {
-        //adds member to in favour list
         wxChoice *choices = (wxChoice*) (wxWindow::FindWindowById(GSL_CHOICES));
         wxString s = choices->GetStringSelection();
 
-        // speaker must be present on neither of the lists
         wxListBox *GSLList = (wxListBox*) wxWindow::FindWindowById(GSL_LIST);
-
         if(GSLList->FindString(s) == wxNOT_FOUND)
                 GSLList->Append(s);
         
@@ -886,16 +869,15 @@ void wxMUNFrame::OnGSLNext( wxCommandEvent& event ) {
 }
 
 void wxMUNFrame::OnGSLYield( wxCommandEvent& event ) {
-        if( !(_GSLspeakerRunning && (_GSLSpeakerTimer.IsRunning() || _timerPaused) ) ) {
+        if( !(_GSLspeakerRunning && (_GSLSpeakerTimer.IsRunning() || _timerPaused) ) ) 
                 return;
-        }
+        
         PauseGSL();
         
         YieldDialog dlg(this);
-
         wxListBox *choices  = (wxListBox*) wxWindow::FindWindowById(YIELD_TO_DELEGATE_CHOICES);
-        Committee *c = wxGetApp().session()->committee();
         
+        Committee *c = wxGetApp().session()->committee();
         std::map<wxString, Country>::iterator it = c->countries()->begin();
         for(int i=0; it != c->countries()->end(); it++, i++) {
                 choices->Append(it->second.name());
@@ -907,13 +889,16 @@ void wxMUNFrame::OnGSLYield( wxCommandEvent& event ) {
         }
 
         wxString name = choices->GetStringSelection();
-        std::cout << name.mb_str() << std::endl;
+#ifdef DEBUG
+        std::cout << "wxMUNFrame::OnGSLYield(): yield to " << name.mb_str() << std::endl;
+#endif
 
         Country *country = wxGetApp().findCountryPtr(wxGetApp().findCountryCode(name));
         if(!country) { //shouldn't happen!
                 ResumeGSL(); 
                 return;
         }
+        
         wxStaticText *countryText =  (wxStaticText*) wxWindow::FindWindowById(GSL_SPEAKER);
         countryText->SetLabel(name);
         countryText->SetSize(countryText->GetBestSize());
@@ -962,16 +947,10 @@ void wxMUNFrame::DisableGSLResumeButton() {
 }
 
 void wxMUNFrame::DisableGSLStopButton() {
-        //wxButton *p = (wxButton*) wxWindow::FindWindowById(GSL_STOP);
-        //p->Enable(false);
-
         m_GSLStopButton->Enable(false);
 }
 
 void wxMUNFrame::EnableGSLStopButton() {
-        //wxButton *r = (wxButton*) wxWindow::FindWindowById(GSL_STOP);
-        //r->Enable(true);
-
         m_GSLStopButton->Enable(true);
 }
 
@@ -1173,7 +1152,6 @@ void wxMUNFrame::ResumeModCaucus() {
 }
 
 void wxMUNFrame::OnModCaucusCountrySelect( wxCommandEvent& event ) {
-        
         const unsigned int minutes = _speakerLength % 3600 / 60;
         const unsigned int seconds = _speakerLength % 60;
 
@@ -1198,10 +1176,7 @@ void wxMUNFrame::OnModCaucusCountrySelect( wxCommandEvent& event ) {
         //always resume debate
         ResumeModCaucus();
         
-        // show the pause button
-        //EnableModCaucusPauseButton();
-        
-        // DO NOT disable mod caucus choices, maybe speaker ends speech before _speakerLength seconds!
+        // DO NOT disable mod caucus choices, maybe speaker ends speech within the allotted time!
         _speakerSeconds = _speakerLength;
         _speakerRunning = true;
         _caucusSpeakerTimer.Start(1000);
@@ -1300,8 +1275,8 @@ void wxMUNFrame::OnUnModCaucusStop ( wxCommandEvent& event) {
 void wxMUNFrame::OnStateFileOpen( wxCommandEvent& event ) {
         if(wxGetApp().isCommitteeLoaded() && !wxGetApp().session()->isStateManuallySaved()) {
                 wxMessageDialog dialog( NULL, 
-                        wxT("You currently already have loaded a committee. Proceed with loading a state file? Any current state will be lost!"), 
-                        wxT("Load state file"),
+                        _("You currently already have loaded a committee. Proceed with loading a state file? Any current state will be lost!"), 
+                        _("Load state file"),
                         wxNO_DEFAULT|wxYES_NO|wxICON_QUESTION); 
 
                 //dialog if user wants to clear
@@ -1349,8 +1324,8 @@ void wxMUNFrame::OnNewCommittee( wxCommandEvent& event ) {
                 return;
 
         wxMessageDialog dialog( NULL, 
-                        wxT("Committee created!\nLoad the newly created committee?"), 
-                        wxT("New committee"),
+                        _("Committee created!\nLoad the newly created committee?"), 
+                        _("New committee"),
                          wxYES_DEFAULT|wxYES_NO|wxICON_INFORMATION);
                                 
         if ( dialog.ShowModal() == wxID_YES ) {
@@ -1379,8 +1354,8 @@ void wxMUNFrame::OnEditCommittee( wxCommandEvent& event ) {
         if(wxGetApp().isCommitteeLoaded()) {
 
                 wxMessageDialog dialog( NULL, 
-                                wxT("Committee saved!\n\nLoad the newly defined committee preserving the current state of debate (yes), not preserving the state (no) or do not load the new committee (cancel)?\n\nAny countries no longer present in the edited committee will be removed from the General Speakers list, even if you wish to preserve it."), 
-                                wxT("Edit committee"),
+                                _("Committee saved!\n\nLoad the newly defined committee preserving the current state of debate (yes), not preserving the state (no) or do not load the new committee (cancel)?\n\nAny countries no longer present in the edited committee will be removed from the General Speakers list, even if you wish to preserve it."), 
+                                _("Edit committee"),
                                  wxYES_DEFAULT|wxYES_NO|wxCANCEL|wxICON_QUESTION);
 
                 switch ( dialog.ShowModal() ) { 
@@ -1397,10 +1372,9 @@ void wxMUNFrame::OnEditCommittee( wxCommandEvent& event ) {
                                 break;
                 }
         } else {        
-
                 wxMessageDialog dialog( NULL, 
-                                wxT("Committee saved!\nLoad the newly defined committee?"), 
-                                wxT("Edit committee"),
+                                _("Committee saved!\nLoad the newly defined committee?"), 
+                                _("Edit committee"),
                                 wxYES_DEFAULT|wxYES_NO|wxICON_QUESTION);
                                 
                 if ( dialog.ShowModal() == wxID_YES ) {
@@ -1411,9 +1385,9 @@ void wxMUNFrame::OnEditCommittee( wxCommandEvent& event ) {
 
 void wxMUNFrame::OnLoadCommittee( wxCommandEvent& event ) {
         if(wxGetApp().isCommitteeLoaded()  && !wxGetApp().session()->isStateManuallySaved()) {
-                wxMessageBox(wxT("Warning: you have already loaded a committee! Loading another one will overwrite your current settings!"),
-                        wxT("Already loaded committee"),
-                        wxICON_WARNING | wxOK, this);
+                wxMessageBox(_("Warning: you have already loaded a committee! Loading another one will overwrite your current settings!"),
+                             _("Already loaded committee"),
+                             wxICON_WARNING | wxOK, this);
         }
 
         wxFileDialog* OpenDialog = new wxFileDialog(
@@ -1487,7 +1461,7 @@ void wxMUNFrame::LoadSetLabels() {
                 
         if(wxGetApp().session()->committee()->numTopics() == 1) {
                 tA->Check(true); tA->Enable(false);
-                tB->SetText(wxT("No Topic B"));
+                tB->SetText(_("No Topic B"));
                 tB->Enable(false);
                         
                 topic_label->SetLabel(wxGetApp().session()->committee()->topicA());
@@ -1500,8 +1474,6 @@ void wxMUNFrame::LoadSetLabels() {
                         EnableSingleSpeakerCtrls();
                 }
         } else if(wxGetApp().session()->topicChosen()) { // 2 topics, one chosen
-                
-                std::cout << "two topics, one chosen" << std::endl;
                 tB->SetText(wxGetApp().session()->committee()->topicB());
                 wxGetApp().session()->setTopic(wxGetApp().session()->committee()->topicB());
                 
@@ -1521,7 +1493,7 @@ void wxMUNFrame::LoadSetLabels() {
                 tB->SetText(wxGetApp().session()->committee()->topicB());
                 tB->Enable();
 
-                topic_label->SetLabel(wxT("awaiting user input")); //reset in case a previous session already set this
+                topic_label->SetLabel(_("awaiting user input")); //reset in case a previous session already set this
 
                 //lock the controls until topic chosen
                 DisableGSLCtrls();
@@ -1529,9 +1501,11 @@ void wxMUNFrame::LoadSetLabels() {
                 DisableSingleSpeakerCtrls();
         }
                 
-        std::cout << wxGetApp().session()->topicChosen() << std::endl;
-        std::cout << wxGetApp().session()->committee()->topicA().mb_str() << std::endl;
-        std::cout << wxGetApp().session()->committee()->topicB().mb_str() << std::endl;
+#ifdef DEBUG
+        std::cout << "wxMUNFrame::LoadSetLabels(): topic chosen? " << wxGetApp().session()->topicChosen() << std::endl;
+        std::cout << "wxMUNFrame::LoadSetLabels(): topic A = " << wxGetApp().session()->committee()->topicA().mb_str() << std::endl;
+        std::cout << "wxMUNFrame::LoadSetLabels(): topic B = " << wxGetApp().session()->committee()->topicB().mb_str() << std::endl;
+#endif
                 
         //set GSL time 
         wxSpinCtrl *GSLminutes = (wxSpinCtrl*) wxWindow::FindWindowById(GSL_SPEAKER_TIME_MINUTES);
@@ -1572,8 +1546,9 @@ void wxMUNFrame::LoadSetLabels() {
         std::map<wxString, Country> *countries = wxGetApp().session()->committee()->countries();
         std::map<wxString, Country>::iterator it = countries->begin();
         for(; it != countries->end(); it++) {
-                std::cout << it->second.name().mb_str() << " " << it->second.isPresent() << " " << it->second.isObserver() << std::endl;
-                
+#ifdef DEBUG
+                std::cout << "wxMUNFrame::LoadSetLabels(): " <<it->second.name().mb_str() << ", present? " << it->second.isPresent() << ", observer? " << it->second.isObserver() << std::endl;
+#endif
                 if ( !it->second.isPresent() )
                         continue;
                         
@@ -1738,8 +1713,8 @@ void wxMUNFrame::OnCountriesPresentMenuSelect( wxCommandEvent& event) {
         rcFirstRoundChoices->Clear();
         singleSpeakerChoices->Clear();
 
-        int nMembersPresent = 0, nPresent = 0;
-        for(int i=0; i < membersPresent->GetCount(); i++) {
+        unsigned int nMembersPresent = 0, nPresent = 0;
+        for(unsigned int i=0; i < membersPresent->GetCount(); i++) {
                 const wxString name = membersPresent->GetString(i);
                 if( (it = c->countries()->find(name)) == c->countries()->end() )
                         return;
@@ -1747,7 +1722,6 @@ void wxMUNFrame::OnCountriesPresentMenuSelect( wxCommandEvent& event) {
                 if ( membersPresent->IsChecked(i) ) {
                         nPresent++;
 
-                        
                         it->second.makePresent();
                         GSLChoices->Append(name);
                         modCaucusChoices->Append(name);
@@ -1773,12 +1747,15 @@ void wxMUNFrame::OnCountriesPresentMenuSelect( wxCommandEvent& event) {
                         if(wxGetApp().session()->GSL()->size() > 0)
                                 EnableGSLNextButton();
                 }
-        } else if (!_caucusRunning && !_speakerRunning) {
+        //} else if (!_caucusRunning && !_speakerRunning) {
+        } else {
                 DisableGSLNextButton();
-                DisableGSLCtrls();
+                DisableGSLCtrls(true);
                 DisableVotingCtrls();
                 DisableCaucusCtrls();
                 DisableSingleSpeakerCtrls();
+                
+                m_votingProcedureMenuItem->Enable(false);
         }
         c->setPresent(nPresent);
         c->setMembersPresent(nPresent);
@@ -1788,18 +1765,19 @@ void wxMUNFrame::OnCountriesPresentMenuSelect( wxCommandEvent& event) {
                                                 membersPresent->GetCount(), 
                                                 (nPresent == 0) ? 0 : 1 + nPresent/2, 
                                                 (int) ceil((float) nPresent*(2.0/3.0))  ));
-
-        //wxMenuItem *votingMenu = this->m_manageMenu->FindItem(VOTING_PROCEDURE_MENU); 
         
-        if(nPresent == 0) {
+        if(nPresent == 0) {  
                 presentLabel->SetForegroundColour(DARK_RED);
                 wxFont presFont = presentLabel->GetFont();
                 presFont.SetWeight(wxFONTWEIGHT_BOLD);
                 presentLabel->SetFont(presFont);
 
-                m_votingProcedureMenuItem->Enable(false);
+                wxMessageBox(_("Currently, there are no countries present. Most functionality will be unavailable."),
+                             _("Countries present"),
+                             wxICON_INFORMATION | wxOK, this);                
+                
         } else {
-                presentLabel->SetForegroundColour(wxColour( wxSYS_COLOUR_WINDOWTEXT));
+                presentLabel->SetForegroundColour(wxColour(wxSYS_COLOUR_WINDOWTEXT));
                 wxFont presFont = presentLabel->GetFont();
                 presFont.SetWeight(wxFONTWEIGHT_NORMAL);
                 presentLabel->SetFont(presFont);
@@ -1952,8 +1930,9 @@ void wxMUNFrame::OnInFavourUpClick( wxCommandEvent& event ) {
 void wxMUNFrame::OnInFavourDownClick( wxCommandEvent& event ) {
         wxListBox *inFavourList = (wxListBox*) wxWindow::FindWindowById(SPEAKING_IN_FAVOUR);
         int i = inFavourList->GetSelection();
-
-        if(i == wxNOT_FOUND || i == inFavourList->GetCount()-1 ) //can't move last downwards
+        int last = inFavourList->GetCount()-1;
+        
+        if(i == wxNOT_FOUND || i == last) //can't move last downwards
                 return;
         
         swapListStrings(inFavourList, i, i+1);
@@ -2056,8 +2035,9 @@ void wxMUNFrame::OnAgainstUpClick( wxCommandEvent& event ) {
 void wxMUNFrame::OnAgainstDownClick( wxCommandEvent& event ) {
         wxListBox *againstList = (wxListBox*) wxWindow::FindWindowById(SPEAKING_AGAINST);
         int i = againstList->GetSelection();
-
-        if(i == wxNOT_FOUND || i == againstList->GetCount()-1 ) //can't move last downwards
+        int last = againstList->GetCount()-1;
+        
+        if(i == wxNOT_FOUND || i == last ) //can't move last downwards
                 return;
         
         swapListStrings(againstList, i, i+1);
@@ -2260,12 +2240,12 @@ void wxMUNFrame::ToggleRollCallVetoLabels() {
 
 wxString wxMUNFrame::RollCallGetName(wxListBox *list) {
         int i = list->GetSelection();
+        int last = list->GetCount()-1;
+
         wxString name = list->GetStringSelection();
+        int j = (i+1 > last ) ? 0 : i+1; //cycle the list with periodic boundary conditions
 
-        //std::cout << i << " " << list->GetCount() << std::endl;
-
-        int j = (i+1 > list->GetCount()-1 ) ? 0 : i+1;
-
+        //first set selection, then delete previous!
         list->SetSelection(j);
         list->Delete(i);
                 

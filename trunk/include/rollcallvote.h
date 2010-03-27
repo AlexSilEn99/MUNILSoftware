@@ -26,49 +26,49 @@
 
 class RollCallVote {
 public:
-	RollCallVote(bool consensus=false, bool hasVeto=false, bool hasMinInFavour=false);
+        RollCallVote(bool consensus=false, bool hasVeto=false, bool hasMinInFavour=false);
 
-	void Print();
+        void Print();
 
-	bool Passed();
-	bool Failed();
+        bool Passed();
+        bool Failed();
 
-	bool IsConsensusBased();
-	void SetConsensusBasedFlag(bool);
-	
-	bool IsSCMode();
-	void SetSCModeFlag(bool);
+        bool IsConsensusBased();
+        void SetConsensusBasedFlag(bool);
+        
+        bool IsSCMode();
+        void SetSCModeFlag(bool);
 
-	bool HasMinInFavour();
-	void SetMinInFavourFlag(bool);
-	void SetMinInFavour(int);
-	int GetMinInFavour();
+        bool HasMinInFavour();
+        void SetMinInFavourFlag(bool);
+        void SetMinInFavour(int);
+        int GetMinInFavour();
 
-	bool IsVetoed();
+        bool IsVetoed();
 
-	void addAgainst(wxString);
-	void addInFavour(wxString);
-	void addAbstaining(wxString);
-	
-	void removeAgainst(wxString);
-	void removeInFavour(wxString);
-	void removeAbstaining(wxString);
+        void addAgainst(wxString);
+        void addInFavour(wxString);
+        void addAbstaining(wxString);
+        
+        void removeAgainst(wxString);
+        void removeInFavour(wxString);
+        void removeAbstaining(wxString);
 
-	int numAgainst();
-	int numInFavour();
-	int numAbstentions();
+        int numAgainst();
+        int numInFavour();
+        int numAbstentions();
 
 private:
 
-	bool m_consensusBased;
-	bool m_hasMinInFavour;
-	bool m_P5veto;
-	
-	int m_minInFavour;
-	
-	std::set<wxString> m_against;
-	std::set<wxString> m_inFavour;
-	std::set<wxString> m_abstaining;
+        bool m_consensusBased;
+        bool m_hasMinInFavour;
+        bool m_P5veto;
+        
+        unsigned int m_minInFavour;
+        
+        std::set<wxString> m_against;
+        std::set<wxString> m_inFavour;
+        std::set<wxString> m_abstaining;
 };
 
 #endif

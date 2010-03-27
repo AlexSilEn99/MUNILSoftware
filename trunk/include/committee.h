@@ -30,59 +30,59 @@
 
 class Committee {
 public:
-	Committee() {};
-	Committee(const char *);
+        Committee() {};
+        Committee(const char *);
 
-	wxString name();
-	wxString topicA();
-	wxString topicB();
-	int GSLtime();
-	int votingTime();
+        wxString name();
+        wxString topicA();
+        wxString topicB();
+        unsigned int GSLtime();
+        unsigned int votingTime();
 
-	std::map<wxString, Country>* countries();
-	std::map<wxString, Country*>* members();
-	std::map<wxString, Country*>* observers();
-	
-	void setTopicA(wxString);
-	void setTopicB(wxString);
+        std::map<wxString, Country>* countries();
+        std::map<wxString, Country*>* members();
+        std::map<wxString, Country*>* observers();
+        
+        void setTopicA(wxString);
+        void setTopicB(wxString);
 
-	void setGSLtime(int);
-	void setVotingTime(int);
+        void setGSLtime(unsigned int);
+        void setVotingTime(unsigned int);
 
-	void setCountries(std::map<wxString, Country>);
-	bool addCountry(Country);
-	void removeCountry(Country);
+        void setCountries(std::map<wxString, Country>);
+        bool addCountry(Country);
+        void removeCountry(Country);
 
-	void setPresent(int);
-	void setMembersPresent(int);
+        void setPresent(unsigned int);
+        void setMembersPresent(unsigned int);
 
-	int numPresent();
-	int numMembersPresent();
-	
-	int numTopics();
-	int numMembers();
-	int numObservers();
-	int numCountries();
+        unsigned int numPresent();
+        unsigned int numMembersPresent();
+        
+        unsigned int numTopics();
+        unsigned int numMembers();
+        unsigned int numObservers();
+        unsigned int numCountries();
 
-	void printMembers();
-	void printObservers();
-	void printCountries();
-private:	
-	bool initFromXML(const char *);
+        void printMembers();
+        void printObservers();
+        void printCountries();
+private:        
+        bool initFromXML(const char *);
 
-	wxString m_name;
-	std::map<wxString, Country> m_countries; //use country name as the index of the map to keep this baby sorted by names
+        wxString m_name;
+        std::map<wxString, Country> m_countries; //use country name as the index of the map to keep this baby sorted by names
 
-	// contains pointers to elements in m_countries
-	std::map<wxString, Country*> m_members;
-	std::map<wxString, Country*> m_observers;
+        // contains pointers to elements in m_countries
+        std::map<wxString, Country*> m_members;
+        std::map<wxString, Country*> m_observers;
 
-	wxString m_topicA, m_topicB;
-	int m_numTopics;
-	int m_GSLtime;
-	int m_votingTime;
-	int m_numPresent;
-	int m_numMembersPresent;
+        wxString m_topicA, m_topicB;
+        unsigned int m_numTopics;
+        unsigned int m_GSLtime;
+        unsigned int m_votingTime;
+        unsigned int m_numPresent;
+        unsigned int m_numMembersPresent;
 };
 
 #endif

@@ -12,8 +12,27 @@ On a GNOME prior to 2.28 this works the same: add it to ~/.gtkrc.
 For newer GNOMEs, start gconf-editor and edit:
 /desktop/gnome/interfaces/buttons_have_icons, and menus_have_icons (under the same root)
 
-Win32 build
------------
+Cross-compiling win32 build
+---------------------------
 
-./configure --prefix=/home/gbesjes/devel/wxMUN/build/win32 --disable-shared --build=i586-mingw32msvc --host=i586-mingw32msvc --with-wx-prefix=/home/gbesjes/devel/INSTALL_wxMSW-2.8.9/ --with-wx-config=/home/gbesjes/devel/INSTALL_wxMSW-2.8.9/bin/wx-config
+Make a mingw32 dir:
 
+mkdir ~/mingw32
+
+Setup enviroment:
+
+export CFGPRE=~/mingw32
+export CFGOPT="--prefix=$CFGPRE --host=i586-mingw32msvc --disable-shared --enable-static"
+
+wget http://downloads.sourceforge.net/wxwindows/wxWidgets-2.8.10.tar.bz2
+tar jxvf wxWidgets-2.8.10.tar.bz2
+cd wxWidgets-2.8.10
+mkdir compile
+cd compile
+../configure $CFGOPT --enable-unicode
+make install clean
+cd ../..
+
+Build wxMUN with:
+
+CFLAGS="-I$CFGPRE/include" CXXFLAGS="-I$CFGPRE/include" LDFLAGS="-L$CFGPRE/lib" ../configure $CFGOPT --with-wx-prefix=$CFGPRE --with-xerces-prefix=$CFGPRE

@@ -61,7 +61,7 @@ void CountriesPresentDialog::CheckNumPresent(){
 
 void CountriesPresentDialog::OnSelectAll(wxCommandEvent& event){
 	m_numPresent = m_countriesPresentCheckList->GetCount();
-	for(int i = 0; i < m_countriesPresentCheckList->GetCount(); i++)
+	for(unsigned int i = 0; i < m_countriesPresentCheckList->GetCount(); i++)
 		 m_countriesPresentCheckList->Check(i);
 	CheckNumPresent();
 }
@@ -69,7 +69,7 @@ void CountriesPresentDialog::OnSelectAll(wxCommandEvent& event){
 void CountriesPresentDialog::OnSelectNone(wxCommandEvent& event){
 	m_numPresent = 0;
 
-	for(int i = 0; i < m_countriesPresentCheckList->GetCount(); i++)
+	for(unsigned int i = 0; i < m_countriesPresentCheckList->GetCount(); i++)
 		 m_countriesPresentCheckList->Check(i, false);
 
 	CheckNumPresent();
@@ -78,7 +78,7 @@ void CountriesPresentDialog::OnSelectNone(wxCommandEvent& event){
 void CountriesPresentDialog::OnInvert(wxCommandEvent& event){
 	m_numPresent =  m_countriesPresentCheckList->GetCount() - m_numPresent;
 
-	for(int i = 0; i < m_countriesPresentCheckList->GetCount(); i++)
+	for(unsigned int i = 0; i < m_countriesPresentCheckList->GetCount(); i++)
 		 m_countriesPresentCheckList->Check(i, !m_countriesPresentCheckList->IsChecked(i) );
 
 	CheckNumPresent();	

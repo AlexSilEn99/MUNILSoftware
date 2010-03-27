@@ -17,7 +17,7 @@ BEGIN
             VALUE "FileVersion", "@PACKAGE_VERSION_MAJOR@, @PACKAGE_VERSION_MINOR@, @PACKAGE_VERSION_MICRO@, @PACKAGE_VERSION_NANO@"
             VALUE "InternalName", "wxMUN"
             VALUE "LegalCopyright", "Copyright (C) 2008-2010"
-            VALUE "OriginalFilename", "wxMUN.rc"
+            VALUE "OriginalFilename", "wxmun.rc"
             VALUE "ProductName", " wxMUN"
             VALUE "ProductVersion", "@PACKAGE_VERSION_MAJOR@, @PACKAGE_VERSION_MINOR@, @PACKAGE_VERSION_MICRO@, @PACKAGE_VERSION_NANO@"
         END

@@ -2,7 +2,7 @@ ACLOCAL_AMFLAGS = -I m4
 AUTOMAKE_OPTIONS = foreign 1.7 dist-bzip2
 
 if !LOCALES_ONLY
-MAYBE_DIRS = src include data doc
+MAYBE_DIRS = include src data doc
 endif
 
 if LOCALES
@@ -13,7 +13,7 @@ SUBDIRS = $(MAYBE_DIRS) $(MAYBE_LOCALES)
 
 EXTRA_SUBDIRS = m4
 DIST_SUBDIRS = $(SUBDIRS) $(EXTRA_SUBDIRS)
-EXTRA_DIST = autogen.sh
+EXTRA_DIST = autogen.sh GPL.html
 
 if !LOCALES_ONLY
 if MACAPPBUNDLE

@@ -18,9 +18,40 @@
  *
  */
 
+#include <xercesc/util/XercesVersion.hpp>
+
 #include "wxmunaboutdialog.h"
+
 #include "defs.h"
 #include "configmanager.h"
+#include "version.h"
+
+//helper functions
+enum wxbuildinfoformat {
+    short_f, long_f
+};
+
+wxString wxbuildinfo(wxbuildinfoformat format) {
+        wxString wxbuild(wxVERSION_STRING);
+
+        if (format == long_f ) {
+#if defined(__WXMSW__)
+                wxbuild << _T("-windows");
+#elif defined(__WXMAC__)
+                wxbuild << _T("-mac");
+#elif defined(__UNIX__)
+                wxbuild << _T("-linux");
+#endif
+
+#if wxUSE_UNICODE
+                wxbuild << _T("-unicode");
+#else
+                wxbuild << _T("-ANSI");
+#endif // wxUSE_UNICODE
+        }
+
+        return wxbuild;
+}
 
 wxMUNAboutDialog::wxMUNAboutDialog( wxWindow* parent )
 :
@@ -51,9 +82,26 @@ GUI_wxMUNAboutDialog( parent )
 	author->SetLabel(_T("Geert-Jan Besjes"));
 	
 	wxStaticText *email = (wxStaticText*) wxWindow::FindWindowById(ABOUT_EMAIL);
-	email->SetLabel(_T("g.besjes@student.science.ru.nl"));
+	email->SetLabel(_T("gbesjes@gmx.com"));
 	
 	wxTextCtrl *license = (wxTextCtrl*) wxWindow::FindWindowById(ABOUT_LICENSE);
 	license->SetValue(LICENSE_GPL);
 
+	wxStaticText *build_creation = (wxStaticText*) wxWindow::FindWindowById(BUILD_TIME);
+	build_creation->SetLabel(version_build_creation);
+
+	wxStaticText *build_xerces = (wxStaticText*) wxWindow::FindWindowById(BUILD_XERCES);
+	wxString xercesVersion = wxT(XERCES_VERSIONSTR); xercesVersion.Replace(wxT("_"),wxT("."));
+	build_xerces->SetLabel(xercesVersion);
+
+	wxStaticText *build_wxwidgets = (wxStaticText*) wxWindow::FindWindowById(BUILD_WXWIDGETS);
+	build_wxwidgets->SetLabel(wxbuildinfo(long_f));	
+
+	wxStaticText *build_compiler = (wxStaticText*) wxWindow::FindWindowById(BUILD_COMPILER);
+	build_compiler->SetLabel(wxT(USED_COMPILER));
+
+	wxStaticText *build_cflags = (wxStaticText*) wxWindow::FindWindowById(BUILD_CFLAGS);
+	build_cflags->SetLabel(wxT(USED_CXXFLAGS));
+
+//	XERCES_VERSIONSTR
 }

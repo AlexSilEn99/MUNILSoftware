@@ -21,11 +21,15 @@ wxmun_SOURCES = committee.cpp \
 		wxmunaboutdialog.cpp\
 		yielddialog.cpp
 
+if USE_RESOURCEFILE
+RESOURCEFILE = resources/wxmun.o
+endif
+
 # wxmun_LDADD = @LIBS@
 wxmun_CFLAGS = $(WX_CFLAGS_ONLY)
 wxmun_CXXFLAGS = $(WX_CXXFLAGS_ONLY) 
 wxmun_CPPFLAGS = $(WX_CPPFLAGS) $(XERCES_CPPFLAGS)
-wxmun_LDFLAGS = $(XERCES_LDFLAGS)
+wxmun_LDFLAGS = $(XERCES_LDFLAGS) $(RESOURCEFILE)
 wxmun_LDADD = $(WX_LIBS) $(XERCES_LIBS)
 
 if MACAPPBUNDLE

@@ -2262,6 +2262,62 @@ GUI_wxMUNAboutDialog::GUI_wxMUNAboutDialog( wxWindow* parent, wxWindowID id, con
 	m_panel14->Layout();
 	bSizer63->Fit( m_panel14 );
 	m_aboutNotebook->AddPage( m_panel14, _("License"), true );
+	m_panel29 = new wxPanel( m_aboutNotebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* bSizer621;
+	bSizer621 = new wxBoxSizer( wxVERTICAL );
+	
+	wxFlexGridSizer* fgSizer191;
+	fgSizer191 = new wxFlexGridSizer( 5, 2, 0, 0 );
+	fgSizer191->AddGrowableCol( 1 );
+	fgSizer191->SetFlexibleDirection( wxHORIZONTAL );
+	fgSizer191->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_staticText591 = new wxStaticText( m_panel29, wxID_ANY, _("wxWidgets:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText591->Wrap( -1 );
+	fgSizer191->Add( m_staticText591, 0, wxALL, 5 );
+	
+	m_staticText601 = new wxStaticText( m_panel29, BUILD_WXWIDGETS, _("nnn"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText601->Wrap( -1 );
+	fgSizer191->Add( m_staticText601, 0, wxALL|wxEXPAND, 5 );
+	
+	m_staticText611 = new wxStaticText( m_panel29, wxID_ANY, _("Xerces-C++:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText611->Wrap( -1 );
+	fgSizer191->Add( m_staticText611, 0, wxALL, 5 );
+	
+	m_staticText621 = new wxStaticText( m_panel29, BUILD_XERCES, _("vvv"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText621->Wrap( -1 );
+	fgSizer191->Add( m_staticText621, 0, wxALL|wxEXPAND, 5 );
+	
+	m_staticText6311 = new wxStaticText( m_panel29, wxID_ANY, _("Build at:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText6311->Wrap( -1 );
+	fgSizer191->Add( m_staticText6311, 0, wxALL, 5 );
+	
+	m_staticText641 = new wxStaticText( m_panel29, BUILD_TIME, _("aaa"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText641->Wrap( -1 );
+	fgSizer191->Add( m_staticText641, 0, wxALL|wxEXPAND, 5 );
+	
+	m_staticText881 = new wxStaticText( m_panel29, wxID_ANY, _("Compiler:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText881->Wrap( -1 );
+	fgSizer191->Add( m_staticText881, 0, wxALL, 5 );
+	
+	m_staticText631 = new wxStaticText( m_panel29, BUILD_COMPILER, _("ccc"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText631->Wrap( -1 );
+	fgSizer191->Add( m_staticText631, 0, wxALL, 5 );
+	
+	m_staticText651 = new wxStaticText( m_panel29, wxID_ANY, _("CFLAGS:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText651->Wrap( -1 );
+	fgSizer191->Add( m_staticText651, 0, wxALL, 5 );
+	
+	m_staticText661 = new wxStaticText( m_panel29, BUILD_CFLAGS, _("eee"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText661->Wrap( -1 );
+	fgSizer191->Add( m_staticText661, 0, wxALL|wxEXPAND, 5 );
+	
+	bSizer621->Add( fgSizer191, 1, wxEXPAND, 5 );
+	
+	m_panel29->SetSizer( bSizer621 );
+	m_panel29->Layout();
+	bSizer621->Fit( m_panel29 );
+	m_aboutNotebook->AddPage( m_panel29, _("Build info"), false );
 	
 	bSizer60->Add( m_aboutNotebook, 1, wxEXPAND|wxTOP|wxBOTTOM, 5 );
 	
