@@ -40,7 +40,7 @@ public:
 	void OnInvert(wxCommandEvent& event);
 private:
 	void CheckNumPresent();
-	int m_numPresent;
+	unsigned int m_numPresent;
 };
 
 #endif // __countriespresentdialog__

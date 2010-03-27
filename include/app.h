@@ -45,6 +45,11 @@
 #include <wx/artprov.h>
 
 #include <map>
+
+#ifdef HAVE_CONFIG_H
+ #include "../config.h"
+#endif
+
 #include "wxmunframe.h"
 #include "country.h"
 #include "session.h"
@@ -53,43 +58,42 @@ extern wxMUNFrame *parentFrame;
 
 class wxMUN : public wxApp {
 public:
-	wxMUN() : m_committeeLoaded(false), m_latest_version(wxT("")) {}
+        wxMUN() : m_committeeLoaded(false), m_latest_version(wxEmptyString) {}
         bool OnInit();
         int OnExit();
-        int OnRun();
 
-	void LoadCommitteeFromFile(wxString filename, bool overwriteState = true);
-	void readState(wxString filename= wxT(""));
+        void LoadCommitteeFromFile(wxString filename, bool overwriteState = true);
+        void readState(wxString filename= wxEmptyString);
 
-	bool isCommitteeLoaded();
-	void committeeLoaded();
+        bool isCommitteeLoaded();
+        void committeeLoaded();
 
-	bool checkForUpdates();
-	void setSession(Session);
-	Session *session();
+        bool checkForUpdates();
+        void setSession(Session);
+        Session *session();
 
-	Country *findCountryPtr(wxString);
-	Country findCountry(wxString);
-	wxString findCountryCode(wxString);
-	wxString findCountryFlagByName(wxString);
+        Country *findCountryPtr(wxString);
+        Country findCountry(wxString);
+        wxString findCountryCode(wxString);
+        wxString findCountryFlagByName(wxString);
 
-	wxIconBundle GetIconBundle(const wxArtID& id, const wxArtClient& client=wxART_OTHER);
-	
-	std::map<wxString, Country> *availableCountries();
-	std::map<wxString, Country*> *committeeCountries();
+        wxIconBundle GetIconBundle(const wxArtID& id, const wxArtClient& client=wxART_OTHER);
+        
+        std::map<wxString, Country> *availableCountries();
+        std::map<wxString, Country*> *committeeCountries();
 
 private:
-	bool m_committeeLoaded;
-	Session m_session;
+        bool m_committeeLoaded;
+        Session m_session;
 
         std::map<wxString, Country> m_allAvailableCountries;
         std::map<wxString, Country*> m_committeeCountries;
 
-//	const char *extractTextFromXMLTag(const xmlpp::Node*);
-//	void ParseCountry(const xmlpp::Node*);
+//        const char *extractTextFromXMLTag(const xmlpp::Node*);
+//        void ParseCountry(const xmlpp::Node*);
         bool ReadCountries(const char *);
 
-	wxString m_latest_version;
+        wxString m_latest_version;
 };
 
 DECLARE_APP( wxMUN );

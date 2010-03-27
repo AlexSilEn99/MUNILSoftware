@@ -31,54 +31,56 @@
 #include "country.h"
 
 Country::Country(const Country &c){
-	m_name = c.m_name;
-	m_code = c.m_code;
-	m_observer = c.m_observer;
-	m_present = c.m_present;
+        m_name = c.m_name;
+        m_code = c.m_code;
+        m_observer = c.m_observer;
+        m_present = c.m_present;
 }
 
 Country::Country(wxString name, wxString code, bool o=false, bool p) : m_name(name), m_code(code), m_observer(o), m_present(p) {
 }
 
 wxString Country::name(){
-	return m_name;
+        return m_name;
 }
 
 wxString Country::code(){
-	return m_code;
+        return m_code;
 }
 
 wxString Country::flag(){
-	wxString path = ConfigManager::GetFolder(sdResources) + wxFILE_SEP_PATH + wxT("flags") + wxFILE_SEP_PATH; //TODO move this to configmanager element
+        wxString path = ConfigManager::GetFolder(sdResources) + wxFILE_SEP_PATH + wxT("flags") + wxFILE_SEP_PATH; //TODO move this to configmanager element
 
-	wxString s(m_code);
-	s.append(wxString(wxT(".png")));
-	path.append(s);
+        wxString s(m_code);
+        s.append(wxString(wxT(".png")));
+        path.append(s);
 
-	return path;
+        return path;
 }
 
 void Country::makeObserver() {
-	m_observer = true;
-	std::cout << "made " << m_name.mb_str() << " obs. " << std::endl;
+        m_observer = true;
+#ifdef DEBUG
+        std::cout << "Country::makeObserver(): " << m_name.mb_str() << std::endl;
+#endif
 }
 
 void Country::makeMember() {
-	m_observer = false;
+        m_observer = false;
 }
 
 bool Country::isObserver(){
-	return m_observer;
+        return m_observer;
 }
 
 void Country::makePresent() {
-	m_present = true;
+        m_present = true;
 }
 
 void Country::makeNotPresent() {
-	m_present = false;
+        m_present = false;
 }
 
 bool Country::isPresent(){
-	return m_present;
+        return m_present;
 }

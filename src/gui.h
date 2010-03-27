@@ -132,8 +132,13 @@
 #define ABOUT_AUTHOR 1083
 #define ABOUT_EMAIL 1084
 #define ABOUT_LICENSE 1085
-#define UNL_LOGO_BITMAP 1086
-#define YIELD_TO_DELEGATE_CHOICES 1087
+#define BUILD_WXWIDGETS 1086
+#define BUILD_XERCES 1087
+#define BUILD_TIME 1088
+#define BUILD_COMPILER 1089
+#define BUILD_CFLAGS 1090
+#define UNL_LOGO_BITMAP 1091
+#define YIELD_TO_DELEGATE_CHOICES 1092
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class GUI_MainFrame
@@ -643,6 +648,17 @@ class GUI_wxMUNAboutDialog : public wxDialog
 		wxHyperlinkCtrl* m_hyperlink1;
 		wxPanel* m_panel14;
 		wxTextCtrl* m_textCtrl121;
+		wxPanel* m_panel29;
+		wxStaticText* m_staticText591;
+		wxStaticText* m_staticText601;
+		wxStaticText* m_staticText611;
+		wxStaticText* m_staticText621;
+		wxStaticText* m_staticText6311;
+		wxStaticText* m_staticText641;
+		wxStaticText* m_staticText881;
+		wxStaticText* m_staticText631;
+		wxStaticText* m_staticText651;
+		wxStaticText* m_staticText661;
 		wxStaticLine* m_staticline19;
 		wxStaticLine* m_staticline20;
 		wxButton* m_closeAbout;

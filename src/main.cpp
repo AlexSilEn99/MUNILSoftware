@@ -45,146 +45,142 @@ XERCES_CPP_NAMESPACE_USE
 wxMUNFrame *parentFrame;
 
 wxULongLong ConvertToVersionNumber(const wxChar* version) {
-	// This function is (c) the FileZilla project.
+        // This function is (c) the FileZilla project.
 
-	// Crude conversion from version string into number for easy comparison
-	// Supported version formats:
-	// 1.2.4
-	// 11.22.33.44
-	// 1.2.3-rc3
-	// 1.2.3.4-beta5
-	// All numbers can be as large as 1024, with the exception of the release candidate.
+        // Crude conversion from version string into number for easy comparison
+        // Supported version formats:
+        // 1.2.4
+        // 11.22.33.44
+        // 1.2.3-rc3
+        // 1.2.3.4-beta5
+        // All numbers can be as large as 1024, with the exception of the release candidate.
 
-	// Only either rc or beta can exist at the same time)
-	//
-	// The version string A.B.C.D-rcE-betaF expands to the following binary representation:
-	// 0000aaaaaaaaaabbbbbbbbbbccccccccccddddddddddxeeeeeeeeeffffffffff
-	//
-	// x will be set to 1 if neither rc nor beta are set. 0 otherwise.
-	//
-	// Example:
-	// 2.2.26-beta3 will be converted into
-	// 0000000010 0000000010 0000011010 0000000000 0000000000 0000000011
-	// which in turn corresponds to the simple 64-bit number 2254026754228227
-	// And these can be compared easily
+        // Only either rc or beta can exist at the same time)
+        //
+        // The version string A.B.C.D-rcE-betaF expands to the following binary representation:
+        // 0000aaaaaaaaaabbbbbbbbbbccccccccccddddddddddxeeeeeeeeeffffffffff
+        //
+        // x will be set to 1 if neither rc nor beta are set. 0 otherwise.
+        //
+        // Example:
+        // 2.2.26-beta3 will be converted into
+        // 0000000010 0000000010 0000011010 0000000000 0000000000 0000000011
+        // which in turn corresponds to the simple 64-bit number 2254026754228227
+        // And these can be compared easily
 
-	wxASSERT(*version >= '0' && *version <= '9');
+        wxASSERT(*version >= '0' && *version <= '9');
 
-	wxULongLong v = 0;
-	int segment = 0;
+        wxULongLong v = 0;
+        int segment = 0;
 
-	int shifts = 0;
+        int shifts = 0;
 
-	for (; *version; version++)
-	{
-		if (*version == '.' || *version == '-' || *version == 'b')
-		{
-			v += segment;
-			segment = 0;
-			v <<= 10;
-			shifts++;
-		}
-		if (*version == '-' && shifts < 4)
-		{
-			v <<= (4 - shifts) * 10;
-			shifts = 4;
-		}
-		else if (*version >= '0' && *version <= '9')
-		{
-			segment *= 10;
-			segment += *version - '0';
-		}
-	}
-	v += segment;
-	v <<= (5 - shifts) * 10;
+        for (; *version; version++) {
+                if (*version == '.' || *version == '-' || *version == 'b') {
+                        v += segment;
+                        segment = 0;
+                        v <<= 10;
+                        shifts++;
+                }
+                
+                if (*version == '-' && shifts < 4) {
+                        v <<= (4 - shifts) * 10;
+                        shifts = 4;
+                } else if (*version >= '0' && *version <= '9') {
+                        segment *= 10;
+                        segment += *version - '0';
+                }
+        }
+        v += segment;
+        v <<= (5 - shifts) * 10;
 
-	// Make sure final releases have a higher version number than rc or beta releases
-	if ((v & 0x0FFFFF) == 0)
-		v |= 0x080000;
+        // Make sure final releases have a higher version number than rc or beta releases
+        if ((v & 0x0FFFFF) == 0)
+                v |= 0x080000;
 
-	return v;
+        return v;
 }
 
 bool wxMUN::checkForUpdates(){
-	wxString current = wxT(VERSION), latest;
+        wxString current = wxT(VERSION), latest;
 
-	wxURL url(wxT(CHECK_FOR_UPDATE_URL));
-	wxYield();
-	wxInputStream *data = url.GetInputStream();
-	if (!data)
-		return false;
+        wxURL url(wxT(CHECK_FOR_UPDATE_URL));
+        wxYield();
+        wxInputStream *data = url.GetInputStream();
+        if (!data)
+                return false;
 
-	wxStringOutputStream buf(&latest);
-	data->Read(buf);
+        wxStringOutputStream buf(&latest);
+        data->Read(buf);
 
-	latest.Trim();
-	m_latest_version = latest;
+        latest.Trim();
+        m_latest_version = latest;
 
-	if( ConvertToVersionNumber(current) < ConvertToVersionNumber(latest) )
-		return true;
+        if( ConvertToVersionNumber(current) < ConvertToVersionNumber(latest) )
+                return true;
 
-	return false;
+        return false;
 }
 
 void wxMUN::setSession(Session s){
-	m_session = s;
-	m_session.saveState();
+        m_session = s;
+        m_session.saveState();
 }
 
 Session *wxMUN::session(){
-	return &m_session;
+        return &m_session;
 }
 
 bool wxMUN::isCommitteeLoaded(){
-	return m_committeeLoaded;
+        return m_committeeLoaded;
 }
 
 void wxMUN::committeeLoaded(){
-	m_committeeLoaded = true;
+        m_committeeLoaded = true;
 }
 
 Country* wxMUN::findCountryPtr(wxString code){
-	std::map<wxString, Country>::iterator it = m_allAvailableCountries.find(code);
-	if(it == m_allAvailableCountries.end())
-		return NULL;
+        std::map<wxString, Country>::iterator it = m_allAvailableCountries.find(code);
+        if(it == m_allAvailableCountries.end())
+                return NULL;
 
-	return &(m_allAvailableCountries[code]);
+        return &(m_allAvailableCountries[code]);
 }
 
 Country wxMUN::findCountry(wxString code){
-	std::map<wxString, Country>::iterator it = m_allAvailableCountries.find(code);
-	if(it == m_allAvailableCountries.end())
-		throw -1;
+        std::map<wxString, Country>::iterator it = m_allAvailableCountries.find(code);
+        if(it == m_allAvailableCountries.end())
+                throw -1;
 
-	return m_allAvailableCountries[code];
+        return m_allAvailableCountries[code];
 }
 
 wxString wxMUN::findCountryCode(wxString name){
-	std::map<wxString, Country>::iterator it = m_allAvailableCountries.begin();
-	for(; it != m_allAvailableCountries.end(); it++){
-		if(it->second.name() == name)
-			return it->first;
-	}
+        std::map<wxString, Country>::iterator it = m_allAvailableCountries.begin();
+        for(; it != m_allAvailableCountries.end(); it++){
+                if(it->second.name() == name)
+                        return it->first;
+        }
 
-	return wxEmptyString;
+        return wxEmptyString;
 }
 
 wxString wxMUN::findCountryFlagByName(wxString name){
-	std::map<wxString, Country>::iterator it = m_allAvailableCountries.begin();
-	for(; it != m_allAvailableCountries.end(); it++){
-		if(it->second.name() == name)
-			return it->second.flag();
-	}
+        std::map<wxString, Country>::iterator it = m_allAvailableCountries.begin();
+        for(; it != m_allAvailableCountries.end(); it++){
+                if(it->second.name() == name)
+                        return it->second.flag();
+        }
 
-	return wxEmptyString;
+        return wxEmptyString;
 }
 
 std::map<wxString, Country>* wxMUN::availableCountries() {
-	return &m_allAvailableCountries;
+        return &m_allAvailableCountries;
 }
 
 std::map<wxString, Country*>* wxMUN::committeeCountries() {
-	return &m_committeeCountries;
+        return &m_committeeCountries;
 }
 
 void MakeLowerAscii(wxString& str){
@@ -195,6 +191,7 @@ void MakeLowerAscii(wxString& str){
         }
 }
 
+//TODO: move to more sensible place
 wxIconBundle wxMUN::GetIconBundle(const wxArtID& id, const wxArtClient& client /*=wxART_OTHER*/) {
         wxIconBundle iconBundle;
 
@@ -208,7 +205,6 @@ wxIconBundle wxMUN::GetIconBundle(const wxArtID& id, const wxArtClient& client /
 
         for (int i = 0; i < 3; i++) {
                 wxString file =  ConfigManager::GetFolder(sdResources) + wxFILE_SEP_PATH + dirs[i] + name + _T(".png");
-                std::cout << file.mb_str() << std::endl;
 
                 if (!wxFileName::FileExists(file))
                         continue;
@@ -222,11 +218,10 @@ wxIconBundle wxMUN::GetIconBundle(const wxArtID& id, const wxArtClient& client /
 bool wxMUN::ReadCountries(const char *filename){
 
         xercesc::XercesDOMParser *m_CountriesFileParser = new XercesDOMParser;
-        char* m_name;
-        char* m_code;
-        char* m_observer;
-
-        //std::cout << filename << std::endl;
+        char* m_name = NULL;
+        char* m_code = NULL;
+        char* m_observer = NULL;
+        const char *_true = "true";
 
         // Internal class use only. Hold Xerces data in UTF-16 SMLCh type.
         XMLCh* TAG_countries;
@@ -235,35 +230,11 @@ bool wxMUN::ReadCountries(const char *filename){
         XMLCh* ATTR_code;
         XMLCh* ATTR_observer;
 
-        TAG_countries	= XMLString::transcode("countries");
-        TAG_country	= XMLString::transcode("country");
-        ATTR_name	= XMLString::transcode("name");
-        ATTR_code	= XMLString::transcode("code");
-        ATTR_observer	= XMLString::transcode("observer");
-
-        // Test to see if the file is ok.
-
-        /*	struct stat fileStatus;
-        int iretStat = stat(filename, &fileStatus);
-
-        std::cout << iretStat << std::endl;
-
-        if( iretStat == ENOENT ){
-                throw ( "Path file_name does not exist, or path is an empty string." );
-                return false;
-        } else if( iretStat == ENOTDIR ){
-                throw ( "A component of the path is not a directory." );
-                return false;
-        } else if( iretStat == ELOOP ){
-                throw ( "Too many symbolic links encountered while traversing the path.");
-                return false;
-        } else if( iretStat == EACCES ){
-                throw ( "Permission denied.");
-                return false;
-        } else if( iretStat == ENAMETOOLONG ){
-                throw ( "File can not be read\n");
-                return false;
-        } */
+        TAG_countries   = XMLString::transcode("countries");
+        TAG_country     = XMLString::transcode("country");
+        ATTR_name       = XMLString::transcode("name");
+        ATTR_code       = XMLString::transcode("code");
+        ATTR_observer   = XMLString::transcode("observer");
 
         // Configure DOM parser.
         m_CountriesFileParser->setValidationScheme( XercesDOMParser::Val_Never );
@@ -311,7 +282,7 @@ bool wxMUN::ReadCountries(const char *filename){
                                 }
                                 wxString wxname = wxString::FromAscii(m_name);
                                 wxString wxcode = wxString::FromAscii(m_code);
-                                m_allAvailableCountries[wxcode] = Country(wxname, wxcode, (m_observer=="true"));
+                                m_allAvailableCountries[wxcode] = Country(wxname, wxcode, (m_observer==_true));
 
                                 //std::cout << "name: " << m_name << " code: " << m_code << " observer: " << m_observer << std::endl;
                         }
@@ -372,11 +343,14 @@ void wxMUN::LoadCommitteeFromFile(wxString filename, bool overwriteState){
                 wxICON_INFORMATION | wxOK, NULL);
 }
 
-void wxMUN::readState(wxString filename){
-        std::cout << filename.mb_str() << std::endl;
-
+//TODO: should move into a library (like all the other state/country/committee stuff)
+void wxMUN::readState(wxString filename /* = wxEmptyString */){
         wxString file = (filename != wxEmptyString) ? filename : ConfigManager::GetFolder(sdConfig) + wxFILE_SEP_PATH + _T("state.xml");
 
+#ifdef DEBUG
+        std::cout << "wxMUN::readState(): " << file.mb_str() << std::endl;
+#endif
+        
         if(wxFile::Exists(file)){
                 m_session.readState(file);
                 m_committeeLoaded = true;
@@ -386,16 +360,7 @@ void wxMUN::readState(wxString filename){
 }
 
 bool wxMUN::OnInit(){
-
         ConfigManager* mgr = 0;
-
-        //std::cout << ConfigManager::GetFolder(sdConfig).mb_str() << std::endl;
-        //std::cout << ConfigManager::GetFolder(sdHome).mb_str() << std::endl;
-        //std::cout << ConfigManager::GetFolder(sdDataUser).mb_str() << std::endl;
-        //std::cout << ConfigManager::GetFolder(sdDataGlobal).mb_str() << std::endl;
-        //std::cout << ConfigManager::GetFolder(sdBase).mb_str() << std::endl;
-        //std::cout << ConfigManager::GetFolder(sdTemp).mb_str() << std::endl;
-        //std::cout << ConfigManager::FindDataFile(_T("countries.xml")).mb_str() << std::endl;
 
         try {
                 xercesc::XMLPlatformUtils::Initialize();
@@ -429,28 +394,27 @@ bool wxMUN::OnInit(){
                 return false;
         }
 
-        ::wxInitAllImageHandlers(); 
         //we don't know what crazy formats people might make flags in, init all possible handlers!
+        ::wxInitAllImageHandlers(); 
 
 #ifndef DEBUG
-        wxBitmap bitmap;
+        wxImage bitmap;
         wxSplashScreen *splash=NULL;
         if (bitmap.LoadFile(ConfigManager::FindResourceFile(wxT("splash.png")), wxBITMAP_TYPE_PNG)){
-                std::cout << ConfigManager::FindResourceFile(wxT("splash.png")).mb_str() << std::endl;			
                 splash = new wxSplashScreen(bitmap,
                                 wxSPLASH_CENTRE_ON_SCREEN|wxSPLASH_TIMEOUT,
                                 3500, NULL, -1, wxDefaultPosition, wxDefaultSize,
                                 wxSIMPLE_BORDER|wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP); 
         }
-        wxYield();
 
         if(splash){ 
                 //explicitely delete the splash or the parent frame will start minimized
                 wxMilliSleep(3500);
                 delete splash; 
         }
+#endif
 
-        #endif
+        wxYield();
 
         parentFrame = new wxMUNFrame(NULL);
         parentFrame->SetTitle(wxString(DEFAULT_WINDOW_TITLE));
@@ -462,12 +426,9 @@ bool wxMUN::OnInit(){
         //wxTaskBarIcon* tbIcon = new wxTaskBarIcon();
 #ifdef __WXMSW__
         parentFrame->SetIcon(wxICON(appicon));
-
         //tbIcon->SetIcon(wxICON(MAIN_ICON))
 #else
-        //parentFrame->SetIcon(wxIcon(wxMUN_xpm));
         parentFrame->SetIcons(GetIconBundle(_T("ART_WXMUN")));
-
         //tbIcon->SetIcon(wxMUN_xpm);
 #endif // __WXMSW__
 
@@ -491,12 +452,6 @@ int wxMUN::OnExit(){
         xercesc::XMLPlatformUtils::Terminate();
 
         return 0;
-}
-
-int wxMUN::OnRun(){
-        int exitcode = wxApp::OnRun();
-        if (exitcode!=0)
-                return exitcode;
 }
 
 IMPLEMENT_APP( wxMUN );

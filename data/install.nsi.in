@@ -1,3 +1,5 @@
+; TODO: add future support for languages 
+
 ;--------------------------------
 ; Build environment
 
@@ -5,23 +7,6 @@
   !define srcdir @srcdir@
   !define VERSION @PACKAGE_VERSION@
   !addplugindir @srcdir@
-
-;--------------------------------
-;General
-
-  ;Name and file
-  Name "wxMUN ${VERSION}"
-  OutFile "wxMUN-${VERSION}-setup.exe"
-
-  SetCompressor /SOLID LZMA
-
-  ;Default installation folder
-  InstallDir "$PROGRAMFILES\wxMUN"
-
-  ;Get installation folder from registry if available
-  InstallDirRegKey HKLM "Software\wxMUN" ""
-
-  RequestExecutionLevel user
 
 ;--------------------------------
 ; Libtool executable target path
@@ -32,52 +17,70 @@
   !endif
 
 ;--------------------------------
-;Include Modern UI and functions
+; General
 
+  ;Name and file
+  Name "wxMUN"
+  OutFile "wxMUN-${VERSION}-setup.exe"
+
+  SetCompressor /SOLID LZMA
+
+  ;Default installation folder
+  InstallDir "$PROGRAMFILES\wxMUN"
+
+  ;Get installation folder from registry if available
+  InstallDirRegKey HKLM "Software\wxMUN" ""
+ 
   !include "MUI2.nsh"
   !include "WordFunc.nsh"
-  !include Library.nsh
+  !include "Library.nsh"
   !include "WinVer.nsh"
   !include "FileFunc.nsh"
-  !include "@srcdir@\process_running.nsh"
 
-;--------------------------------
-;Variables
-
-  Var MUI_TEMP
   Var STARTMENU_FOLDER
-
+  Var MUI_TEMP
+ 
 ;--------------------------------
-;Interface Settings
-
-  !define MUI_ICON "${top_srcdir}/src/resources/wxMUN.ico"
-;  !define MUI_UNICON "${srcdir}/uninstall.ico"
-  !define MUI_UNICON "${NSISDIR}/Contrib/Graphics/Icons/modern-uninstall.ico"
-
-  !define MUI_ABORTWARNING
-
+;Configuration
+ 
+  ;Bitmaps
   !define MUI_WELCOMEFINISHPAGE_BITMAP            ".\installer-pixmaps\wxmun-intro.bmp"
   !define MUI_HEADERIMAGE
   !define MUI_HEADERIMAGE_RIGHT
   !define MUI_HEADERIMAGE_BITMAP                  ".\installer-pixmaps\wxmun-header.bmp"
 
+  ;Finish Page config
+  !define MUI_FINISHPAGE_NOAUTOCLOSE
+  !define MUI_FINISHPAGE_RUN                    "$INSTDIR\wxMUN.exe"
+  !define MUI_FINISHPAGE_RUN_NOTCHECKED
+  !define MUI_FINISHPAGE_LINK                   "Visit wxMUN homepage"
+  !define MUI_FINISHPAGE_LINK_LOCATION          "http://wxmun.unitednetherlands.org"
 
- ########## Pages ##########
-!insertmacro MUI_PAGE_WELCOME
-!insertmacro MUI_PAGE_LICENSE "${top_srcdir}\COPYING"
-!insertmacro MUI_PAGE_DIRECTORY
+  !insertmacro MUI_PAGE_WELCOME
+  !insertmacro MUI_PAGE_LICENSE "${top_srcdir}\COPYING"
+  !insertmacro MUI_PAGE_COMPONENTS
 
-!insertmacro MUI_PAGE_INSTFILES
+  ; Install dir page
+  !insertmacro MUI_PAGE_DIRECTORY
+  !insertmacro MUI_PAGE_STARTMENU Application $STARTMENU_FOLDER
+  !insertmacro MUI_PAGE_INSTFILES
+  !insertmacro MUI_PAGE_FINISH
 
-!define MUI_FINISHPAGE_RUN "$INSTDIR\wxMUN.exe"
-!insertmacro MUI_PAGE_FINISH
+  ; Uninstaller pages
+  !insertmacro MUI_UNPAGE_WELCOME
+  !insertmacro MUI_UNPAGE_CONFIRM
+  !insertmacro MUI_UNPAGE_INSTFILES
+  !insertmacro MUI_UNPAGE_FINISH
 
-!insertmacro MUI_UNPAGE_CONFIRM
-!insertmacro MUI_UNPAGE_INSTFILES
-
+  ;Language
+  !insertmacro MUI_LANGUAGE "English"
+ 
+  ;General
+  OutFile "wxmun-${VERSION}-setup-win32.exe"
+ 
 ;-------------------------------------------------------------------------
 ; Undef this if you dont have UPX upx.sourceforge.net
-; !define HAVE_UPX
+!define HAVE_UPX
 
 !ifdef HAVE_UPX
   !packhdr tmpexe.tmp "UPX --best -q --compress-icons=0 tmpexe.tmp"
@@ -108,26 +111,37 @@ is_admin:
 
 start:
 FunctionEnd
+ 
+;--------------------------------
+;Installer macros
+
+!macro WRITE_REG_DATA FUNCTION SUB_KEY ENTRY_NAME ENTRY_VALUE
+  ${FUNCTION} SHCTX "${SUB_KEY}" "${ENTRY_NAME}" "${ENTRY_VALUE}"
+!macroend
+
+!macro ADD_UNINSTALL_ENTRY_STR ENTRY_NAME ENTRY_VALUE
+  !insertmacro WRITE_REG_DATA WriteRegStr "Software\Microsoft\Windows\CurrentVersion\Uninstall\wxMUN" "${ENTRY_NAME}" "${ENTRY_VALUE}"
+!macroend
+
+!macro ADD_UNINSTALL_ENTRY_DWORD ENTRY_NAME ENTRY_VALUE
+  !insertmacro WRITE_REG_DATA WriteRegDWORD "Software\Microsoft\Windows\CurrentVersion\Uninstall\wxMUN" "${ENTRY_NAME}" "${ENTRY_VALUE}"
+!macroend
 
 ;--------------------------------
-;Languages
+;Installer Sections
+ 
+Section "wxMUN" SecCore
+SectionIn 1 RO
 
-  !insertmacro MUI_LANGUAGE "English"
-
-; installer
-
-Section "wxMUN" SEC01
 !ifdef NSIS_CONFIG_LOG
   LogSet on
 !endif
 
-  SetOutPath "$INSTDIR"
+  SetOutPath $INSTDIR
 
   File "..\src\${LT_EXEDIR}wxMUN.exe"
   File "${srcdir}\mingwm10.dll"
   File "${top_srcdir}\GPL.html"
-;  File "${top_srcdir}\NEWS"
-;  File "${top_srcdir}\AUTHORS"
 
   SetOutPath "$INSTDIR\share\wxmun\resources"
   File "${top_srcdir}/src\resources\countries.xml"
@@ -145,27 +159,41 @@ Section "wxMUN" SEC01
   SetOutPath "$INSTDIR\share\wxmun\resources\flags"
   File "${top_srcdir}/src\resources\flags\*.png"
 
-  ;Create uninstaller
-  WriteUninstaller "$INSTDIR\uninstall.exe"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\wxMUN" DisplayName "wxMUN"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\wxMUN" UninstallString '"$INSTDIR\uninst.exe"'
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\wxMUN" DisplayIcon $INSTDIR\gfx\icon.ico
+
+SectionEnd
+ 
+Section "Start menu icons" StartMenu
+  !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
 
   ;Create shortcuts
   SetOutPath "$INSTDIR"
+
   CreateDirectory "$SMPROGRAMS\$STARTMENU_FOLDER"
   CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
   CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\wxMUN.lnk" "$INSTDIR\wxMUN.exe"
+  CreateShortCut $SMPROGRAMS\$STARTMENU_FOLDER\License.lnk $INSTDIR\GPL.html
+
+  ${If} ${AtLeastWin7}
+    ; Setting AppID
+    push "wxMUN.AppID"
+    push "$SMPROGRAMS\$STARTMENU_FOLDER\wxMUN.lnk"
+    nsis_appid::set_appid
+  ${EndIf}
+
+  !insertmacro MUI_STARTMENU_WRITE_END
 SectionEnd
-
-!macro WRITE_REG_DATA FUNCTION SUB_KEY ENTRY_NAME ENTRY_VALUE
-  ${FUNCTION} SHCTX "${SUB_KEY}" "${ENTRY_NAME}" "${ENTRY_VALUE}"
-!macroend
-
-!macro ADD_UNINSTALL_ENTRY_STR ENTRY_NAME ENTRY_VALUE
-  !insertmacro WRITE_REG_DATA WriteRegStr "Software\Microsoft\Windows\CurrentVersion\Uninstall\wxMUN" "${ENTRY_NAME}" "${ENTRY_VALUE}"
-!macroend
-
-!macro ADD_UNINSTALL_ENTRY_DWORD ENTRY_NAME ENTRY_VALUE
-  !insertmacro WRITE_REG_DATA WriteRegDWORD "Software\Microsoft\Windows\CurrentVersion\Uninstall\HM NIS Edit" "${ENTRY_NAME}" "${ENTRY_VALUE}"
-!macroend
+ 
+Section "Desktop icon" SecDesktop
+  CreateShortcut "$DESKTOP\wxMUN.lnk" "$INSTDIR\wxMUN.exe"
+SectionEnd
+ 
+Section "Quick Launch icon" SecQuick
+  StrCmp $QUICKLAUNCH $TEMP +2
+    CreateShortcut "$QUICKLAUNCH\wxMUN.lnk" "$INSTDIR\wxMUN.exe"
+SectionEnd
 
 Section -Post
   WriteUninstaller "$INSTDIR\uninst.exe"
@@ -185,32 +213,17 @@ Section -Post
   !insertmacro ADD_UNINSTALL_ENTRY_DWORD "NoRepair" 1
 SectionEnd
 
-############################################################################################
-;                                 Uninstaller                                              ;
-############################################################################################
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+  !insertmacro MUI_DESCRIPTION_TEXT ${SecCore} "Required core wxMUN files"
+  !insertmacro MUI_DESCRIPTION_TEXT ${StartMenu} "Put links in the start menu"
+  !insertmacro MUI_DESCRIPTION_TEXT ${SecQuick} "Add a link to wxMUN in your quick launch bar"
+  !insertmacro MUI_DESCRIPTION_TEXT ${SecDesktop} "Place a link to wxMUN on the desktop"
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 
-Function un.onInit
-  FindWindow $R0 "wxMUN"
-  IsWindow $R0 0 +3
-  MessageBox MB_ICONEXCLAMATION|MB_OK "Before uninstalling wxMUN you must close it."
-  Abort
-  
-  UserInfo::GetAccountType
-  Pop $R0
-  StrCmp $R0 "Admin" is_admin
-
-  SetShellVarContext current
-  StrCpy $REG_ROOT_KEY "HKCU"
-  Goto start
-
-is_admin:
-  SetShellVarContext all
-  StrCpy $REG_ROOT_KEY "HKLM"
-
-start:
-FunctionEnd
-
+;--------------------------------
+;Uninstaller Section
+ 
 !macro DELETE_REG_KEY REG_KEY
 	StrCmp $REG_ROOT_KEY "HKLM" 0 +3
     DeleteRegKey HKLM "${REG_KEY}"
@@ -218,12 +231,11 @@ FunctionEnd
  	DeleteRegKey HKCU "${REG_KEY}"
 !macroend
 
-Section Uninstall
+Section "Uninstall"
 
   Delete "$INSTDIR\wxMUN.exe"
   Delete "$INSTDIR\mingwm10.dll"
   Delete "$INSTDIR\GPL.html"
-
 
   Delete "$DESKTOP\wxMUN.lnk"
 
@@ -242,12 +254,14 @@ Section Uninstall
   Delete "$INSTDIR\share\wxmun\resources\*.png"
   Delete "$INSTDIR\share\wxmun\resources\*.xml"
 
-  RMDir "$INSTDIR\resources\share\wxmun"
-  RMDir "$INSTDIR\resources\share"
-  RMDir "$INSTDIR\resources"
+  RMDir "$INSTDIR\share\wxmun\resources"
+  RMDir "$INSTDIR\share\wxmun"
+  RMDir "$INSTDIR\share"
 
   Delete "$INSTDIR\po\*"
   RMDir "$INSTDIR\po"
+
+  Delete "$INSTDIR\uninst.exe"
   RMDir "$INSTDIR"
 
   DeleteRegKey HKCU "Software\HM Software\wxMUN"
@@ -255,6 +269,20 @@ Section Uninstall
   
   !insertmacro DELETE_REG_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\wxMUN"
   !insertmacro DELETE_REG_KEY "Software\Microsoft\Windows\CurrentVersion\App Paths\wxMUN.exe"
-  
+
+  !insertmacro MUI_STARTMENU_GETFOLDER Application $MUI_TEMP
+
+  Delete "$SMPROGRAMS\$MUI_TEMP\Uninstall.lnk"
+  Delete "$SMPROGRAMS\$MUI_TEMP\wxMUN.lnk"
+  Delete "$SMPROGRAMS\$MUI_TEMP\License.lnk"
+ 
+  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\wxMUN"
+ 
+  Delete "$DESKTOP\wxMUN.lnk"
+  Delete "$QUICKLAUNCH\wxMUN.lnk"
+ 
   SetAutoClose false
+
 SectionEnd
+ 
+;eof

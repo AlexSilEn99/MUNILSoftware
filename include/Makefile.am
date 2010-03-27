@@ -20,4 +20,16 @@ noinst_HEADERS = clear_png.h \
 			wxmunaboutdialog.h \
 			yielddialog.h
 
-EXTRA_DIST = $(noinst_HEADERS) 
+BUILT_SOURCES = version.h
+
+version.h: version.h.SH
+	$(SHELL) version.h.SH
+
+clean:
+	rm version.h
+
+EXTRA_DIST = $(noinst_HEADERS) version.h.SH
+
+dist-hook:
+	rm -rf version.h
+
