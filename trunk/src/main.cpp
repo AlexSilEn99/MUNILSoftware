@@ -308,7 +308,7 @@ void wxMUN::LoadCommitteeFromFile(wxString filename, bool overwriteState){
                 // create session instance
                 Session s(c);
 
-                // write session back to wxMUN instance and save	
+                // write session back to wxMUN instance and save
                 wxGetApp().committeeLoaded();
                 wxGetApp().setSession(s);
 

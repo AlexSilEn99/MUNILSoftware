@@ -397,6 +397,16 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	wxBoxSizer* bSizer861;
 	bSizer861 = new wxBoxSizer( wxHORIZONTAL );
 	
+	m_resumeSingleSpeakerButton = new wxButton( m_singleSpeakerCaucusLeftPanel, RESUME_SINGLE_SPEAKER, _("&Resume"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_resumeSingleSpeakerButton->Enable( false );
+	
+	bSizer861->Add( m_resumeSingleSpeakerButton, 0, wxALL, 5 );
+	
+	m_pauseSingleSpeakerButton = new wxButton( m_singleSpeakerCaucusLeftPanel, PAUSE_SINGLE_SPEAKER, _("&Pause"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_pauseSingleSpeakerButton->Enable( false );
+	
+	bSizer861->Add( m_pauseSingleSpeakerButton, 0, wxALL, 5 );
+	
 	m_stopSingleSpeakerButton = new wxButton( m_singleSpeakerCaucusLeftPanel, wxID_STOP, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer861->Add( m_stopSingleSpeakerButton, 0, wxALL|wxALIGN_RIGHT, 5 );
 	
@@ -467,7 +477,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_singleSpeakerPanel->SetSizer( singleSpeakerCaucusContainerSizer );
 	m_singleSpeakerPanel->Layout();
 	singleSpeakerCaucusContainerSizer->Fit( m_singleSpeakerPanel );
-	m_mainauinotebook->AddPage( m_singleSpeakerPanel, _("Single speaker"), false, wxNullBitmap );
+	m_mainauinotebook->AddPage( m_singleSpeakerPanel, _("Single speaker"), true, wxNullBitmap );
 	m_modCaucusPanel = new wxPanel( m_mainauinotebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* modCaucusContainerSizer;
 	modCaucusContainerSizer = new wxBoxSizer( wxVERTICAL );
@@ -1176,7 +1186,7 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_procVotingPanel->SetSizer( procVotingContainerSizer );
 	m_procVotingPanel->Layout();
 	procVotingContainerSizer->Fit( m_procVotingPanel );
-	m_mainauinotebook->AddPage( m_procVotingPanel, _("Procedural voting"), true, wxNullBitmap );
+	m_mainauinotebook->AddPage( m_procVotingPanel, _("Procedural voting"), false, wxNullBitmap );
 	m_rollCallVotePanel = new wxPanel( m_mainauinotebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* rollCallVoteSizer;
 	rollCallVoteSizer = new wxBoxSizer( wxHORIZONTAL );
@@ -1629,6 +1639,8 @@ GUI_MainFrame::GUI_MainFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	m_GSLDownButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLDownClick ), NULL, this );
 	m_GSLDeleteButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLDeleteClick ), NULL, this );
 	m_GSLClearButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLClearClick ), NULL, this );
+	m_resumeSingleSpeakerButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnSingleSpeakerResume ), NULL, this );
+	m_pauseSingleSpeakerButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnSingleSpeakerPause ), NULL, this );
 	m_stopSingleSpeakerButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnSingleSpeakerStop ), NULL, this );
 	m_singleSpeakerMinutes->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUI_MainFrame::OnSingleSpeakerMinutesChange ), NULL, this );
 	m_singleSpeakerSeconds->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUI_MainFrame::OnSingleSpeakerSecondsChange ), NULL, this );
@@ -1712,6 +1724,8 @@ GUI_MainFrame::~GUI_MainFrame()
 	m_GSLDownButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLDownClick ), NULL, this );
 	m_GSLDeleteButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLDeleteClick ), NULL, this );
 	m_GSLClearButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnGSLClearClick ), NULL, this );
+	m_resumeSingleSpeakerButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnSingleSpeakerResume ), NULL, this );
+	m_pauseSingleSpeakerButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnSingleSpeakerPause ), NULL, this );
 	m_stopSingleSpeakerButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUI_MainFrame::OnSingleSpeakerStop ), NULL, this );
 	m_singleSpeakerMinutes->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUI_MainFrame::OnSingleSpeakerMinutesChange ), NULL, this );
 	m_singleSpeakerSeconds->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUI_MainFrame::OnSingleSpeakerSecondsChange ), NULL, this );
