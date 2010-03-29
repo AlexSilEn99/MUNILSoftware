@@ -173,7 +173,7 @@ _singleSpeakerTimer(this,SINGLE_SPEAKER_TIMER),
 _unmodCaucusTimer(this, UNMOD_CAUCUS_TIMER),
 _modCaucusTimer(this, MOD_CAUCUS_TIMER)
 {
-        _speakerRunning = false; _timerPaused = false; _caucusRunning = false;
+        _speakerRunning = false; _GSLtimerPaused = false; _timerPaused = false; _caucusRunning = false;
         _caucusSeconds = 0; _speakerSeconds = 0;
         
         DisableCaucusCtrls();
@@ -488,6 +488,22 @@ void wxMUNFrame::DisableSingleSpeakerCtrls() {
         DisableSingleSpeakerTimerCtrls();
 }
 
+void wxMUNFrame::EnableSingleSpeakerPauseButton() {
+        m_pauseSingleSpeakerButton->Enable();
+}
+
+void wxMUNFrame::DisableSingleSpeakerPauseButton() {
+        m_pauseSingleSpeakerButton->Enable(false);
+}
+
+void wxMUNFrame::EnableSingleSpeakerResumeButton() {
+        m_resumeSingleSpeakerButton->Enable();
+}
+
+void wxMUNFrame::DisableSingleSpeakerResumeButton() {
+        m_resumeSingleSpeakerButton->Enable(false);
+}
+
 void wxMUNFrame::EnableSingleSpeakerTimerCtrls() {
         wxSpinCtrl *minutes = (wxSpinCtrl*) wxWindow::FindWindowById(SINGLE_SPEAKER_MINUTES);
         wxSpinCtrl *seconds = (wxSpinCtrl*) wxWindow::FindWindowById(SINGLE_SPEAKER_SECONDS);
@@ -582,6 +598,8 @@ void wxMUNFrame::StartSingleSpeaker(wxString name) {
         PauseGSL();
         DisableCaucusCtrls();
         DisableVotingCtrls();
+        
+        EnableSingleSpeakerPauseButton();
 
         // m_GSLpanel->Enable(false); 
         m_procVotingPanel->Enable(false);
@@ -599,6 +617,40 @@ void wxMUNFrame::OnSingleSpeakerStop( wxCommandEvent& event ) {
         }
         
         StopSingleSpeaker();
+}
+
+void wxMUNFrame::OnSingleSpeakerResume( wxCommandEvent& event ) {
+        if( !(_speakerRunning && (_singleSpeakerTimer.IsRunning() || _timerPaused) ) ) {
+                return;
+        }
+        
+        ResumeSingleSpeaker();
+}
+
+void wxMUNFrame::OnSingleSpeakerPause( wxCommandEvent& event ) {
+        if( !(_speakerRunning && (_singleSpeakerTimer.IsRunning() || _timerPaused) ) ) {
+                return;
+        }
+        
+        PauseSingleSpeaker();
+}
+
+void wxMUNFrame::PauseSingleSpeaker() {
+        _singleSpeakerTimer.Stop();
+        _timerPaused = true;
+        
+        EnableSingleSpeakerResumeButton();
+        DisableSingleSpeakerPauseButton();
+        DisableSingleSpeakerTimerCtrls();
+}
+
+void wxMUNFrame::ResumeSingleSpeaker() {        
+        _singleSpeakerTimer.Start();
+        _timerPaused = false;
+        
+        DisableSingleSpeakerResumeButton();
+        EnableSingleSpeakerPauseButton();
+        DisableSingleSpeakerTimerCtrls();
 }
 
 void wxMUNFrame::ResetSingleSpeakerLabels() {
@@ -856,7 +908,7 @@ void wxMUNFrame::OnGSLChoice( wxCommandEvent& event ) {
 } 
 
 void wxMUNFrame::OnGSLStop( wxCommandEvent& event ) {
-        if( !(_GSLspeakerRunning && (_GSLSpeakerTimer.IsRunning() || _timerPaused) ) ) {
+        if( !(_GSLspeakerRunning && (_GSLSpeakerTimer.IsRunning() || _GSLtimerPaused) ) ) {
                 return;
         }
 
@@ -869,7 +921,7 @@ void wxMUNFrame::OnGSLNext( wxCommandEvent& event ) {
 }
 
 void wxMUNFrame::OnGSLYield( wxCommandEvent& event ) {
-        if( !(_GSLspeakerRunning && (_GSLSpeakerTimer.IsRunning() || _timerPaused) ) ) 
+        if( !(_GSLspeakerRunning && (_GSLSpeakerTimer.IsRunning() || _GSLtimerPaused) ) ) 
                 return;
         
         PauseGSL();
@@ -911,7 +963,7 @@ void wxMUNFrame::OnGSLYield( wxCommandEvent& event ) {
 }
 
 void wxMUNFrame::OnGSLPause( wxCommandEvent& event ) {
-        if( !(_GSLspeakerRunning && (_GSLSpeakerTimer.IsRunning() || _timerPaused) ) ) {
+        if( !(_GSLspeakerRunning && (_GSLSpeakerTimer.IsRunning() || _GSLtimerPaused) ) ) {
                 return;
         }
         
@@ -919,7 +971,7 @@ void wxMUNFrame::OnGSLPause( wxCommandEvent& event ) {
 }
 
 void wxMUNFrame::OnGSLResume( wxCommandEvent& event ) {
-        if( !(_GSLspeakerRunning && (_GSLSpeakerTimer.IsRunning() || _timerPaused) ) ) {
+        if( !(_GSLspeakerRunning && (_GSLSpeakerTimer.IsRunning() || _GSLtimerPaused) ) ) {
                 return;
         }
         
@@ -981,7 +1033,7 @@ void wxMUNFrame::EnableGSLYieldButton() {
 
 void wxMUNFrame::PauseGSL() {
         _GSLSpeakerTimer.Stop();
-        _timerPaused = true;
+        _GSLtimerPaused = true;
         
         EnableGSLResumeButton();
         DisableGSLPauseButton();
@@ -995,7 +1047,7 @@ void wxMUNFrame::ResumeGSL() {
         StopVotingSpeaker();
         
         _GSLSpeakerTimer.Start();
-        _timerPaused = false;
+        _GSLtimerPaused = false;
         
         DisableGSLResumeButton();
         EnableGSLPauseButton();
@@ -1329,7 +1381,7 @@ void wxMUNFrame::OnNewCommittee( wxCommandEvent& event ) {
                          wxYES_DEFAULT|wxYES_NO|wxICON_INFORMATION);
                                 
         if ( dialog.ShowModal() == wxID_YES ) {
-                wxGetApp().LoadCommitteeFromFile(CurrentDocPath); 
+                wxGetApp().LoadCommitteeFromFile(CurrentDocPath, true); 
         }         
 }
 
@@ -1352,7 +1404,6 @@ void wxMUNFrame::OnEditCommittee( wxCommandEvent& event ) {
                 return;
 
         if(wxGetApp().isCommitteeLoaded()) {
-
                 wxMessageDialog dialog( NULL, 
                                 _("Committee saved!\n\nLoad the newly defined committee preserving the current state of debate (yes), not preserving the state (no) or do not load the new committee (cancel)?\n\nAny countries no longer present in the edited committee will be removed from the General Speakers list, even if you wish to preserve it."), 
                                 _("Edit committee"),
@@ -1363,7 +1414,7 @@ void wxMUNFrame::OnEditCommittee( wxCommandEvent& event ) {
                                 wxGetApp().LoadCommitteeFromFile(CurrentDocPath, false); 
                                 break; 
                         case wxID_NO: 
-                                wxGetApp().LoadCommitteeFromFile(CurrentDocPath); 
+                                wxGetApp().LoadCommitteeFromFile(CurrentDocPath, true); 
                                 break; 
                         case wxID_CANCEL: 
                                 return;
@@ -1397,10 +1448,8 @@ void wxMUNFrame::OnLoadCommittee( wxCommandEvent& event ) {
  
         if (OpenDialog->ShowModal() == wxID_OK) { // if the user click "Open" instead of "Cancel"
                 CurrentDocPath = OpenDialog->GetPath();
-                wxGetApp().LoadCommitteeFromFile(CurrentDocPath);
+                wxGetApp().LoadCommitteeFromFile(CurrentDocPath, true);
         }
-
-        // TODO: Implement OnLoadCommittee
 }
 
 void wxMUNFrame::LoadSetLabels() {
@@ -1465,14 +1514,7 @@ void wxMUNFrame::LoadSetLabels() {
                 tB->Enable(false);
                         
                 topic_label->SetLabel(wxGetApp().session()->committee()->topicA());
-                wxGetApp().session()->setTopic(wxGetApp().session()->committee()->topicA());
-                        
-                //one topic, free controls if members present
-                if(wxGetApp().session()->committee()->numPresent() > 0) {
-                        EnableGSLCtrls();
-                        EnableCaucusCtrls();
-                        EnableSingleSpeakerCtrls();
-                }
+                wxGetApp().session()->setTopic(wxGetApp().session()->committee()->topicA());                
         } else if(wxGetApp().session()->topicChosen()) { // 2 topics, one chosen
                 tB->SetText(wxGetApp().session()->committee()->topicB());
                 wxGetApp().session()->setTopic(wxGetApp().session()->committee()->topicB());
@@ -1488,13 +1530,13 @@ void wxMUNFrame::LoadSetLabels() {
                         tB->Check(true); tB->Enable(false);
                         tA->Enable(true);                        
                 }
-                
         } else { // 2 topics, none chosen
                 tB->SetText(wxGetApp().session()->committee()->topicB());
                 tB->Enable();
 
                 topic_label->SetLabel(_("awaiting user input")); //reset in case a previous session already set this
-
+                topic_label->SetForegroundColour(DARK_RED);
+                
                 //lock the controls until topic chosen
                 DisableGSLCtrls();
                 DisableCaucusCtrls();
@@ -1564,6 +1606,13 @@ void wxMUNFrame::LoadSetLabels() {
                         rcFirstRoundChoices->Append(name);
                 
         }
+              
+        if(wxGetApp().session()->topicChosen() && wxGetApp().session()->committee()->numPresent() > 0) {
+                EnableGSLCtrls();
+                EnableCaucusCtrls();
+                EnableSingleSpeakerCtrls();
+        }
+        
 }
 
 void wxMUNFrame::OnHelp( wxCommandEvent& event ) {
@@ -1607,6 +1656,7 @@ void wxMUNFrame::OnTopicAMenuSelect ( wxCommandEvent& event ) {
 
         wxStaticText *topic_label = (wxStaticText*) wxWindow::FindWindowById(CURRENT_TOPIC);
         topic_label->SetLabel(wxGetApp().session()->committee()->topicA());
+        topic_label->SetForegroundColour(wxColour( wxSYS_COLOUR_WINDOWTEXT));
 
         wxGetApp().session()->setTopic(wxGetApp().session()->committee()->topicA());
 
@@ -1655,7 +1705,8 @@ void wxMUNFrame::OnTopicBMenuSelect ( wxCommandEvent& event ) {
 
         wxStaticText *topic_label = (wxStaticText*) wxWindow::FindWindowById(CURRENT_TOPIC);
         topic_label->SetLabel(wxGetApp().session()->committee()->topicB());
-
+        topic_label->SetForegroundColour(wxColour( wxSYS_COLOUR_WINDOWTEXT));
+        
         wxGetApp().session()->setTopic(wxGetApp().session()->committee()->topicB());
         
 //TODO: following should move to shared function with OnTopicASelect!        
@@ -2555,6 +2606,9 @@ void wxMUNFrame::StopSingleSpeaker() {
         EnableVotingCtrls();
         EnableGSLCtrls();
 
+        DisableSingleSpeakerPauseButton();
+        DisableSingleSpeakerResumeButton();
+        
         EnableSingleSpeakerCtrls();        
         ResetSingleSpeakerLabels();
         

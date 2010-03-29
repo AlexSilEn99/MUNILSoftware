@@ -83,6 +83,10 @@ protected:
         void OnSingleSpeakerStop( wxCommandEvent& event );
         void ResetSingleSpeakerLabels();
         void StopSingleSpeaker();
+        void OnSingleSpeakerPause( wxCommandEvent& event );
+        void OnSingleSpeakerResume( wxCommandEvent& event );
+        void PauseSingleSpeaker();
+        void ResumeSingleSpeaker();
         
         // caucus stuff
         void OnModCaucusStart( wxCommandEvent& event );
@@ -231,6 +235,10 @@ protected:
 
         void DisableSingleSpeakerCtrls();
         void EnableSingleSpeakerCtrls();
+        void EnableSingleSpeakerPauseButton();
+        void DisableSingleSpeakerPauseButton();
+        void EnableSingleSpeakerResumeButton();
+        void DisableSingleSpeakerResumeButton();
         void DisableSingleSpeakerTimerCtrls();
         void EnableSingleSpeakerTimerCtrls();
         
@@ -261,6 +269,7 @@ private:
         wxTimer _unmodCaucusTimer; //need seperate counter id & var
         wxTimer _modCaucusTimer;
 
+        bool _GSLtimerPaused;
         bool _timerPaused;
         bool _caucusRunning;
         bool _speakerRunning;
