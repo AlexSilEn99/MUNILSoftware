@@ -22,7 +22,7 @@ mkdir ~/mingw32
 Setup enviroment:
 
 export CFGPRE=~/mingw32
-export CFGOPT="--prefix=$CFGPRE --host=i586-mingw32msvc --disable-shared --enable-static"
+export CFGOPT="--prefix=$CFGPRE --build=i586-mingw32msvc --disable-shared --enable-static"
 
 wget http://downloads.sourceforge.net/wxwindows/wxWidgets-2.8.10.tar.bz2
 tar jxvf wxWidgets-2.8.10.tar.bz2
@@ -35,4 +35,9 @@ cd ../..
 
 Build wxMUN with:
 
-CFLAGS="-I$CFGPRE/include" CXXFLAGS="-I$CFGPRE/include" LDFLAGS="-L$CFGPRE/lib" ../configure $CFGOPT --with-wx-prefix=$CFGPRE --with-xerces-prefix=$CFGPRE
+CFLAGS="-I$CFGPRE/include" CXXFLAGS="-I$CFGPRE/include" LDFLAGS="-L$CFGPRE/lib" ./configure $CFGOPT --with-wx-prefix=$CFGPRE --with-xerces=$CFGPRE
+
+Win32 installer
+---------------
+
+When cross-compiling, an install.nsi file is created in the data/ subdirectory. Run 'makensis install.nsi' on it to create a Windows installer.
