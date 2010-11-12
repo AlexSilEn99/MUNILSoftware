@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.60)
-AC_INIT(wxMUN, 0.38, g.besjes@student.science.ru.nl)
+AC_INIT(wxMUN, 0.38, gbesjes@gmail.com)
 AC_CONFIG_MACRO_DIR([m4])
 
 if test `pwd | wc -w` -ne 1; then
