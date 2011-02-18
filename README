@@ -22,7 +22,17 @@ mkdir ~/mingw32
 Setup enviroment:
 
 export CFGPRE=~/mingw32
-export CFGOPT="--prefix=$CFGPRE --build=i586-mingw32msvc --disable-shared --enable-static"
+export CFGOPT="--prefix=$CFGPRE --host=i586-mingw32msvc --build=i686-linux --disable-shared --enable-static"
+
+Build Xerces-C++:
+
+wget http://apache.mirror.easycolocate.nl//xerces/c/3/sources/xerces-c-3.1.1.tar.gz
+tar xvzf xerces-c-3.1.1.tar.gz
+cd xerces-c-3.1.1
+./configure $CFGOPT
+make install clean
+
+Build wxWidgets:
 
 wget http://downloads.sourceforge.net/wxwindows/wxWidgets-2.8.10.tar.bz2
 tar jxvf wxWidgets-2.8.10.tar.bz2
