@@ -71,9 +71,13 @@ if test "$buildmain" = "yes"; then
 			wxWidgets version is $reqwx or above.
 			])
 	fi
+    WX_LIBS=`$WX_CONFIG_PATH --static --libs aui,core,base,adv,net`
+    
+    AC_SUBST(WX_LIBSS)
 
-	AX_LIB_XERCES
-	if test $HAVE_XERCES != "yes"; then
+    #AX_LIB_XERCES
+	#AX_XERCESC
+    if test $HAVE_XERCES != "yes"; then
 		AC_MSG_ERROR([
 			Xerces-C++ must be installed on your system.
 		])
@@ -163,7 +167,12 @@ if test "$buildmain" = "yes"; then
 
 	if echo $WX_CPPFLAGS | grep __WXMAC__; then
 	    macappbundle="yes"
+
+        dnl ensure xerces is linked statically - we don't check for it on this system
+        LIBS="$LIBS /usr/local/lib/libxerces-c.a -lcurl"
+        AC_SUBST(LIBS)
 	else
+        AX_LIB_XERCES
 	    macappbundle="no"
 	fi
 

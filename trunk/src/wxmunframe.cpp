@@ -1339,7 +1339,7 @@ void wxMUNFrame::OnStateFileOpen( wxCommandEvent& event ) {
         wxFileDialog* OpenDialog = new wxFileDialog(
                 this, _("Choose a file to open"), wxEmptyString, wxEmptyString, 
                 _("XML files (*.xml)|*.xml"),
-                wxFD_OPEN | wxFILE_MUST_EXIST, wxDefaultPosition);
+                wxFD_OPEN | wxFD_FILE_MUST_EXIST, wxDefaultPosition);
  
         if (OpenDialog->ShowModal() == wxID_OK) { // if the user click "Open" instead of "Cancel"
                 CurrentDocPath = OpenDialog->GetPath();
@@ -1356,7 +1356,7 @@ void wxMUNFrame::OnStateFileSaveAs( wxCommandEvent& event ) {
         wxFileDialog* SaveDialog = new wxFileDialog(
                 this, _("Choose a location to save"), wxEmptyString, wxEmptyString, 
                 _("XML files (*.xml)|*.xml"),
-                wxFD_SAVE | wxOVERWRITE_PROMPT, wxDefaultPosition);
+                wxFD_SAVE | wxFD_OVERWRITE_PROMPT, wxDefaultPosition);
  
         if (SaveDialog->ShowModal() == wxID_OK) { // if the user click "Open" instead of "Cancel"        
                 wxGetApp().session()->saveState(SaveDialog->GetPath());
@@ -1389,7 +1389,7 @@ void wxMUNFrame::OnEditCommittee( wxCommandEvent& event ) {
         wxFileDialog* OpenDialog = new wxFileDialog(
                 this, _("Choose a committee file to edit"), wxEmptyString, wxEmptyString, 
                 _("XML files (*.xml)|*.xml"),
-                wxFD_OPEN | wxFILE_MUST_EXIST, wxDefaultPosition);
+                wxFD_OPEN | wxFD_FILE_MUST_EXIST, wxDefaultPosition);
  
         if (OpenDialog->ShowModal() != wxID_OK) { // if the user click "Open" instead of "Cancel"
                 return;        
@@ -1444,7 +1444,7 @@ void wxMUNFrame::OnLoadCommittee( wxCommandEvent& event ) {
         wxFileDialog* OpenDialog = new wxFileDialog(
                 this, _("Choose a file to open"), wxEmptyString, wxEmptyString, 
                 _("XML files (*.xml)|*.xml"),
-                wxFD_OPEN | wxFILE_MUST_EXIST, wxDefaultPosition);
+                wxFD_OPEN | wxFD_FILE_MUST_EXIST, wxDefaultPosition);
  
         if (OpenDialog->ShowModal() == wxID_OK) { // if the user click "Open" instead of "Cancel"
                 CurrentDocPath = OpenDialog->GetPath();
