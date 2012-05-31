@@ -183,13 +183,13 @@ std::map<wxString, Country*>* wxMUN::committeeCountries() {
         return &m_committeeCountries;
 }
 
-void MakeLowerAscii(wxString& str){
-        for (size_t i = 0; i < str.Len(); i++) {
-                wxChar& c = str[i];
-                if (c >= 'A' && c <= 'Z')
-                        c += 32;
-        }
-}
+//void MakeLowerAscii(wxString& str){
+        //for (size_t i = 0; i < str.Len(); i++) {
+                //wxChar *c = str[i];
+                //if (c >= 'A' && c <= 'Z')
+                        //c += 32;
+        //}
+//}
 
 //TODO: move to more sensible place
 wxIconBundle wxMUN::GetIconBundle(const wxArtID& id, const wxArtClient& client /*=wxART_OTHER*/) {
@@ -199,8 +199,9 @@ wxIconBundle wxMUN::GetIconBundle(const wxArtID& id, const wxArtClient& client /
                 return iconBundle;
 
         wxString name = id.Mid(4);
-        MakeLowerAscii(name);
-
+        //MakeLowerAscii(name);
+        name.MakeLower();
+    
         const wxChar* dirs[3] = { _T("16x16/"), _T("32x32/"), _T("48x48/") };
 
         for (int i = 0; i < 3; i++) {
