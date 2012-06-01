@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2010 Geert-Jan Besjes 
+ * Copyright (c) 2008-2012 Geert-Jan Besjes 
  *
  * This file is part of wxMUN.
  *
@@ -21,6 +21,10 @@
 #include <xercesc/util/XercesVersion.hpp>
 
 #include "wxmunaboutdialog.h"
+
+#ifdef HAVE_CONFIG_H
+  #include "../config.h"
+#endif
 
 #include "defs.h"
 #include "configmanager.h"
@@ -82,7 +86,7 @@ GUI_wxMUNAboutDialog( parent )
 	author->SetLabel(_T("Geert-Jan Besjes"));
 	
 	wxStaticText *email = (wxStaticText*) wxWindow::FindWindowById(ABOUT_EMAIL);
-	email->SetLabel(_T("gbesjes@gmx.com"));
+	email->SetLabel(_T(PACKAGE_BUGREPORT));
 	
 	wxTextCtrl *license = (wxTextCtrl*) wxWindow::FindWindowById(ABOUT_LICENSE);
 	license->SetValue(LICENSE_GPL);

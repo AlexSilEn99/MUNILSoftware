@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2010 Geert-Jan Besjes 
+ * Copyright (c) 2008-2012 Geert-Jan Besjes 
  *
  * This file is part of wxMUN.
  *
@@ -22,7 +22,7 @@
 #define DEFS_H
 
 #ifndef VERSION
- #define VERSION "0.38"
+ #define VERSION "0.40"
 #endif
 
 #define CHECK_FOR_UPDATE_URL "http://wxmun.sourceforge.net/LATEST"
@@ -34,7 +34,7 @@
 #define DARK_RED (wxColour(187, 14, 14))
 #define DARK_GREEN (wxColour(00, 79 , 00))
 
-#define LICENSE_GPL wxT("Copyright (c) 2008-2010 Geert-Jan Besjes\n\nThis program is free software: you can redistribute it and/or modify "\
+#define LICENSE_GPL wxT("Copyright (c) 2008-2012 Geert-Jan Besjes\n\nThis program is free software: you can redistribute it and/or modify "\
 	"it under the terms of the GNU General Public License as published by "\
 	"the Free Software Foundation, either version 3 of the License, or "\
 	"(at your option) any later version.\n\n"\

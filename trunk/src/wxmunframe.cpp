@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2010 Geert-Jan Besjes 
+ * Copyright (c) 2008-2012 Geert-Jan Besjes 
  *
  * This file is part of wxMUN.
  *
@@ -40,7 +40,6 @@
 #include "countriespresentdialog.h"
 #include "yielddialog.h"
 #include "clear_png.h"
-#include "unl_logo.h"
 #include "rollcallvote.h"
 
 #ifdef HAVE_CONFIG_H
@@ -1621,7 +1620,7 @@ void wxMUNFrame::OnHelp( wxCommandEvent& event ) {
 
 void wxMUNFrame::OnAbout( wxCommandEvent& event ) {
         wxMUNAboutDialog* dlg = new wxMUNAboutDialog(this);
-        dlg->m_aboutUNLlogobitmap->SetBitmap(wxGetBitmapFromMemory(unl_logo));
+        //dlg->m_aboutUNLlogobitmap->SetBitmap(wxGetBitmapFromMemory(unl_logo));
 
         dlg->ShowModal();
         dlg->Destroy();
