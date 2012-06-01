@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2010 Geert-Jan Besjes 
+ * Copyright (c) 2008-2012 Geert-Jan Besjes 
  *
  * This file is part of wxMUN.
  *

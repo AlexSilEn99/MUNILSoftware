@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2010 Geert-Jan Besjes 
+ * Copyright (c) 2008-2012 Geert-Jan Besjes 
  *
  * This file is part of wxMUN.
  *
@@ -361,6 +361,7 @@ void wxMUN::readState(wxString filename /* = wxEmptyString */){
 }
 
 bool wxMUN::OnInit(){
+        wxApp::SetAppName( wxT( "wxMUN" ) );
         ConfigManager* mgr = 0;
 
         try {
@@ -398,22 +399,22 @@ bool wxMUN::OnInit(){
         //we don't know what crazy formats people might make flags in, init all possible handlers!
         ::wxInitAllImageHandlers(); 
 
+        wxSplashScreen *splash=NULL;
 #ifndef DEBUG
         wxImage bitmap;
-        wxSplashScreen *splash=NULL;
         if (bitmap.LoadFile(ConfigManager::FindResourceFile(wxT("splash.png")), wxBITMAP_TYPE_PNG)){
                 splash = new wxSplashScreen(bitmap,
                                 wxSPLASH_CENTRE_ON_SCREEN|wxSPLASH_TIMEOUT,
                                 3500, NULL, -1, wxDefaultPosition, wxDefaultSize,
                                 wxSIMPLE_BORDER|wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP); 
         }
+#endif
 
         if(splash){ 
                 //explicitely delete the splash or the parent frame will start minimized
-                wxMilliSleep(3500);
-                delete splash; 
+                wxMilliSleep(2750);
+                //delete splash; 
         }
-#endif
 
         wxYield();
 
@@ -423,6 +424,11 @@ bool wxMUN::OnInit(){
         parentFrame->Show(true);
 
         readState();
+
+        if(splash){
+                wxMilliSleep(750);
+                delete splash;
+        }
 
         //wxTaskBarIcon* tbIcon = new wxTaskBarIcon();
 #ifdef __WXMSW__
