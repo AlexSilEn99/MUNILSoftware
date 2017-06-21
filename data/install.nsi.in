@@ -20,16 +20,16 @@
 ; General
 
   ;Name and file
-  Name "wxMUN"
-  OutFile "wxMUN-${VERSION}-setup.exe"
+  Name "MUNIL"
+  OutFile "MUNIL-${VERSION}-SOFTWARE.exe"
 
   SetCompressor /SOLID LZMA
 
   ;Default installation folder
-  InstallDir "$PROGRAMFILES\wxMUN"
+  InstallDir "$PROGRAMFILES\MUNIL"
 
   ;Get installation folder from registry if available
-  InstallDirRegKey HKLM "Software\wxMUN" ""
+  InstallDirRegKey HKLM "Software\MUNIL" ""
  
   !include "MUI2.nsh"
   !include "WordFunc.nsh"
