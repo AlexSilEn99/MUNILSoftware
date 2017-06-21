@@ -9,14 +9,6 @@
   !addplugindir @srcdir@
 
 ;--------------------------------
-; Libtool executable target path
-
-  !include libtoolexecutablesubdir.nsh
-  !ifndef LT_EXEDIR
-    !define LT_EXEDIR ""
-  !endif
-
-;--------------------------------
 ; General
 
   ;Name and file
